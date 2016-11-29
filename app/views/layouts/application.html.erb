@@ -9,28 +9,12 @@
   </head>
 
   <body>
+       <%= render "partial/navigation" %>
 
-     <header>
-      <nav class="be-red white large-padding" >
-	<ul class="no-list row center-xs middle-xs " >
-	   <li class="col-md">
-	    <h1 class="no-margin" id="logo">Almacenes </h1>
-	  </li>   
-	  <li class="col-md">
-	    <%= link_to "Inicio", root_path %>
-	  </li>   
-          <li class="col-md">
-            Documentos
-          </li>  
-          <li class="col-md">
-            Proveedores-Clientes
-          </li>  
-          <li class="col-md">
-            Inventarios
-          </li> 
-       </ul> 
-      </nav>           
-    </header> 
-    <%= yield %>
-  </body>
+    
+     <p class="notice"><%= notice %></p>
+     <p class="alert"><%= alert %></p>
+     <%= yield %>
+    </body>
+     
 </html>

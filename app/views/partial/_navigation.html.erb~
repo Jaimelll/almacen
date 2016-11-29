@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Almacen</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+     <header>
+      <nav class="be-red white large-padding" >
+	<ul class="no-list row center-xs middle-xs " >
+	   <li class="col-md">
+	    <h1 class="no-margin" id="logo">Almacenes </h1>
+	  </li>   
+	  <li class="col-md">
+	    <%= link_to "Inicio", root_path %>
+	  </li>   
+          <li class="col-md">
+            Documentos
+          </li>  
+          <li class="col-md">
+            Proveedores-Clientes
+          </li>  
+          <li class="col-md">
+            Inventarioss
+          </li>
+           <% if user_signed_in? %>
+            <li class="col-md">
+	      <%= link_to "Cerrar sesion", destroy_user_session_path, method: :delete  %>
+            </li>  	     
+	   <% end %>
+
+       </ul> 
+      </nav>           
+     </header>
+     <p class="notice"><%= notice %></p>
+     <p class="alert"><%= alert %></p>
+     <%= yield %>
+    </body>
+     
+</html>
