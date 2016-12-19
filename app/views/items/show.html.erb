@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fecha:</strong>
+  <%= @item.pfecha %>
+</p>
+
+<p>
+  <strong>Serie:</strong>
+  <%= @item.serie %>
+</p>
+
+<p>
+  <strong>factura:</strong>
+  <%= @item.nfactu %>
+</p>
+
+<p>
+  <strong>Razon:</strong>
+  <%= @item.client.razon %>
+</p>
+
+<p>
+  <strong>Subtotal:</strong>
+  <%= @item.subtotal %>
+</p>
+
+<p>
+  <strong>Origen:</strong>
+  <%= @item.origen %>
+</p>
+
+<p>
+  <strong>Mmes:</strong>
+  <%= @item.mmes %>
+</p>
+
+<p>
+  <strong>Moneda:</strong>
+  <%= @item.moneda %>
+</p>
+
+<p>
+  <strong>Tc:</strong>
+  <%= @item.tc %>
+</p>
+
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Back', items_path %>

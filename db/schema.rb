@@ -10,19 +10,52 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161130234722) do
+ActiveRecord::Schema.define(version: 20161219182454) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "clients", force: :cascade do |t|
     t.string   "ruc"
     t.text     "razon"
     t.text     "direccion"
-    t.integer  "origen"
     t.text     "obs"
+    t.integer  "tipo",       default: 1
+    t.integer  "origen",     default: 1
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_clients_on_user_id", using: :btree
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.date     "pfecha"
+    t.string   "serie"
+    t.string   "nfactu"
+    t.integer  "client_id"
+    t.float    "subtotal"
+    t.integer  "origen"
+    t.date     "mmes"
+    t.integer  "moneda"
+    t.float    "tc"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "clients"
-    t.integer  "user_id"
-    t.index ["user_id"], name: "index_clients_on_user_id"
+    t.index ["client_id"], name: "index_items_on_client_id", using: :btree
+    t.index ["user_id"], name: "index_items_on_user_id", using: :btree
+  end
+
+  create_table "paso", id: false, force: :cascade do |t|
+    t.integer "id"
+    t.text    "ruc"
+    t.text    "razon"
+    t.text    "direccion"
+    t.text    "obs"
+    t.integer "tipo"
+    t.integer "origen"
+    t.date    "fecha1"
+    t.date    "fecha2"
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -40,8 +73,11 @@ ActiveRecord::Schema.define(version: 20161130234722) do
     t.string   "permission_level"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "clients", "users"
+  add_foreign_key "items", "clients"
+  add_foreign_key "items", "users"
 end

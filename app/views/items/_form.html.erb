@@ -1,0 +1,58 @@
+<%= form_for(item) do |f| %>
+  <% if item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+      <% item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Fecha %>
+    <%= f.date_select :pfecha %>
+  </div>
+
+  <div class="field">
+    <%= f.label :factura %>
+      <%= f.text_field :serie %>
+    <%= f.text_field :nfactu %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Razon %>
+    <%= f.collection_select :client_id, Client.all.order(:razon), :id, :razon  %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Subtotal %>
+    <%= f.text_field :subtotal %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Origen %>
+    <%= f.select :origen, [['compras',1],['ventas',2]] %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Mes %>
+    <%= f.date_select :mmes %>
+  </div>
+
+  <div class="field">
+    <%= f.label :moneda %>
+    <%= f.select :moneda, [['Sol',1],['Dolar',2]] %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tc %>
+    <%= f.text_field :tc %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

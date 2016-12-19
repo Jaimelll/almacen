@@ -1,7 +1,7 @@
 <%= form_for(client) do |f| %>
   <% if client.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:</h2>
+      <h2><%= pluralize(client.errors.count, "error") %> este cambio no se puede grabar:</h2>
 
       <ul>
       <% client.errors.full_messages.each do |message| %>
@@ -28,7 +28,12 @@
 
   <div class="field">
     <%= f.label :origen %>
-    <%= f.number_field :origen %>
+  <%= f.select :origen, [['cliente',1],['proveedor',2]] %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tipo %>
+  <%= f.select :tipo, [['compra',1],['venta',2]] %>
   </div>
 
   <div class="field">
