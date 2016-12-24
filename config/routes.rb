@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+#  get 'variables/form'
+#  post 'variables/form'
+match 'variables/form', via: [:get,:post], as: :variables
   resources :items
   devise_for :users
   root 'welcome#index'
