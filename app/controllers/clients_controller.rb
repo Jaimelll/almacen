@@ -1,11 +1,15 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:create,:new,:edit]
+#  before_action :authenticate_user!, only: [:create,:new,:edit]
+  before_action :authenticate_user!
+  before_action do
+    redirect_to :new_user_session unless current_user && current_user.admin?
+  end
 
   # GET /clients
   # GET /clients.json
   def index
-    @clients = Client.all
+    @clients = Client.all.order('razon ASC')
   end
 
   # GET /clients/1

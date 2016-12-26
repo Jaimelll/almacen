@@ -1,8 +1,15 @@
-<h2>PARAMETROS DEL PERIODO   <%=$vorigen %><%=$vmes %> </h2>
-  <%= form_tag :action =>'form' do %>
-    <p>Origen:
-    <%= select_tag "origen_de", raw("<option value=1 >compras</option>" "<option value=2 >ventas</option>") %><p/>
-        <p>Mes:
+
+<% if current_user.admin? %>
+  <h2>PARAMETROS DEL PERIODO  </h2>
+  <h2>1:Compras 2:Ventas=   <%=$vorigen %> </h2>
+  <h2>Periodo=  <%=$vmes %> </h2>
+    <%= form_tag :action =>'form' do %>
+      <p>Origen:
+      <%= select_tag "origen_de", raw("<option value=1 >compras</option>" "<option value=2 >ventas</option>") %><p/>
+          <p>Mes:
       <%= select_date Date.today, :prefix=> :mes_de, discard_day:true %><p/>
     <%= submit_tag 'Registrar' %>
+
+  
   <% end %>
+<% end %>

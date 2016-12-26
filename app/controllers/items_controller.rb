@@ -1,11 +1,15 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-    before_action :authenticate_user!, only: [:create,:new,:edit]
-
+    before_action :authenticate_user!
+    before_action do
+      redirect_to :new_user_session unless current_user && current_user.admin?
+    end
   # GET /items
   # GET /items.json
   def index
-    @items = Item.where(origen:$vorigen)
+    @items = Item.where(origen:$vorigen,mmes:$vmes).order('pfecha ASC')
+    @regis = Item.where(origen:$vorigen,mmes:$vmes).count('Id')
+    @acum = Item.where(origen:$vorigen,mmes:$vmes).sum('subtotal')
   end
 
   # GET /items/1
