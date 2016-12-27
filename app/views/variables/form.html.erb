@@ -1,4 +1,4 @@
-
+<% if user_signed_in? %>
 <% if current_user.admin? %>
   <h2>PARAMETROS DEL PERIODO  </h2>
   <h2>1:Compras 2:Ventas=   <%=$vorigen %> </h2>
@@ -10,6 +10,7 @@
       <%= select_date Date.today, :prefix=> :mes_de, discard_day:true %><p/>
     <%= submit_tag 'Registrar' %>
 
-  
+
   <% end %>
+<% end %>
 <% end %>
