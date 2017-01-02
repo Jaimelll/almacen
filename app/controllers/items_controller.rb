@@ -7,9 +7,9 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = Item.where(origen:$vorigen,mmes:$vmes).order('pfecha ASC')
-    @regis = Item.where(origen:$vorigen,mmes:$vmes).count('Id')
-    @acum = Item.where(origen:$vorigen,mmes:$vmes).sum('subtotal')
+    @items = Item.where(origen:$vorigen,mmes:$vmes,empresa:$vempresa).order('pfecha ASC')
+    @regis = Item.where(origen:$vorigen,mmes:$vmes,empresa:$vempresa).count('Id')
+    @acum = Item.where(origen:$vorigen,mmes:$vmes,empresa:$vempresa).sum('subtotal')
   end
 
   # GET /items/1

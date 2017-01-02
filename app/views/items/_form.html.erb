@@ -23,6 +23,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :Empresa %>
+    <%= f.select :empresa, [['Industrias',1],['Confecciones',2]] %>
+  </div>
+
+  <div class="field">
     <%= f.label :Razon %>
     <%= f.collection_select :client_id, Client.all.order(:razon), :id, :razon  %>
   </div>

@@ -1,6 +1,6 @@
 class VariablesController < ApplicationController
   def form
-
+$vempresa=params[ :empresa_id]
 $vorigen=params[ :origen_de]
 #$vmes=params[ :mes_de]
 
