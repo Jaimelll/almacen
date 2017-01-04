@@ -1,9 +1,7 @@
 <% if user_signed_in? %>
 <% if current_user.admin? %>
-  <h2>PARAMETROS DEL PERIODO  </h2>
-  <h3>1:Industrias 2:Confecciones=   <%=$vempresa %> </h3>
-  <h3>1:Compras 2:Ventas=   <%=$vorigen %> </h3>
-  <h3>Periodo=  <%=$vmes %> </h3>
+
+
     <%= form_tag :action =>'form' do %>
     <p>Empresa:
     <%= select_tag "empresa_id", raw("<option value=1 >Industrias</option>" "<option value=2 >Confecciones</option>") %><p/>

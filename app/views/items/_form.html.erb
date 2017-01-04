@@ -10,21 +10,30 @@
       </ul>
     </div>
   <% end %>
+  <div class="field">
+    <%= f.label :Empresa %>
+    <%= f.select :empresa, [['Industrias',1],['Confecciones',2]], selected: $vempresa %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Mes %>
+    <%= f.date_select :mmes, discard_day:true, selected: $vmes %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Origen %>
+    <%= f.select :origen, [['compras',1],['ventas',2]], selected: $vorigen %>
+  </div>
 
   <div class="field">
     <%= f.label :Fecha %>
-    <%= f.date_select :pfecha %>
+    <%= f.date_select :pfecha, selected: $vmes %>
   </div>
 
   <div class="field">
     <%= f.label :factura %>
-      <%= f.text_field :serie %>
+    <%= f.text_field :serie %>
     <%= f.text_field :nfactu %>
-  </div>
-
-  <div class="field">
-    <%= f.label :Empresa %>
-    <%= f.select :empresa, [['Industrias',1],['Confecciones',2]] %>
   </div>
 
   <div class="field">
@@ -35,16 +44,6 @@
   <div class="field">
     <%= f.label :Subtotal %>
     <%= f.text_field :subtotal %>
-  </div>
-
-  <div class="field">
-    <%= f.label :Origen %>
-    <%= f.select :origen, [['compras',1],['ventas',2]] %>
-  </div>
-
-  <div class="field">
-    <%= f.label :Mes %>
-    <%= f.date_select :mmes, discard_day:true %>
   </div>
 
   <div class="field">

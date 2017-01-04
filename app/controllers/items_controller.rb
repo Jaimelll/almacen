@@ -74,6 +74,6 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:pfecha, :serie, :nfactu, :client_id, :subtotal, :origen, :mmes, :moneda, :tc)
+      params.require(:item).permit(:pfecha, :serie, :nfactu, :client_id, :subtotal, :origen, :mmes, :moneda, :tc, :empresa)
     end
 end
