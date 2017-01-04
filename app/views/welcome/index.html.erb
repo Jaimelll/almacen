@@ -1,4 +1,9 @@
 <% if user_signed_in? %>
   <h3>BIENVENIDOS <%= current_user.email %>  </h3>
-      
+  <h3>PARAMETROS DEL PERIODO :
+      <%= select_tag $vempresa, raw("<option value=1 >Industrias</option>" "<option value=2 >Confecciones</option>")%>
+      <%=select_tag $vorigen, raw("<option value=1 >compras</option>" "<option value=2 >ventas</option>") %>
+      <%= select_date Date.today, :prefix=> :$vmes, discard_day:true %></h3>
+
+
 <% end %>
