@@ -1,4 +1,13 @@
 <p id="notice"><%= notice %></p>
+<p>
+  <strong>Empresa:</strong>
+  <%= @item.empresa %>
+  <strong>Periodo:</strong>
+  <%= @item.mmes %>
+  <strong>Origen:</strong>
+  <%= @item.origen %>
+</p>
+
 
 <p>
   <strong>Fecha:</strong>
@@ -23,16 +32,6 @@
 <p>
   <strong>Subtotal:</strong>
   <%= @item.subtotal %>
-</p>
-
-<p>
-  <strong>Origen:</strong>
-  <%= @item.origen %>
-</p>
-
-<p>
-  <strong>Mmes:</strong>
-  <%= @item.mmes %>
 </p>
 
 <p>

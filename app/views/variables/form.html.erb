@@ -1,6 +1,9 @@
 <% if user_signed_in? %>
 <% if current_user.admin? %>
-
+<h2>PARAMETROS DEL PERIODO  </h2>
+<h3>Empresa =   <%=$vempresa %>
+  Origen =   <%=$vorigen %>
+    Periodo =  <%=$vmes %> </h3>
 
     <%= form_tag :action =>'form' do %>
       <p>Empresa:

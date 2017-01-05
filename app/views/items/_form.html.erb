@@ -38,22 +38,24 @@
 
   <div class="field">
     <%= f.label :Razon %>
-    <%= f.collection_select :client_id, Client.all.order(:razon), :id, :razon  %>
+    <%= f.collection_select :client_id, Client.all.order(:razon), :id, :razon, selected: 881 %>
   </div>
 
-  <div class="field">
-    <%= f.label :Subtotal %>
-    <%= f.text_field :subtotal %>
-  </div>
-
-  <div class="field">
+    <div class="field">
     <%= f.label :moneda %>
     <%= f.select :moneda, [['Sol',1],['Dolar',2]] %>
   </div>
 
   <div class="field">
     <%= f.label :tc %>
-    <%= f.text_field :tc %>
+    <%= f.text_field :tc,:value => 0 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Subtotal %>
+    <%= f.text_field :subtotal, onchange: "{alert('IGV='+value*0.18+'      TOTAL='+value*1.18);}" %>
+
+
   </div>
 
   <div class="actions">

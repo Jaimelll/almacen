@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = Item.where(origen:$vorigen,mmes:$vmes,empresa:$vempresa).order('pfecha ASC')
+    @items = Item.where(origen:$vorigen,mmes:$vmes,empresa:$vempresa).order('pfecha ASC','serie','nfactu')
     @regis = Item.where(origen:$vorigen,mmes:$vmes,empresa:$vempresa).count('Id')
     @acum = Item.where(origen:$vorigen,mmes:$vmes,empresa:$vempresa).sum('subtotal')
   end
@@ -33,6 +33,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
+    
         format.html { redirect_to @item, notice: 'Item was successfully created.' }
         format.json { render :show, status: :created, location: @item }
       else
