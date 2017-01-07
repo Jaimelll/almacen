@@ -1,12 +1,16 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Items</h1>
+
+    <% if not $vorigen.nil? %>
 <h2>PARAMETROS DEL PERIODO  </h2>
-<h3>Empresa =   <%=$vempresa %>
-  Origen =   <%=$vorigen %>
-    Periodo =  <%=$vmes %> </h3>
+     <h3>Empresa =   <%=$vempresa %>
+         Origen =   <%=$vorigen %>
+         Periodo =  <%=$vmes %> </h3>
 
-
+     <% else %>
+    <h3>cargar parametros </h3>
+    <% end %>
 <table>
   <thead>
     <tr>

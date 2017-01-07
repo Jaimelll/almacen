@@ -1,7 +1,36 @@
 <% if user_signed_in? %>
-  <h3>BIENVENIDOS <%= current_user.email %>  </h3>
+  <h3>BIENVENIDO <%= current_user.email %>  </h3>
 
-    
+<% if not $vorigen.nil? %>
 
+<% if  $vorigen.to_f==2 %>
+
+   <h3>\copy (SELECT TO_CHAR(items.mmes,'YYYYMM00') a1, to_char(items.id,'99999') as a2,
+     'M'||trim(to_char(items.id,'99999')) as a3, to_char(items.pfecha, 'DD/MM/YYYY') a4,
+ ' ' as a5, to_char(CAST(items.serie AS INT),'0000')  as a6, nfactu as a7, ' ' as a8,
+ to_char(CAST(items.nfactu AS INT),'00000000') as a9, ' ' as a10, '6' as a11,clients.ruc as a12,
+clients.razon as a13, items.subtotal as a14, items.subtotal*0.18 as a15, ' ' as a16,
+' ' as a17, ' ' as a18, ' ' as a19, ' ' as a20, ' ' as a21, ' ' as a22,
+items.subtotal*1.18 as a23, items.tc as a24, items.tc as a25, to_char(items.pfecha,
+'DD/MM/YYYY') a26, ' ' as a27, ' ' as a28, ' ' as a29, ' ' as a30, ' ' as a31, ' ' as a32,
+' ' as a33, '1' as a34, ' ' as a35, ' ' as a36, ' ' as a37, ' ' as a38, ' ' as a39,
+ '1' as a40, '1' as a41
+     FROM items INNER JOIN clients ON items.client_id = clients.id
+     where items.empresa =   <%=$vempresa %>
+     and items.origen =  <%=$vorigen %>
+     and items.mmes = '<%=$vmes %>' ) TO
+
+     <% case $vempresa.to_f %>
+     <% when 1 %>
+    LE10257000767<%= $vmes.strftime("%Y")  %><%=$vmes.strftime("%m") %>00140100001111.cvs CSV DELIMITER '|' </h3>
+     <% when 2 %>
+    LE10402501486<%= $vmes.strftime("%Y")  %><%=$vmes.strftime("%m") %>00140100001111.cvs CSV DELIMITER '|' </h3>
+     <% else %>
+    <% end %>
+
+
+
+<% end %>
+<% end %>
 
 <% end %>
