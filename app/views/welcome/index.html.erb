@@ -4,31 +4,19 @@
 <% if not $vorigen.nil? %>
 <h3>COMPRAS  empresa=  <%=$vempresa %> periodo= <%=$vmes %> </h3>
 
-   <h3>\copy (SELECT TO_CHAR(items.mmes,'YYYYMM00') a1,
- trim(to_char(items.id,'99999')) as a2,
-'M'||trim(to_char(items.id,'99999')) as a3, to_char(items.pfecha,
- 'DD/MM/YYYY') a4,
-' ' as a5,
- case
-when ascii(left(items.serie,1))= 84 then '12'
-when ascii(left(items.serie,1))= 66 then '03'
-else '01'
- end as a6,
-case when ascii(left(items.serie,1))< 58 then trim(to_char(CAST(items.serie AS INT),'0000')) else items.serie end as a7,
+   <h3>\copy (SELECT TO_CHAR(items.mmes,'YYYYMM00') a1, trim(to_char(items.id,'99999')) as a2,
+ 'M'||trim(to_char(items.id,'99999')) as a3, to_char(items.pfecha, 'DD/MM/YYYY') a4, ' ' as a5,
+ case when ascii(left(items.serie,1))= 84 then '12' when ascii(left(items.serie,1))= 66 then '03' else '01' end as a6,
+ case when ascii(left(items.serie,1))< 58 then trim(to_char(CAST(items.serie AS INT),'0000')) else items.serie end as a7,
  ' ' as a8, trim(to_char(CAST(items.nfactu AS INT),'00000000')) as a9, ' ' as a10, '6' as a11,
  clients.ruc as a12, clients.razon as a13, trim(to_char(items.subtotal,'999999.99')) as a14,
- trim(to_char(items.subtotal*0.18,'999999.99')) as a15, ' ' as a16, ' ' as a17, ' ' as a18, ' ' as a19,
- ' ' as a20, ' ' as a21, trim(to_char(items.subtotal*1.18,'999999.99')) as a23,
- case when items.tc=0 then ' ' else 'USD' end as a24,
-case when items.tc=0 then ' ' else trim(to_char(items.tc,'99.999')) end as a25,
- to_char(items.pfecha, 'DD/MM/YYYY') a26, ' ' as a27, ' ' as a28, ' ' as a29, ' ' as a30, ' ' as a31,
-' ' as a32, ' ' as a33, clients.origen as a34, ' ' as a35, ' ' as a36, ' ' as a37, ' ' as a38, ' ' as a39,
-'1' as a40,
- case
-when items.pfecha >= items.mmes then '1'
-when items.pfecha < items.mmes then '6'
- end as a41
-  FROM items INNER JOIN clients ON items.client_id = clients.id
+ trim(to_char(items.subtotal*0.18,'999999.99')) as a15, ' ' as a16, ' ' as a17, ' ' as a18, ' ' as a19, ' ' as a20, ' ' as a21, ' ' as a22,
+ trim(to_char(items.subtotal*1.18,'999999.99')) as a23, case when items.tc=0 then ' ' else 'USD' end as a24,
+ case when items.tc=0 then ' ' else trim(to_char(items.tc,'99.999')) end as a25, to_char(items.pfecha, 'DD/MM/YYYY') a26,
+ ' ' as a27, ' ' as a28, ' ' as a29, ' ' as a30, ' ' as a31, ' ' as a32, ' ' as a33, clients.origen as a34, ' ' as a35,
+ ' ' as a36, ' ' as a37, ' ' as a38, ' ' as a39, '1' as a40,
+ case when items.pfecha >= items.mmes then '1' when items.pfecha < items.mmes then '6' end as a41, null as a42
+FROM items INNER JOIN clients ON items.client_id = clients.id
      where items.empresa =   <%=$vempresa %>
      and items.origen =  <%=$vorigen %>
      and items.mmes = '<%=$vmes %>' ) TO
@@ -76,7 +64,7 @@ case when items.client_id=1 then ' ' else trim(to_char(items.subtotal*1.18,'9999
 case when items.client_id=1 then ' ' else to_char(items.pfecha, 'DD/MM/YYYY') end as a27,
  ' ' as a28 ,' ' as a29, ' ' as a30, ' ' as a31, ' ' as a32,
  case when items.client_id=1 then ' ' else '1' end as a33,
- case when items.client_id=1 then '2 ' else '1' end as a34
+ case when items.client_id=1 then '2 ' else '1' end as a34, null as a35
  FROM items INNER JOIN clients ON items.client_id = clients.id
      where items.empresa =   <%=$vempresa %>
      and items.origen =  <%=$vorigen %>
