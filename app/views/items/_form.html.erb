@@ -27,7 +27,8 @@
 
   <div class="field">
     <%= f.label :Fecha %>
-    <%= f.date_select :pfecha, selected: $vmes %>
+
+    <%= f.date_select :pfecha, selected: $vmes %>  
   </div>
 
   <div class="field">
@@ -38,7 +39,7 @@
 
   <div class="field">
     <%= f.label :Razon %>
-    <%= f.collection_select :client_id, Client.all.order(:razon), :id, :razon, selected: 881 %>
+    <%= f.collection_select :client_id, Client.all.order(:razon), :id, :razon %>
   </div>
 
     <div class="field">
@@ -48,12 +49,12 @@
 
   <div class="field">
     <%= f.label :tc %>
-    <%= f.text_field :tc,:value => 0 %>
+    <%= f.text_field :tc %>
   </div>
 
   <div class="field">
     <%= f.label :Subtotal %>
-    <%= f.text_field :subtotal, onchange: "{alert('IGV='+value*0.18+'      TOTAL='+value*1.18);}" %>
+    <%= f.text_field :subtotal, onchange: "{alert('IGV='+value*0.18+' TOTAL='+value*1.18);}" %>
 
 
   </div>
