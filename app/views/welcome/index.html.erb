@@ -18,7 +18,7 @@
  case when items.pfecha >= items.mmes then '1' when items.pfecha < items.mmes then '6' end as a41, null as a42
 FROM items INNER JOIN clients ON items.client_id = clients.id
      where items.empresa =   <%=$vempresa %>
-     and items.origen =  <%=$vorigen %>
+     and items.origen =  1
      and items.mmes = '<%=$vmes %>' ) TO
 
      <% case $vempresa.to_f %>
@@ -67,7 +67,7 @@ case when items.client_id=1 then ' ' else to_char(items.pfecha, 'DD/MM/YYYY') en
  case when items.client_id=1 then '2 ' else '1' end as a34, null as a35
  FROM items INNER JOIN clients ON items.client_id = clients.id
      where items.empresa =   <%=$vempresa %>
-     and items.origen =  <%=$vorigen %>
+     and items.origen =  2
      and items.mmes = '<%=$vmes %>' ) TO
 
      <% case $vempresa.to_f %>

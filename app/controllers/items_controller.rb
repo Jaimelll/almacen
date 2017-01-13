@@ -20,6 +20,11 @@ class ItemsController < ApplicationController
   # GET /items/new
   def new
     @item = Item.new
+    @item.pfecha=$vmes
+    @item.set_serie
+    @item.set_nfactu
+
+
   end
 
   # GET /items/1/edit
@@ -33,7 +38,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-    
+
         format.html { redirect_to @item, notice: 'Item was successfully created.' }
         format.json { render :show, status: :created, location: @item }
       else

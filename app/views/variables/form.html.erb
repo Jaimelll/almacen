@@ -4,21 +4,25 @@
 
 <% if not $vorigen.nil? %>
 
- <h3>Empresa =   <%=$vempresa %>
-     Origen =   <%=$vorigen %>
-     Periodo =  <%=$vmes %> </h3>
+       <h3>Empresa =   <%=$vempresa %>
+           Origen =  <%=$vorigen %>
+          Periodo =  <%=$vmes %> </h3>
 
- <% else %>
-<h3>cargar parametros </h3>
+     <% else %>
+      <h3>cargar parametros </h3>
+
 <% end %>
+
 
     <%= form_tag :action =>'form' do %>
       <p>Empresa:
-         <%= select_tag "empresa_id", raw("<option value=1 >Industrias</option>" "<option value=2 >Confecciones</option>") %><p/>
+         <%= select_tag "empresa_id", options_for_select([['Industrias', 1], ['Confecciones', 2]], $vempresa) %><p/>
+
       <p>Origen:
-         <%= select_tag "origen_de", raw("<option value=1 >compras</option>" "<option value=2 >ventas</option>") %><p/>
+
+         <%= select_tag "origen_de", options_for_select([['compras', 1], ['ventas', 2]], $vorigen) %><p/>
       <p>Mes:
-        <%= select_date Date.today, :prefix=> :mes_de, discard_day:true %><p/>
+        <%= select_date $vmes, :prefix=> :mes_de, discard_day:true %><p/>
     <%= submit_tag 'Cargar' %>
   <% end %>
 
