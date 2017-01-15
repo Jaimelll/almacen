@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @detail.descripcion %>
+</p>
+
+<p>
+  <strong>Cantidad:</strong>
+  <%= @detail.cantidad %>
+</p>
+
+<p>
+  <strong>Precio:</strong>
+  <%= @detail.precio %>
+</p>
+
+<p>
+  <strong>Monto:</strong>
+  <%= @detail.monto %>
+</p>
+
+
+
+<%= link_to 'Edit', edit_item_detail_path(@detail) %> |
+<%= link_to 'Back', item_path %>

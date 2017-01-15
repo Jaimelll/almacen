@@ -10,11 +10,14 @@ class ItemsController < ApplicationController
     @items = Item.where(origen:$vorigen,mmes:$vmes,empresa:$vempresa).order('pfecha ASC','serie','nfactu')
     @regis = Item.where(origen:$vorigen,mmes:$vmes,empresa:$vempresa).count('Id')
     @acum = Item.where(origen:$vorigen,mmes:$vmes,empresa:$vempresa).sum('subtotal')
+
   end
 
   # GET /items/1
   # GET /items/1.json
   def show
+   @detail=Detail.new
+   #@details=@item.details
   end
 
   # GET /items/new

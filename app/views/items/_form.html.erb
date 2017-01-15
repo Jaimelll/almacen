@@ -11,18 +11,14 @@
     </div>
   <% end %>
   <div class="field">
-    <%= f.label :Empresa %>
+    <%= f.label :Parametros %>
     <%= f.select :empresa, [['Industrias',1],['Confecciones',2]], selected: $vempresa %>
-  </div>
 
-  <div class="field">
-    <%= f.label :Mes %>
     <%= f.date_select :mmes, discard_day:true, selected: $vmes %>
-  </div>
 
-  <div class="field">
-    <%= f.label :Origen %>
     <%= f.select :origen, [['compras',1],['ventas',2]], selected: $vorigen %>
+
+    <%= f.select :moneda, [['Sol',1],['Dolar',2]] %>
   </div>
 
   <div class="field">
@@ -33,24 +29,22 @@
 
   <div class="field">
     <%= f.label :factura %>
-    <%= f.text_field :serie %>
-    <%= f.text_field :nfactu %>
+    <%= f.text_field :serie, :size => 4 %>
+    <%= f.text_field :nfactu, :size => 10 %>
   </div>
 
   <div class="field">
     <%= f.label :Razon %>
-    <%= f.collection_select :client_id, Client.all.order(:razon), :id, :razon %>
+    <%= f.collection_select :client_id, Client.all.order(:razon), :id, :razon  %>
   </div>
 
-    <div class="field">
-    <%= f.label :moneda %>
-    <%= f.select :moneda, [['Sol',1],['Dolar',2]] %>
-  </div>
 
   <div class="field">
     <%= f.label :Subtotal %>
     <%= f.text_field :subtotal, onchange: "{alert('IGV='+value*0.18+' TOTAL='+value*1.18);}" %>
   </div>
+
+  
 
   <div class="field">
     <%= f.label :tc %>

@@ -6,12 +6,13 @@
   <%= @item.mmes %>
   <strong>Origen:</strong>
   <%= @item.origen %>
-</p>
+  </p>
 
 
 <p>
   <strong>Fecha:</strong>
   <%= @item.pfecha %>
+
 </p>
 
 <p>
@@ -28,12 +29,6 @@
   <strong>Razon:</strong>
   <%= @item.client.razon %>
 </p>
-
-<p>
-  <strong>Subtotal:</strong>
-  <%= @item.subtotal %>
-</p>
-
 <p>
   <strong>Moneda:</strong>
   <%= @item.moneda %>
@@ -43,6 +38,45 @@
   <strong>Tc:</strong>
   <%= @item.tc %>
 </p>
+
+<p>
+  <strong>Subtotal:</strong>
+  <%= @item.subtotal %>
+</p>
+
+<div class="field">
+  <h3> Detalles</h3>
+<%= render "details/form" %>
+
+<table>
+  <thead>
+    <tr>
+
+      <th>Descripcion</th>
+      <th>Cantidad</th>
+      <th>Precio</th>
+      <th>Monto</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @item.details.each do |detail| %>
+      <tr>
+        <td><%= detail.descripcion %></td>
+        <td><%= detail.cantidad %></td>
+        <td><%= detail.precio %></td>
+        <td><%= detail.monto %></td>
+        <td><%= link_to 'Edit',edit_item_detail_path(@item,detail) %></td>
+        <td><%= link_to 'Destroy', item_detail_path(@item,detail), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+</div>
+
 
 <%= link_to 'Edit', edit_item_path(@item) %> |
 <%= link_to 'Back', items_path %>
