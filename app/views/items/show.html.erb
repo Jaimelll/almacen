@@ -2,11 +2,12 @@
 <p>
   <strong>Periodo:</strong>
   <%= @item.mmes %>
-  <%= select_tag @item.empresa, options_for_select([['Industrias', 1], ['Confecciones', 2]]), {:disabled => true} %>
-  <%= select_tag @item.origen, options_for_select([['Compras', 1], ['Ventas', 2]]), {:disabled => true} %>
+  <strong>Empresa:</strong>
+  <%= @item.empresa %>
+  <strong>Origen:</strong>
+  <%= @item.origen %>
   <strong>Moneda:</strong>
-  <%= select_tag @item.moneda, options_for_select([['Soles', 1], ['Dolares', 2]]), {:disabled => true} %>
-
+   <%= @item.moneda %>
   <strong>Tc:</strong>
   <%= @item.tc %>
 

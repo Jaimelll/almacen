@@ -4,11 +4,12 @@
 
     <% if not $vorigen.nil? %>
 <h2>PARAMETROS DEL PERIODO  </h2>
-     <h3> <%= select_tag $vempresa, options_for_select([['Industrias', 1], ['Confecciones', 2]]), {:disabled => true} %>
-          <%= select_tag $vorigen, options_for_select([['compras', 1], ['ventas', 2]] ), {:disabled => true} %>
-        Periodo =  <%=$vmes %>
-        Registros =  <%=@regis %>
-        Subtotal =  <%=@acum %> </h3>
+     <h3>
+       Empresa =  <%=$vempresa %>
+       Origen =  <%=$vorigen %>
+       Periodo =  <%=$vmes %>
+       Registros =  <%=@regis %>
+      Subtotal =  <%=@acum %> </h3>
      <% else %>
     <h3>cargar parametros </h3>
     <% end %>
