@@ -2,7 +2,10 @@
   <h3>BIENVENIDO <%= current_user.email %>  </h3>
 
 <% if not $vorigen.nil? %>
-<h3>COMPRAS  empresa=  <%=$vempresa %> periodo= <%=$vmes %> </h3>
+<h3>    <%= select_tag $vempresa, options_for_select([['Industrias', 1], ['Confecciones', 2]]), {:disabled => true} %>
+         <%= select_tag $vorigen, options_for_select([['compras', 1], ['ventas', 2]] ), {:disabled => true} %>
+           Periodo =  <%=$vmes %>
+                                          </h3>
 
    <h3>\copy (SELECT TO_CHAR(items.mmes,'YYYYMM00') a1, trim(to_char(items.id,'99999')) as a2,
  'M'||trim(to_char(items.id,'99999')) as a3, to_char(items.pfecha, 'DD/MM/YYYY') a4, ' ' as a5,

@@ -16,9 +16,11 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.json
   def show
+   @item.update_subtotal
    @detail=Detail.new
    #@details=@item.details
-  end
+
+   end
 
   # GET /items/new
   def new

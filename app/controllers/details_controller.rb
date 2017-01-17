@@ -11,6 +11,8 @@ class DetailsController < ApplicationController
   # GET /details/new
   def new
     @detail = Detail.new
+    @detail.cantidad=0
+    @detail.precio=0
   end
 
   # GET /details/1/edit
@@ -25,7 +27,7 @@ class DetailsController < ApplicationController
     respond_to do |format|
       if @detail.save
         format.html { redirect_to @detail.item, notice: 'Detail was successfully created.' }
-        format.json { render :show, status: :created, location: @detail }
+      #  format.json { render :show, status: :created, location: @detail }
       else
         format.html { render :new }
         format.json { render json: @detail.errors, status: :unprocessable_entity }
@@ -36,6 +38,7 @@ class DetailsController < ApplicationController
   # PATCH/PUT /details/1
   # PATCH/PUT /details/1.json
   def update
+
     respond_to do |format|
       if @detail.update(detail_params)
         format.html { redirect_to @detail.item, notice: 'Detail was successfully updated.' }
@@ -45,7 +48,9 @@ class DetailsController < ApplicationController
         format.json { render json: @detail.errors, status: :unprocessable_entity }
       end
     end
-  end
+      @detail.edit_monto
+    #  @item.edit_subtotal
+   end
 
   # DELETE /details/1
   # DELETE /details/1.json

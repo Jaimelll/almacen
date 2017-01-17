@@ -1,52 +1,36 @@
 <p id="notice"><%= notice %></p>
 <p>
-  <strong>Empresa:</strong>
-  <%= @item.empresa %>
   <strong>Periodo:</strong>
   <%= @item.mmes %>
-  <strong>Origen:</strong>
-  <%= @item.origen %>
+  <%= select_tag @item.empresa, options_for_select([['Industrias', 1], ['Confecciones', 2]]), {:disabled => true} %>
+  <%= select_tag @item.origen, options_for_select([['Compras', 1], ['Ventas', 2]]), {:disabled => true} %>
+  <strong>Moneda:</strong>
+  <%= select_tag @item.moneda, options_for_select([['Soles', 1], ['Dolares', 2]]), {:disabled => true} %>
+
+  <strong>Tc:</strong>
+  <%= @item.tc %>
+
   </p>
 
 
 <p>
-  <strong>Fecha:</strong>
+  <strong>  Fecha: </strong>
   <%= @item.pfecha %>
 
-</p>
-
-<p>
-  <strong>Serie:</strong>
-  <%= @item.serie %>
-</p>
-
-<p>
-  <strong>factura:</strong>
-  <%= @item.nfactu %>
-</p>
-
-<p>
-  <strong>Razon:</strong>
+  <strong>  Factura:</strong>
+  <%= @item.serie %>-<%= @item.nfactu %>
+  <strong>  Razon:</strong>
   <%= @item.client.razon %>
-</p>
-<p>
-  <strong>Moneda:</strong>
-  <%= @item.moneda %>
+
 </p>
 
-<p>
-  <strong>Tc:</strong>
-  <%= @item.tc %>
-</p>
 
-<p>
-  <strong>Subtotal:</strong>
-  <%= @item.subtotal %>
-</p>
+
+
 
 <div class="field">
-  <h3> Detalles</h3>
-<%= render "details/form" %>
+  <h3> DETALLES</h3>
+
 
 <table>
   <thead>
@@ -73,9 +57,15 @@
     <% end %>
   </tbody>
 </table>
-
-
+   <p>
+  </p>
+  <h3><%= link_to '<Nuevo Detalle>', new_item_detail_path(@item) %> </h3>
 </div>
+<p>
+  <strong>Subtotal:</strong>
+  <%= @item.subtotal %>
+  </p>
+
 
 
 <%= link_to 'Edit', edit_item_path(@item) %> |

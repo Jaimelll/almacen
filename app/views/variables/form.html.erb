@@ -4,9 +4,12 @@
 
 <% if not $vorigen.nil? %>
 
-       <h3>Empresa =   <%=$vempresa %>
-           Origen =  <%=$vorigen %>
-          Periodo =  <%=$vmes %> </h3>
+       <h3>    <%= select_tag $vempresa, options_for_select([['Industrias', 1], ['Confecciones', 2]]), {:disabled => true} %>
+               <%= select_tag $vorigen, options_for_select([['compras', 1], ['ventas', 2]] ), {:disabled => true} %>
+                 Periodo =  <%=$vmes %>
+                                               </h3>
+
+
 
      <% else %>
       <h3>cargar parametros </h3>
