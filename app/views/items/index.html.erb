@@ -2,17 +2,15 @@
 
 <h1>Items</h1>
 
-    <% if not $vorigen.nil? %>
+
 <h2>PARAMETROS DEL PERIODO  </h2>
      <h3>
-       Empresa =  <%=$vempresa %>
-       Origen =  <%=$vorigen %>
-       Periodo =  <%=$vmes %>
+       Empresa =  <%=Parameter.find_by_id(1).empresa %>
+       Origen =  <%=Parameter.find_by_id(1).origen %>
+       Periodo =  <%=Parameter.find_by_id(1).mes %>
        Registros =  <%=@regis %>
       Subtotal =  <%=@acum %> </h3>
-     <% else %>
-    <h3>cargar parametros </h3>
-    <% end %>
+
 <table>
   <thead>
     <tr>

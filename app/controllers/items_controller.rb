@@ -7,9 +7,9 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = Item.where(origen:$vorigen,mmes:$vmes,empresa:$vempresa).order('pfecha ASC','serie','nfactu')
-    @regis = Item.where(origen:$vorigen,mmes:$vmes,empresa:$vempresa).count('Id')
-    @acum = Item.where(origen:$vorigen,mmes:$vmes,empresa:$vempresa).sum('subtotal')
+    @items = Item.where(origen:Parameter.find_by_id(1).origen,mmes:Parameter.find_by_id(1).mes,empresa:Parameter.find_by_id(1).empresa).order('pfecha ASC','serie','nfactu')
+    @regis = Item.where(origen:Parameter.find_by_id(1).origen,mmes:Parameter.find_by_id(1).mes,empresa:Parameter.find_by_id(1).empresa).count('Id')
+    @acum = Item.where(origen:Parameter.find_by_id(1).origen,mmes:Parameter.find_by_id(1).mes,empresa:Parameter.find_by_id(1).empresa).sum('subtotal')
 
   end
 
@@ -25,10 +25,12 @@ class ItemsController < ApplicationController
   # GET /items/new
   def new
     @item = Item.new
-    @item.pfecha=$vmes
+    @item.pfecha=Parameter.find_by_id(1).mes
     @item.set_serie
     @item.set_nfactu
-
+    @item.mmes=Parameter.find_by_id(1).mes
+    @item.origen=Parameter.find_by_id(1).origen
+    @item.empresa=Parameter.find_by_id(1).empresa
 
   end
 

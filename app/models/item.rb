@@ -4,17 +4,17 @@ class Item < ApplicationRecord
    has_many :details
 
   def set_serie
-    if $vorigen.to_f==2
+    if Parameter.find_by_id(1).origen==2
 
-          self.serie=Item.where(origen:$vorigen,empresa:$vempresa).last.serie.to_f.round
+          self.serie=Item.where(origen:Parameter.find_by_id(1).origen,empresa:Parameter.find_by_id(1).empresa).last.serie.to_f.round
 
     end
   end
 
   def set_nfactu
-    if $vorigen.to_f==2
+    if Parameter.find_by_id(1).origen==2
 
-         self.nfactu=Item.where(origen:$vorigen,empresa:$vempresa).last.nfactu.to_f.round+1
+         self.nfactu=Item.where(origen:Parameter.find_by_id(1).origen,empresa:Parameter.find_by_id(1).empresa).last.nfactu.to_f.round+1
      end
     end
 

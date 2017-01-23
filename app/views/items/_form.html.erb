@@ -12,11 +12,11 @@
   <% end %>
   <div class="field">
     <%= f.label :Parametros %>
-    <%= f.select :empresa, [['Industrias',1],['Confecciones',2]], selected: $vempresa %>
+    <%= f.select :empresa, [['Industrias',1],['Confecciones',2]] %>
 
-    <%= f.date_select :mmes, discard_day:true, selected: $vmes %>
+    <%= f.date_select :mmes, discard_day:true %>
 
-    <%= f.select :origen, [['compras',1],['ventas',2]], selected: $vorigen %>
+    <%= f.select :origen, [['compras',1],['ventas',2]] %>
 
     <%= f.select :moneda, [['Sol',1],['Dolar',2]] %>
   </div>
@@ -44,7 +44,7 @@
     <%= f.text_field :subtotal, onchange: "{alert('IGV='+value*0.18+' TOTAL='+value*1.18);}" %>
   </div>
 
-  
+
 
   <div class="field">
     <%= f.label :tc %>

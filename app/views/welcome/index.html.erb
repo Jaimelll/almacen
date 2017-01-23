@@ -1,10 +1,11 @@
 <% if user_signed_in? %>
   <h3>BIENVENIDO <%= current_user.email %>  </h3>
 
-<% if not $vorigen.nil? %>
-<h3>   Empresa =  <%=$vempresa %>
-       Origen =  <%=$vorigen %>
-      Periodo =  <%=$vmes %>
+
+<h3>
+  Empresa =  <%=Parameter.find_by_id(1).empresa %>
+  Origen =  <%=Parameter.find_by_id(1).origen %>
+  Periodo =  <%=Parameter.find_by_id(1).mes %>
                                             </h3>
 
    <h3>\copy (SELECT TO_CHAR(items.mmes,'YYYYMM00') a1, trim(to_char(items.id,'99999')) as a2,
@@ -20,20 +21,20 @@
  ' ' as a36, ' ' as a37, ' ' as a38, ' ' as a39, '1' as a40,
  case when items.pfecha >= items.mmes then '1' when items.pfecha < items.mmes then '6' end as a41, null as a42
 FROM items INNER JOIN clients ON items.client_id = clients.id
-     where items.empresa =   <%=$vempresa %>
+     where items.empresa =   <%=Parameter.find_by_id(1).empresa %>
      and items.origen =  1
-     and items.mmes = '<%=$vmes %>' ) TO
+     and items.mmes = '<%=Parameter.find_by_id(1).mes %>' ) TO
 
-     <% case $vempresa.to_f %>
+     <% case Parameter.find_by_id(1).empresa %>
      <% when 1 %>
-    LE10257000767<%= $vmes.strftime("%Y")  %><%=$vmes.strftime("%m") %>00080100001111.cvs CSV DELIMITER '|' </h3>
+    LE10257000767<%= Parameter.find_by_id(1).mes.strftime("%Y")  %><%=Parameter.find_by_id(1).mes.strftime("%m") %>00080100001111.cvs CSV DELIMITER '|' </h3>
      <% when 2 %>
-    LE10402501486<%= $vmes.strftime("%Y")  %><%=$vmes.strftime("%m") %>00080100001111.cvs CSV DELIMITER '|' </h3>
+    LE10402501486<%= Parameter.find_by_id(1).mes.strftime("%Y")  %><%=Parameter.find_by_id(1).mes.strftime("%m") %>00080100001111.cvs CSV DELIMITER '|' </h3>
       <% end %> </h3>
 
 
 
-<h3>VENTAS  empresa=  <%=$vempresa %> periodo= <%=$vmes %> </h3>
+<h3>VENTAS  empresa=  <%=Parameter.find_by_id(1).empresa %> periodo= <%=Parameter.find_by_id(1).mes %> </h3>
 
    <h3>\copy (SELECT TO_CHAR(items.mmes,'YYYYMM00') a1,
  case when items.client_id=1 then '0000' else trim(to_char(items.id,'99999')) end as a2,
@@ -69,20 +70,20 @@ case when items.client_id=1 then ' ' else to_char(items.pfecha, 'DD/MM/YYYY') en
  case when items.client_id=1 then ' ' else '1' end as a33,
  case when items.client_id=1 then '2 ' else '1' end as a34, null as a35
  FROM items INNER JOIN clients ON items.client_id = clients.id
-     where items.empresa =   <%=$vempresa %>
+     where items.empresa =   <%=Parameter.find_by_id(1).empresa %>
      and items.origen =  2
-     and items.mmes = '<%=$vmes %>' ) TO
+     and items.mmes = '<%=Parameter.find_by_id(1).mes %>' ) TO
 
-     <% case $vempresa.to_f %>
+     <% case Parameter.find_by_id(1).empresa %>
      <% when 1 %>
-    LE10257000767<%= $vmes.strftime("%Y")  %><%=$vmes.strftime("%m") %>00140100001111.cvs CSV DELIMITER '|' </h3>
+    LE10257000767<%= Parameter.find_by_id(1).mes.strftime("%Y")  %><%=Parameter.find_by_id(1).mes.strftime("%m") %>00140100001111.cvs CSV DELIMITER '|' </h3>
      <% when 2 %>
-    LE10402501486<%= $vmes.strftime("%Y")  %><%=$vmes.strftime("%m") %>00140100001111.cvs CSV DELIMITER '|' </h3>
+    LE10402501486<%= Parameter.find_by_id(1).mes.strftime("%Y")  %><%=Parameter.find_by_id(1).mes.strftime("%m") %>00140100001111.cvs CSV DELIMITER '|' </h3>
       <% end %> </h3>
 
 
 
 
-<% end %>
+
 
 <% end %>

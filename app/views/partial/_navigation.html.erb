@@ -5,9 +5,11 @@
 	   <li class="col-md">
 	    <h1 class="no-margin" id="logo"><%= link_to "Almacenes", root_path %> </h1>
 	  </li>
-           <li class="col-md" id="logo">
-           <%= link_to "Parametros", variables_path  %>
-         </li>
+
+
+         <li class="col-md" id="logo">
+         <%= link_to "Parametros", edit_parameter_path(1)  %>
+       </li>
 
 	          <li class="col-md" id="logo">
             <%= link_to "Clientes-proveedores", clients_path %>
@@ -22,14 +24,16 @@
 	      <%= link_to "Cerrar sesion", destroy_user_session_path, method: :delete  %>
             </li>
 
+            <li class="col-md" id="logo">
+                 <%= link_to "Crear cuenta", new_user_registration_path %>
+            </li>
+
             <% else %>
 	    <li class="col-md" id="logo">
            <%= link_to "Iniciar sesion", new_user_session_path %>
 	  </li>
 
-    <li class="col-md" id="logo">
-         <%= link_to "Crear cuenta", new_user_registration_path %>
-    </li>
+
 
 
 	   <% end %>
