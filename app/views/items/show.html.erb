@@ -63,8 +63,14 @@
   <h3><%= link_to '<Nuevo Detalle>', new_item_detail_path(@item) %> </h3>
 </div>
 <p>
-  <strong>Subtotal:</strong>
+  <strong>Subtotal</strong>
   <%= @item.subtotal %>
+  <strong>Igv</strong>
+  <%= @item.subtotal*0.18 %>
+  <strong>Total</strong>
+  <%= @item.subtotal*1.18 %>
+
+
   </p>
 
 

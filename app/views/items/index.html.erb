@@ -5,11 +5,24 @@
 
 <h2>PARAMETROS DEL PERIODO  </h2>
      <h3>
-       Empresa =  <%=Parameter.find_by_id(1).empresa %>
-       Origen =  <%=Parameter.find_by_id(1).origen %>
-       Periodo =  <%=Parameter.find_by_id(1).mes %>
-       Registros =  <%=@regis %>
-      Subtotal =  <%=@acum %> </h3>
+       EMPRESA =
+       <%if Parameter.find_by_id(1).empresa==1 %>
+         Industrias
+        <%end %>
+        <%if Parameter.find_by_id(1).empresa==2 %>
+          Confecciones
+         <%end %>
+       ORIGEN =
+       <%if Parameter.find_by_id(1).origen==1 %>
+         Compras
+        <%end %>
+        <%if Parameter.find_by_id(1).origen==2 %>
+          Ventas
+         <%end %>
+
+       PERIODO =    <%= Parameter.find_by_id(1).mes.strftime("%b")  %>-<%=Parameter.find_by_id(1).mes.strftime("%Y") %>
+       REGISTROS =  <%=@regis %>
+      SUBTOTAL =  <%=@acum %> </h3>
 
 <table>
   <thead>

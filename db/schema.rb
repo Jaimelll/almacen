@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170123160754) do
+ActiveRecord::Schema.define(version: 20170123235944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,25 @@ ActiveRecord::Schema.define(version: 20170123160754) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "products", force: :cascade do |t|
+    t.string   "nombre"
+    t.string   "descripcion"
+    t.float    "precio"
+    t.integer  "moneda"
+    t.integer  "unidad"
+    t.integer  "client_id"
+    t.string   "material"
+    t.float    "lote"
+    t.integer  "proceso"
+    t.integer  "equivalente"
+    t.float    "conversion"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.float    "peso"
+    t.boolean  "activo",      default: true
+    t.index ["client_id"], name: "index_products_on_client_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
@@ -92,4 +111,5 @@ ActiveRecord::Schema.define(version: 20170123160754) do
   add_foreign_key "details", "users"
   add_foreign_key "items", "clients"
   add_foreign_key "items", "users"
+  add_foreign_key "products", "clients"
 end

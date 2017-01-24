@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :products
   resources :parameters
 #  get 'variables/form'
 #  post 'variables/form'
