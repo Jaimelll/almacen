@@ -4,16 +4,16 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    @products = Product.order('activo DESC' ,'nombre ASC')
   end
 
   # GET /products/1
   # GET /products/1.json
   def show
-  #  if @product.equivalente.nil?
-  # @product.equivalente =  @product.id
-  #  end
-  end
+      if @product.equivalente.nil?
+        @product.update(equivalente: @product.id)
+      end
+ end
 
   # GET /products/new
   def new
@@ -21,7 +21,7 @@ class ProductsController < ApplicationController
    @product.client_id=881
     @product.lote=1
     @product.conversion=1
-    @product.equivalente =  @product.id
+
 
   end
 

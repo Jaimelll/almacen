@@ -62,7 +62,7 @@
 
   <div class="field">
     <%= f.label :equivalente %>
-    <%= f.collection_select :equivalente, Product.all.order(:nombre), :id, :nombre %>
+    <%= f.collection_select :equivalente, Product.all.order(:nombre), :id, :nombre, {:include_blank => ' sin equivalente'} %>
 
   </div>
   </div>

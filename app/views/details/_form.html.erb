@@ -12,6 +12,13 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :producto %>
+   <%= f.collection_select :product_id, Product.all.order(:nombre), :id, :nombre, {:include_blank => ' falta producto'} %>
+
+  </div>
+
+
+  <div class="field">
     <%= f.label :descripcion %>
     <%= f.text_area :descripcion %>
   </div>

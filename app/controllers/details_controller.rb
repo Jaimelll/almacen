@@ -73,6 +73,6 @@ class DetailsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def detail_params
-      params.require(:detail).permit(:descripcion, :cantidad, :precio, :monto, :item_id, :user_id)
+      params.require(:detail).permit(:descripcion, :cantidad, :precio, :monto, :item_id, :user_id, :product_id)
     end
 end

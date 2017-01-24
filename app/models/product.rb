@@ -3,4 +3,5 @@ class Product < ApplicationRecord
 
 
 
+
 end

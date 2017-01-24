@@ -47,7 +47,7 @@
 
 <p>
   <strong>Equivalente:</strong>
-  <%= @product.equivalente %>
+  <%= Product.find_by_id(@product.equivalente).nombre if @product.equivalente %>
 </p>
 
 <p>
