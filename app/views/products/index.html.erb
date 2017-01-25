@@ -28,7 +28,11 @@
         <td><%= product.precio %></td>
         <td><%= product.moneda %></td>
         <td><%= product.unidad %></td>
+        <% if product.client_id!=881 %>
         <td><%= product.client.razon if product.client %></td>
+        <% else %>
+          <td> Interno </td>
+        <% end %>
         <td><%= product.material %></td>
         <td><%= product.lote %></td>
         <td><%= product.activo %></td>

@@ -13,6 +13,7 @@ class ProductsController < ApplicationController
       if @product.equivalente.nil?
         @product.update(equivalente: @product.id)
       end
+      @formula=Formula.new
  end
 
   # GET /products/new

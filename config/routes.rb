@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
-  resources :products
+
+  resources :products do
+    resources :formulas
+  end
+
   resources :parameters
 #  get 'variables/form'
 #  post 'variables/form'

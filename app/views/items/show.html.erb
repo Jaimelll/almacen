@@ -69,7 +69,6 @@
   <tbody>
     <% @item.details.each do |detail| %>
       <tr>
-        <% var= detail.descripcion %>
         <td><%= Product.find_by_id(detail.product_id).nombre if detail.product_id %></td>
         <td><%= detail.descripcion %></td>
         <td><%= detail.cantidad %></td>
