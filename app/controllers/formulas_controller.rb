@@ -30,9 +30,9 @@ class FormulasController < ApplicationController
   # POST /formulas
   # POST /formulas.json
   def create
-    @formula = Formula.new(formula_params)
+    @formula = current_user.formulas.new(formula_params)
     @formula.product=@product
-    @formula.user_id=current_user.id
+  #  @formula.user_id=current_user.id
 
     respond_to do |format|
       if @formula.save

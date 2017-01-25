@@ -1,9 +1,26 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Items</h1>
+<h1>Partes</h1>
 
 
-<h2>PARAMETROS DEL PERIODO  </h2>
+<h2>PARAMETROS
+  <%if Parameter.find_by_id(1).origen==1 %>
+    Compras
+   <%end %>
+   <%if Parameter.find_by_id(1).origen==2 %>
+     Ventas
+  <%end %>
+  <%if Parameter.find_by_id(1).origen==3 %>
+      Parte
+  <%end %>
+  <%if Parameter.find_by_id(1).origen==4 %>
+       Inventario
+  <%end %>
+  <%if Parameter.find_by_id(1).origen==5 %>
+       Pedido
+   <%end %>
+
+</h2>
      <h3>
        EMPRESA =
        <%if Parameter.find_by_id(1).empresa==1 %>
@@ -12,22 +29,19 @@
         <%if Parameter.find_by_id(1).empresa==2 %>
           Confecciones
          <%end %>
-       ORIGEN =
-       <%if Parameter.find_by_id(1).origen==1 %>
-         Compras
-        <%end %>
-        <%if Parameter.find_by_id(1).origen==2 %>
-          Ventas
-         <%end %>
 
        PERIODO =    <%= Parameter.find_by_id(1).mes.strftime("%b")  %>-<%=Parameter.find_by_id(1).mes.strftime("%Y") %>
        REGISTROS =  <%=@regis %>
-      SUBTOTAL =  <%=@acum %> </h3>
+      <% if @acum>0 %>
+      SUBTOTAL =  <%=@acum %>
+      <% end %>
+                  </h3>
 
 <table>
   <thead>
     <tr>
       <th>Pfecha</th>
+    <% if Parameter.find_by_id(1).origen<3 %>
       <th>Serie</th>
       <th>Factura</th>
       <th>Ruc</th>
@@ -35,6 +49,7 @@
       <th>Subtotal</th>
       <th>Moneda</th>
       <th>Tc</th>
+    <% end %>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -43,6 +58,7 @@
     <% @items.each do |item| %>
       <tr>
         <td><%= item.pfecha %></td>
+        <% if Parameter.find_by_id(1).origen<3 %>
         <td><%= item.serie %></td>
         <td><%= item.nfactu %></td>
         <td><%= item.client.ruc if item.client %></td>
@@ -50,6 +66,7 @@
         <td><%= item.subtotal %></td>
         <td><%= item.moneda %></td>
         <td><%= item.tc %></td>
+          <% end %>
         <td><%= link_to 'Show', item %></td>
         <td><%= link_to 'Edit', edit_item_path(item) %></td>
         <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>

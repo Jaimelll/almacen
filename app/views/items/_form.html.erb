@@ -16,9 +16,9 @@
 
     <%= f.date_select :mmes, discard_day:true %>
 
-    <%= f.select :origen, [['compras',1],['ventas',2]] %>
+    <%= f.select :origen, [['compras',1],['ventas',2],['parte',3],['inventario',4],['pedido',5]] %>
 
-    <%= f.select :moneda, [['Sol',1],['Dolar',2]] %>
+
   </div>
 
   <div class="field">
@@ -26,23 +26,26 @@
 
     <%= f.date_select :pfecha %>
   </div>
+  <% if Parameter.find_by_id(1).origen<3 %>
+    <div class="field">
+       <%= f.label :factura %>
+       <%= f.text_field :serie, :size => 4 %>
+      <%= f.text_field :nfactu, :size => 10 %>
 
-  <div class="field">
-    <%= f.label :factura %>
-    <%= f.text_field :serie, :size => 4 %>
-    <%= f.text_field :nfactu, :size => 10 %>
-  </div>
+   </div>
 
-  <div class="field">
+   <div class="field">
     <%= f.label :Razon %>
     <%= f.collection_select :client_id, Client.all.order(:razon), :id, :razon  %>
-  </div>
+   </div>
 
 
-  <div class="field">
+   <div class="field">
     <%= f.label :tc %>
     <%= f.text_field :tc %>
-  </div>
+    <%= f.select :moneda, [['Sol',1],['Dolar',2]] %>
+   </div>
+  <% end %>
 
 
   <div class="actions">

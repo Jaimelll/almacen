@@ -17,7 +17,37 @@
   <% if @item.origen==2 %>
   Ventas
   <% end %>
+  <% if @item.origen==3 %>
+  Parte
+  <% end %>
+  <% if @item.origen==4 %>
+  Inventario
+  <% end %>
+  <% if @item.origen==5 %>
+  Pedido
+  <% end %>
 
+
+
+
+
+
+
+  </p>
+
+
+<p>
+  <strong>  Fecha: </strong>
+  <%= @item.pfecha %>
+<% if Parameter.find_by_id(1).origen<3 %>
+  <strong>  Factura:</strong>
+  <%= @item.serie %>-<%= @item.nfactu %>
+
+  <strong>  Razon:</strong>
+  <%= @item.client.razon %>
+
+  <strong>Tc:</strong>
+  <%= @item.tc %>
 
   <strong>Moneda:</strong>
   <% if @item.moneda==1 %>
@@ -28,22 +58,7 @@
   <% end %>
 
 
-
-  <strong>Tc:</strong>
-  <%= @item.tc %>
-
-  </p>
-
-
-<p>
-  <strong>  Fecha: </strong>
-  <%= @item.pfecha %>
-
-  <strong>  Factura:</strong>
-  <%= @item.serie %>-<%= @item.nfactu %>
-  <strong>  Razon:</strong>
-  <%= @item.client.razon %>
-
+<% end %>
 </p>
 
 
@@ -60,8 +75,11 @@
       <th>Producto</th>
       <th>Descripcion</th>
       <th>Cantidad</th>
+    <% if Parameter.find_by_id(1).origen<3 %>
       <th>Precio</th>
       <th>Monto</th>
+     <% end %>
+
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -72,8 +90,11 @@
         <td><%= Product.find_by_id(detail.product_id).nombre if detail.product_id %></td>
         <td><%= detail.descripcion %></td>
         <td><%= detail.cantidad %></td>
+      <% if Parameter.find_by_id(1).origen<3 %>
         <td><%= detail.precio %></td>
         <td><%= detail.monto %></td>
+     <% end %>
+
         <td><%= link_to 'Edit',edit_item_detail_path(@item,detail) %></td>
         <td><%= link_to 'Destroy', item_detail_path(@item,detail), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -85,13 +106,14 @@
   <h3><%= link_to '<Nuevo Detalle>', new_item_detail_path(@item) %> </h3>
 </div>
 <p>
-  <strong>Subtotal</strong>
-  <%= @item.subtotal %>
-  <strong>Igv</strong>
-  <%= @item.subtotal*0.18 %>
-  <strong>Total</strong>
-  <%= @item.subtotal*1.18 %>
-
+    <% if Parameter.find_by_id(1).origen<3 %>
+      <strong>Subtotal</strong>
+        <%= @item.subtotal %>
+      <strong>Igv</strong>
+       <%= @item.subtotal*0.18 %>
+      <strong>Total</strong>
+       <%= @item.subtotal*1.18 %>
+    <% end %>
 
   </p>
 

@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
   <h3>BIENVENIDO <%= current_user.email %>  </h3>
-
+  <% if current_user.id==1 %>
 
 <h3>
   Empresa =  <%=Parameter.find_by_id(1).empresa %>
@@ -84,6 +84,6 @@ case when items.client_id=1 then ' ' else to_char(items.pfecha, 'DD/MM/YYYY') en
 
 
 
-
+<% end %>
 
 <% end %>
