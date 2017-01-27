@@ -31,6 +31,10 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'devise'
 
+gem 'wicked_pdf'
+
+gem 'wkhtmltopdf-binary-edge'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

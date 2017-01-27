@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+<h2>PARTE INGRESO DE DETALLES </h2>
 <p>
   <strong>Periodo:</strong>
   <%= @item.mmes.strftime("%b-%Y") %>
@@ -72,12 +73,12 @@
 <table>
   <thead>
     <tr>
-      <th>Producto</th>
-      <th>Descripcion</th>
-      <th>Cantidad</th>
+      <th  style="width:150px;">Producto</th>
+      <th  style="width:150px;">Descripcion</th>
+      <th  style="width:50px;">Cantidad</th>
     <% if Parameter.find_by_id(1).origen<3 %>
-      <th>Precio</th>
-      <th>Monto</th>
+      <th  style="width:50px;">Precio</th>
+      <th  style="width:100px;">Monto</th>
      <% end %>
 
       <th colspan="3"></th>
@@ -95,8 +96,8 @@
         <td><%= detail.monto %></td>
      <% end %>
 
-        <td><%= link_to 'Edit',edit_item_detail_path(@item,detail) %></td>
-        <td><%= link_to 'Destroy', item_detail_path(@item,detail), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td  style="width:50px;"><%= link_to 'Edit',edit_item_detail_path(@item,detail) %></td>
+        <td  style="width:50px;"> <%= link_to 'Destroy', item_detail_path(@item,detail), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -107,11 +108,11 @@
 </div>
 <p>
     <% if Parameter.find_by_id(1).origen<3 %>
-      <strong>Subtotal</strong>
+      <strong  style="width:100px;">Subtotal</strong>
         <%= @item.subtotal %>
-      <strong>Igv</strong>
+      <strong  style="width:100px;">Igv</strong>
        <%= @item.subtotal*0.18 %>
-      <strong>Total</strong>
+      <strong  style="width:100px;">Total</strong>
        <%= @item.subtotal*1.18 %>
     <% end %>
 

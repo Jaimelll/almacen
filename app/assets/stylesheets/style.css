@@ -1,5 +1,5 @@
 html.body{
-    margin: 0px;
+margin: 0px;
    font_family: "Open Sans", sans-serif;
 }
 #logo{
@@ -22,4 +22,18 @@ html.body{
 }
 .form-control{
     padding: 8px 5px;
+}
+h1 {
+  font-size: 30px
+}
+h2 {
+  font-size: 20px
+}
+h3 {
+  font-size: 15px
+}
+
+td,th{
+  text-align:left;
+  font-size: 14px
 }
