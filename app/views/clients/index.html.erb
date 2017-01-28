@@ -24,9 +24,9 @@
         <td><%= client.origen %></td>
         <td><%= client.tipo %></td>
         <td><%= client.obs %></td>
-        <td><%= link_to 'Show', client %></td>
-        <td><%= link_to 'Edit', edit_client_path(client) %></td>
-        <td><%= link_to 'Destroy', client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td style="width:60px;"><%= link_to 'Mostrar', client %></td>
+        <td style="width:60px;"><%= link_to 'Editar', edit_client_path(client) %></td>
+        <td style="width:60px;"><%= link_to 'Eliminar', client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -34,4 +34,4 @@
 
 <br>
 
-<%= link_to 'New Client', new_client_path %>
+<%= link_to 'Nuevo Centro', new_client_path %>

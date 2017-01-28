@@ -11,14 +11,18 @@
      Ventas
   <%end %>
   <%if Parameter.find_by_id(1).origen==3 %>
-      Parte
+      Pedido
   <%end %>
   <%if Parameter.find_by_id(1).origen==4 %>
-       Inventario
+       Orden de compra
   <%end %>
   <%if Parameter.find_by_id(1).origen==5 %>
-       Pedido
+       Produccion
    <%end %>
+   <%if Parameter.find_by_id(1).origen==6 %>
+      Inventario
+    <%end %>
+
 
 </h2>
      <h3>
@@ -41,11 +45,11 @@
   <thead>
     <tr>
       <th style="width:100px;">Pfecha</th>
-    <% if Parameter.find_by_id(1).origen<3 %>
+    <% if Parameter.find_by_id(1).origen<5 %>
       <th style="width:50px;">Serie</th>
       <th style="width:70px;">Factura</th>
       <th style="width:100px;">Ruc</th>
-      <th style="width:200px;">Razon</th>
+      <th style="width:350px;">Razon</th>
       <th style="width:100px;">Subtotal</th>
       <th style="width:50px;">Moneda</th>
       <th style="width:50px;">Tc</th>
@@ -58,7 +62,7 @@
     <% @items.each do |item| %>
       <tr>
         <td><%= item.pfecha %></td>
-        <% if Parameter.find_by_id(1).origen<3 %>
+        <% if Parameter.find_by_id(1).origen<5 %>
         <td><%= item.serie %></td>
         <td><%= item.nfactu %></td>
         <td><%= item.client.ruc if item.client %></td>
@@ -67,9 +71,9 @@
         <td><%= item.moneda %></td>
         <td><%= item.tc %></td>
           <% end %>
-        <td  style="width:50px;"><%= link_to 'Show', item %></td>
-        <td  style="width:50px;"><%= link_to 'Edit', edit_item_path(item) %></td>
-        <td  style="width:50px;"><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td  style="width:60px;"><%= link_to 'Mostrar', item %></td>
+        <td  style="width:60px;"><%= link_to 'Editar', edit_item_path(item) %></td>
+        <td  style="width:60px;"><%= link_to 'Eliminar', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
 

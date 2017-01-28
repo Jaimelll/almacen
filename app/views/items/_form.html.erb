@@ -16,7 +16,8 @@
 
     <%= f.date_select :mmes, discard_day:true %>
 
-    <%= f.select :origen, [['compras',1],['ventas',2],['parte',3],['inventario',4],['pedido',5]] %>
+
+    <%= f.select :origen, [['compras',1],['ventas',2],['pedido',3],['orden de compra',4],['produccion',5],['inventario',6]] %>
 
 
   </div>
@@ -36,7 +37,7 @@
 
    <div class="field">
     <%= f.label :Razon %>
-    <%= f.collection_select :client_id, Client.all.order(:razon), :id, :razon  %>
+    <%= f.collection_select :client_id, Client.all.order(:razon), :id, :razon, html_options = {:style => "width:600px"}  %>
    </div>
 
 
@@ -46,7 +47,7 @@
     <%= f.select :moneda, [['Sol',1],['Dolar',2]] %>
    </div>
   <% end %>
-
+<br/>
 
   <div class="actions">
     <%= f.submit %>

@@ -76,8 +76,8 @@
       <tr>
         <td><%= Product.find_by_id(formula.material).nombre if formula.material %></td>
         <td><%= formula.cantidad %></td>
-        <td  style="width:100px;"><%= link_to 'Edit', edit_product_formula_path(@product,formula) %></td>
-        <td  style="width:100px;"><%= link_to 'Destroy', product_formula_path(@product,formula), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td  style="width:100px;"><%= link_to 'Editar', edit_product_formula_path(@product,formula) %></td>
+        <td  style="width:100px;"><%= link_to 'Eliminar', product_formula_path(@product,formula), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -85,8 +85,8 @@
 
 <br>
 
-<h3><%= link_to 'New Formula', new_product_formula_path(@product) %></h3>
+<h3><%= link_to 'Nueva Formula', new_product_formula_path(@product) %></h3>
 <p></p>
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+<%= link_to 'Editar', edit_product_path(@product) %> |
+<%= link_to 'Retroceder', products_path %>
