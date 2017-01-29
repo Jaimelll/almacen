@@ -25,7 +25,7 @@
    Orden de compra
   <% end %>
   <% if @item.origen==5 %>
-  Produccion 
+  Produccion
   <% end %>
   <% if @item.origen==6 %>
   Inventario
@@ -65,7 +65,7 @@
 </p>
 
 
-
+<br/>
 
 
 <div class="field">
@@ -104,10 +104,12 @@
     <% end %>
   </tbody>
 </table>
-   <p>
-  </p>
+
+  <br/>
+  <br/>
   <h3><%= link_to '<Nuevo Detalle>', new_item_detail_path(@item) %> </h3>
 </div>
+<br/>
 <p>
     <% if Parameter.find_by_id(1).origen<5 %>
       <strong  style="width:100px;">Subtotal</strong>
@@ -120,7 +122,7 @@
 
   </p>
 
-
+<br/>
 
 <%= link_to 'Editar', edit_item_path(@item) %> |
 <%= link_to 'Retroceder', items_path %>
