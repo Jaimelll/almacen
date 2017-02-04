@@ -3,7 +3,8 @@
 <h1>Partes</h1>
 
 
-<h2 >PARAMETROS
+<h2 >PARAMETROS :
+
   <%if Parameter.find_by_id(1).origen==1 %>
     Compras
    <%end %>
@@ -26,18 +27,21 @@
 
 </h2>
      <h3>
-       EMPRESA =
-       <%if Parameter.find_by_id(1).empresa==1 %>
-         Industrias
+       <strong class="para"> EMPRESA =</strong>
+
+        <%if Parameter.find_by_id(1).empresa==1 %>
+            Industrias
         <%end %>
         <%if Parameter.find_by_id(1).empresa==2 %>
-          Confecciones
+           Confecciones
          <%end %>
-
-       PERIODO =    <%= Parameter.find_by_id(1).mes.strftime("%b")  %>-<%=Parameter.find_by_id(1).mes.strftime("%Y") %>
-       REGISTROS =  <%=@regis %>
+      <strong class="para"> PERIODO =</strong>
+        <%= Parameter.find_by_id(1).mes.strftime("%b")  %>-<%=Parameter.find_by_id(1).mes.strftime("%Y") %>
+      <strong class="para"> REGISTROS =</strong>
+          <%=@regis %>
       <% if @acum>0 %>
-      SUBTOTAL =  <%=@acum %>
+      <strong class="para"> SUBTOTAL =</strong>
+        <%= '%.2f' % (@acum) %>
       <% end %>
                   </h3>
 <br/>
@@ -67,7 +71,7 @@
         <td><%= item.nfactu %></td>
         <td><%= item.client.ruc if item.client %></td>
         <td><%= item.client.razon if item.client %></td>
-        <td><%= item.subtotal %></td>
+        <td><%= '%.2f' % (item.subtotal) %></td>
         <td><%= item.moneda %></td>
         <td><%= item.tc %></td>
           <% end %>

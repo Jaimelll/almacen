@@ -13,7 +13,8 @@ class ItemsController < ApplicationController
     respond_to do |format|
         format.html
         format.json
-        format.pdf{render template: 'items/pdf', pdf:'Reporte'}
+       format.pdf{render template: 'items/pdf', pdf:'Reporte'}
+
       end
   end
 
@@ -23,6 +24,11 @@ class ItemsController < ApplicationController
    @item.update_subtotal
    @detail=Detail.new
    #@details=@item.details
+   respond_to do |format|
+       format.html
+       format.json
+       format.pdf{render template: 'items/show.pdf.erb', pdf:'Factura'}
+     end
 
    end
 

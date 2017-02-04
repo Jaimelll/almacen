@@ -40,7 +40,10 @@ td,th{
   text-align:left;
   font-size: 13px;
   left: 30px
-
+}
+.para{
+ margin-left: 20px;
+}
 
 }
 * {
