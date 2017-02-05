@@ -35,6 +35,8 @@ gem 'wicked_pdf'
 
 gem 'wkhtmltopdf-binary-edge'
 
+gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

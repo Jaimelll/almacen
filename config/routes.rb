@@ -13,7 +13,10 @@ resources :items do
   resources :details
 end
 
-  devise_for :users
+  devise_for :users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+
+
   root 'welcome#index'
 
   resources :clients
