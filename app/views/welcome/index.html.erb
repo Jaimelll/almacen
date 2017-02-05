@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
   <h3>BIENVENIDO <%= current_user.email %>  </h3>
 <% if current_user.id==1 or current_user.id==3 %>
-  <%= link_to "Clientes", admin_dashboard_path %>
+  <%= link_to "Volver al dashboard", admin_dashboard_path %>
   <% end %>
 
   <% if current_user.id==1 %>

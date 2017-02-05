@@ -12,6 +12,30 @@ ActiveAdmin.register Client do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
+  filter :ruc
+  filter :razon
+  filter :direccion
 
+  scope :all, :default => true
+  scope :proveedores do |clients|
+    clients.where("tipo = 2")
+  end
+  scope :clientes do |clients|
+    clients.where("tipo = 1")
+  end
+  scope :Mercaderia do |clients|
+    clients.where("origen = 1")
+  end
+  scope :Activos do |clients|
+    clients.where("origen = 2")
+  end
+
+  index do
+    column("ruc")
+    column("razon")
+    column("direccion")
+    column("tipo")
+    column("origen")
+  end
 
 end
