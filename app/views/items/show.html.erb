@@ -5,10 +5,13 @@
        <%= @item.mmes.strftime("%b-%Y") %>
   <strong class="para">Empresa:</strong>
        <% if @item.empresa==1 %>
-       Industrias
+       Mario
        <% end %>
        <% if @item.empresa==2 %>
       Confecciones
+      <% end %>
+      <% if @item.empresa==3 %>
+      Industrias
       <% end %>
   <strong class="para">Origen:</strong>
 

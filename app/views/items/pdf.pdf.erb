@@ -30,11 +30,15 @@
      <h3>
        EMPRESA =
        <%if Parameter.find_by_id(1).empresa==1 %>
-         Industrias
+         Mario
         <%end %>
         <%if Parameter.find_by_id(1).empresa==2 %>
           Confecciones
          <%end %>
+         <%if Parameter.find_by_id(1).empresa==3 %>
+           Industrias
+        <%end %>
+
 
        PERIODO =    <%= Parameter.find_by_id(1).mes.strftime("%b")  %>-<%=Parameter.find_by_id(1).mes.strftime("%Y") %>
        REGISTROS =  <%=@regis %>

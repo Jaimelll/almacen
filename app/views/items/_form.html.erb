@@ -12,7 +12,7 @@
   <% end %>
   <div class="field">
     <%= f.label :Parametros %>
-    <%= f.select :empresa, [['Industrias',1],['Confecciones',2]] %>
+    <%= f.select :empresa, [['Mario',1],['Confecciones',2],['Industrias',3]] %>
     <%= f.date_select :mmes, discard_day:true %>
     <%= f.select :origen, [['compras',1],['ventas',2],['pedido',3],['orden de compra',4],['produccion',5],['inventario',6]] %>
   </div>
@@ -23,10 +23,12 @@
     <%= f.date_select :pfecha %>
   </div>
   <% if Parameter.find_by_id(1).origen<5 %>
+<br/>
     <div class="field">
        <%= f.label :factura %>
-       <%= f.text_field :serie, :size => 4 %>
-      <%= f.text_field :nfactu, :size => 10 %>
+       <%= f.text_field :serie, :size=>3 %>
+       <%= f.text_field :nfactu %>
+
    </div>
 
    <div class="field">
