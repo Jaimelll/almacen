@@ -88,7 +88,10 @@
 </table>
 <br/>
   <%= link_to 'Imprimir partes', items_url(format: :pdf)%>
-
+<br/>
+ <%= link_to "CSV", items_path(format: "csv") %>
+ <br/>
+  <%= link_to "XLS", items_path(format: "xls") %>
 <br/>
 <br>
 

@@ -13,7 +13,9 @@ class ItemsController < ApplicationController
     respond_to do |format|
         format.html
         format.json
-       format.pdf{render template: 'items/pdf', pdf:'Reporte'}
+        format.csv { send_data @items.to_csv }
+        format.xls 
+        format.pdf{render template: 'items/pdf', pdf:'Reporte'}
 
       end
   end

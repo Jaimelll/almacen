@@ -3,6 +3,16 @@ class Item < ApplicationRecord
   belongs_to :user
    has_many :details
 
+def self.to_csv(options={})
+  CSV.generate(options) do |csv|
+  csv <<  column_names
+    all.each do |item|
+       csv << item.attributes.values_at(*column_names)
+    end
+  end
+end
+
+
   def set_serie
     if Parameter.find_by_id(1).origen==2
 
