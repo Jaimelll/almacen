@@ -70,8 +70,8 @@
       <tr>
         <td><%= item.pfecha %></td>
         <% if Parameter.find_by_id(1).origen<5 %>
-        <td><%= item.serie %></td>
-        <td><%= item.nfactu %></td>
+        <td><%= item.serie.rjust(4,"0") %></td>
+        <td><%= item.nfactu.rjust(9,"0") %></td>
         <td><%= item.client.ruc if item.client %></td>
         <td><%= item.client.razon if item.client %></td>
         <td><%= '%.2f' % (item.subtotal) %></td>
