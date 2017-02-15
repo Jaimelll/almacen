@@ -80,7 +80,7 @@
           <td><%= item.nfactu.rjust(9,"0")+"|" %></td>
           <td><%= item.client.ruc+"|" if item.client %></td>
           <td><%= item.client.razon+"|" if item.client %></td>
-          <td><%= '%.2f' % (item.subtotal).to_s+"|" %></td>
+          <td><%= '%.2f' % (item.subtotal).to_s if item.subtotal%></td>
           <td><%= item.moneda.to_s+"|"%></td>
           <td><%= item.tc.to_s+"|" %></td>
             <% end %>
