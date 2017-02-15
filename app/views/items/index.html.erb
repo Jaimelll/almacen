@@ -44,7 +44,7 @@
           <%=@regis %>
       <% if @acum>0 %>
       <strong class="para"> SUBTOTAL =</strong>
-        <%= '%.2f' % (@acum) %>
+        <%= '%.2f' % (@acum) if @acum %>
       <% end %>
                   </h3>
 <br/>
@@ -74,7 +74,7 @@
         <td><%= item.nfactu.rjust(9,"0") %></td>
         <td><%= item.client.ruc if item.client %></td>
         <td><%= item.client.razon if item.client %></td>
-        <td><%= '%.2f' % (item.subtotal) %></td>
+        <td><%= '%.2f' % (item.subtotal) if item.subtotal %></td>
         <td><%= item.moneda %></td>
         <td><%= item.tc %></td>
           <% end %>
