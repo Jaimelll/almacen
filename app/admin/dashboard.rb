@@ -9,7 +9,14 @@ ActiveAdmin.register_page "Dashboard" do
         small I18n.t("active_admin.dashboard_welcome.call_to_action")
       end
     end
-strong { link_to "Ir al sistema", root_path }
+strong { link_to "IR AL SISTEMA", root_path }
+br
+br
+strong { link_to 'ver pdf reporte', variables_form_path(format: :pdf)}
+br
+br
+strong { link_to 'ver pdf reporte2', variables_comment_path(format: :pdf)}
+
     # Here is an example of a simple dashboard with columns and panels.
     #
     # columns do

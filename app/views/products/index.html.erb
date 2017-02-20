@@ -39,7 +39,8 @@
 
         <td  style="width:60px;"><%= link_to 'Mostrar', product %></td>
         <td  style="width:60px;"><%= link_to 'Editar', edit_product_path(product) %></td>
-        <td  style="width:60px;"><%= link_to 'Eliminar', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        
+        <td  style="width:60px;"><%= link_to_if(Formula.where(product_id:product.id).count==0, 'Eliminar', product, method: :delete, data: { confirm: 'Are you sure?' }) %></td>
       </tr>
     <% end %>
   </tbody>

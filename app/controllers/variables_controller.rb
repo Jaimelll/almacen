@@ -1,12 +1,25 @@
 class VariablesController < ApplicationController
   def form
-$vempresa=params[ :empresa_id]
-$vorigen=params[ :origen_de]
-#$vmes=params[ :mes_de]
-
-# $vmes=Date.civil( params[:mes_de][:year].to_i, params[:mes_de][:month].to_i, params[:mes_de][:day].to_i )
-   unless params[:mes_de].nil?
- $vmes=Date.civil( params[:mes_de][:year].to_i, params[:mes_de][:month].to_i, params[:mes_de][:day].to_i )
-   end
+   @items = Item.where(origen:Parameter.find_by_id(1).origen,mmes:Parameter.find_by_id(1).mes,empresa:Parameter.find_by_id(1).empresa).order('pfecha ASC','serie','nfactu')
+   @regis = Item.where(origen:Parameter.find_by_id(1).origen,mmes:Parameter.find_by_id(1).mes,empresa:Parameter.find_by_id(1).empresa).count('Id')
+   @acum = Item.where(origen:Parameter.find_by_id(1).origen,mmes:Parameter.find_by_id(1).mes,empresa:Parameter.find_by_id(1).empresa).sum('subtotal')
+   respond_to do |format|
+       format.html
+       format.json
+       format.pdf{render template: 'variables/reporte.pdf.erb', pdf:'Factura'}
+     end
   end
+
+  
+  def comment
+   @items = Item.where(origen:Parameter.find_by_id(1).origen,mmes:Parameter.find_by_id(1).mes,empresa:Parameter.find_by_id(1).empresa).order('pfecha ASC','serie','nfactu')
+   @regis = Item.where(origen:Parameter.find_by_id(1).origen,mmes:Parameter.find_by_id(1).mes,empresa:Parameter.find_by_id(1).empresa).count('Id')
+   @acum = Item.where(origen:Parameter.find_by_id(1).origen,mmes:Parameter.find_by_id(1).mes,empresa:Parameter.find_by_id(1).empresa).sum('subtotal')
+   respond_to do |format|
+       format.html
+       format.json
+       format.pdf{render template: 'variables/reporte2.pdf.erb', pdf:'Factura2'}
+     end
+  end
+
 end

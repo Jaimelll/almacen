@@ -10,11 +10,12 @@ class ItemsController < ApplicationController
     @items = Item.where(origen:Parameter.find_by_id(1).origen,mmes:Parameter.find_by_id(1).mes,empresa:Parameter.find_by_id(1).empresa).order('pfecha ASC','serie','nfactu')
     @regis = Item.where(origen:Parameter.find_by_id(1).origen,mmes:Parameter.find_by_id(1).mes,empresa:Parameter.find_by_id(1).empresa).count('Id')
     @acum = Item.where(origen:Parameter.find_by_id(1).origen,mmes:Parameter.find_by_id(1).mes,empresa:Parameter.find_by_id(1).empresa).sum('subtotal')
+
     respond_to do |format|
         format.html
         format.json
         format.csv { send_data @items.to_csv }
-        format.xls 
+        format.xls
         format.pdf{render template: 'items/pdf', pdf:'Reporte'}
 
       end
@@ -25,6 +26,7 @@ class ItemsController < ApplicationController
   def show
    @item.update_subtotal
    @detail=Detail.new
+
    #@details=@item.details
    respond_to do |format|
        format.html

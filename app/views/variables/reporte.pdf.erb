@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<%= wicked_pdf_stylesheet_link_tag 'pdf' %>
+<meta charset="utf-8">
+</head>
+<body>
+  <h1>REGISTROS</h1>
+
+
+
+       <h3>
+         <strong class="para"> EMPRESA =</strong>
+
+          <%if Parameter.find_by_id(1).empresa==1 %>
+              Mario
+          <%end %>
+          <%if Parameter.find_by_id(1).empresa==2 %>
+             Confecciones
+           <%end %>
+           <%if Parameter.find_by_id(1).empresa==3 %>
+              Industrias
+          <%end %>
+        <strong class="para"> PERIODO =</strong>
+          <%= Parameter.find_by_id(1).mes.strftime("%b")  %>-<%=Parameter.find_by_id(1).mes.strftime("%Y") %>
+        <strong class="para"> REGISTROS =</strong>
+            <%=@regis %>
+        <% if @acum>0 %>
+        <strong class="para"> SUBTOTAL =</strong>
+          <%= '%.2f' % (@acum) %>
+        <% end %>
+                    </h3>
+  <br/>
+  <table>
+
+
+    <tbody>
+      <% @items.each do |item| %>
+        <tr>
+          <td><%= item.pfecha.to_s+"|" %>
+          <% if Parameter.find_by_id(1).origen<5 %>
+          <%= item.serie.rjust(4,"0")+"|"  %>
+          <%= item.nfactu.rjust(9,"0")+"|" %>
+          <%= item.client.ruc+"|" if item.client %>
+          <%= item.client.razon+"|" if item.client %>
+          <%= '%.2f' % (item.subtotal).to_s if item.subtotal%>
+          <%= item.moneda.to_s+"|"%>
+          <%= item.tc.to_s+"|" %></td>
+            <% end %>
+
+        </tr>
+      <% end %>
+
+    </tbody>
+  </table>
+</body>

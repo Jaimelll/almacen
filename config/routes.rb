@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   resources :parameters
 #  get 'variables/form'
 #  post 'variables/form'
-  match 'variables/form', via: [:get,:post], as: :variables
+  match 'variables/form', via: [:get]
+  match 'variables/comment', via: [:get]
+  
 resources :items do
   resources :details
 end

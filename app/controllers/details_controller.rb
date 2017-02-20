@@ -11,7 +11,7 @@ class DetailsController < ApplicationController
   # GET /details/new
   def new
     @detail = Detail.new
-    @detail.cantidad=0
+    @detail.cantidad=1
     @detail.precio=0
   end
 
