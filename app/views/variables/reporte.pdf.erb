@@ -12,7 +12,7 @@
 
     <tbody>
       <% @items.each do |item| %>
-        <h5>
+        <h6>
         <%if Parameter.find_by_id(1).origen==1 %>
            <%= Parameter.find_by_id(1).mes.strftime("%Y").to_s+Parameter.find_by_id(1).mes.strftime("%m").to_s+"00"+"|"  +
                item.id.to_s.rjust(5,"0")+"|" +
@@ -125,7 +125,7 @@
 
       <% end %>
 
-        </h5>
+    </h6>
      <% end %>
 
     </tbody>
