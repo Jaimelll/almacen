@@ -6,52 +6,129 @@
 <meta charset="utf-8">
 </head>
 <body>
-  <h1>REGISTROS</h1>
 
-
-
-       <h3>
-         <strong class="para"> EMPRESA =</strong>
-
-          <%if Parameter.find_by_id(1).empresa==1 %>
-              Mario
-          <%end %>
-          <%if Parameter.find_by_id(1).empresa==2 %>
-             Confecciones
-           <%end %>
-           <%if Parameter.find_by_id(1).empresa==3 %>
-              Industrias
-          <%end %>
-        <strong class="para"> PERIODO =</strong>
-          <%= Parameter.find_by_id(1).mes.strftime("%b")  %>-<%=Parameter.find_by_id(1).mes.strftime("%Y") %>
-        <strong class="para"> REGISTROS =</strong>
-            <%=@regis %>
-        <% if @acum>0 %>
-        <strong class="para"> SUBTOTAL =</strong>
-          <%= '%.2f' % (@acum) %>
-        <% end %>
-                    </h3>
-  <br/>
   <table>
 
 
     <tbody>
       <% @items.each do |item| %>
-        <tr>
-          <td><%= item.pfecha.to_s+"|" %>
-          <% if Parameter.find_by_id(1).origen<5 %>
-          <%= item.serie.rjust(4,"0")+"|"  %>
-          <%= item.nfactu.rjust(9,"0")+"|" %>
-          <%= item.client.ruc+"|" if item.client %>
-          <%= item.client.razon+"|" if item.client %>
-          <%= '%.2f' % (item.subtotal).to_s if item.subtotal%>
-          <%= item.moneda.to_s+"|"%>
-          <%= item.tc.to_s+"|" %></td>
-            <% end %>
+        <h5>
+        <%if Parameter.find_by_id(1).origen==1 %>
+           <%= Parameter.find_by_id(1).mes.strftime("%Y").to_s+Parameter.find_by_id(1).mes.strftime("%m").to_s+"00"+"|"  +
+               item.id.to_s.rjust(5,"0")+"|" +
+               "M"+item.id.to_s.rjust(5,"0")+"|"+item.pfecha.strftime("%d/%m/%Y")+"|" %>
 
-        </tr>
+           <%= "|"+(if item.serie.first=="T" then "12" else (if item.serie.first=="F" then "01" else "01" end) end)+
+              "|"+(if item.serie.first=="T" then item.serie else (if item.serie.first=="F" then item.serie else item.serie.rjust(4,"0") end) end)+"|" %>
+
+           <%="|" +item.nfactu.rjust(8,"0")+"|" %>
+           <%="|"+"6"+"|"+(item.client.ruc+"|" if item.client) +
+             (item.client.razon+"|" if item.client)+
+             ('%.2f' % (item.subtotal).to_s+"|" if item.subtotal)+('%.2f' % (item.subtotal*0.18).to_s+"|" if item.subtotal)%>
+           <%= "|"  %>
+           <%= "|"  %>
+           <%= "|"  %>
+           <%= "|"  %>
+           <%= "|"  %>
+           <%= "|"  %>
+            <%if item.tc==0 %>
+           <%= "|" +('%.2f' % (item.subtotal*1.18).to_s+"|" if item.subtotal) %>
+           <%= "|"  %>
+           <%= "|" +item.pfecha.strftime("%d/%m/%Y")+"|"  %>
+           <%else %>
+           <%= "|" +('%.2f' % (item.subtotal*1.18).to_s+"|" if item.subtotal)+"USD"+"|"+ item.tc.to_s+
+           "|"+item.pfecha.strftime("%d/%m/%Y")+"|"  %>
+           <%end %>
+           <%= "|"  %>
+           <%= "|"  %>
+           <%= "|"  %>
+           <%= "|"  %>
+           <%= "|"  %>
+           <%= "|"  %>
+           <%= "|" +(item.client.origen.to_s+"|" if item.client) %>
+           <%= "|"  %>
+           <%= "|"  %>
+           <%= "|"  %>
+           <%= "|"  %>
+           <%= "|" +"1" +"|"+(if item.pfecha>=item.mmes then "1|" else "6|" end ) %>
       <% end %>
+       <%if Parameter.find_by_id(1).origen==2 %>
+         <%if item.client.id==1 %>
+           <%= Parameter.find_by_id(1).mes.strftime("%Y").to_s+Parameter.find_by_id(1).mes.strftime("%m").to_s+"00"+"|"  +
+               item.id.to_s.rjust(5,"0")+"|" +
+               "M"+item.id.to_s.rjust(5,"0")+"|"%>
+           <%="|" %>
+         <%else %>
+           <%= Parameter.find_by_id(1).mes.strftime("%Y").to_s+Parameter.find_by_id(1).mes.strftime("%m").to_s+"00"+"|"  +
+               item.id.to_s.rjust(5,"0")+"|" +
+               "M"+item.id.to_s.rjust(5,"0")+"|"+
+               item.pfecha.strftime("%d/%m/%Y")+"|" %>
+         <% end %>
+         <%= "|"+(if item.serie.first=="T" then "12" else (if item.serie.first=="F" then "01" else "01" end) end)+
+            "|"+(if item.serie.first=="T" then item.serie else (if item.serie.first=="F" then item.serie else item.serie.rjust(4,"0") end) end)+
+            "|" +item.nfactu.rjust(8,"0")+"|"%>
+        <%if item.client.id==1 %>
+          <%="|" %>
+          <%="|" %>
+          <%="|" %>
+          <%="|" %>
+          <%="|" %>
+          <%="|" %>
+          <%="|" %>
+
+          <%="|" %>
+          <%="|" %>
+          <%="|" %>
+          <%="|" %>
+          <%="|" %>
+          <%="|" %>
+          <%="|" %>
+          <%="|" %>
+          <%="|" %>
+          <%="|" %>
+
+          <%="|" %>
+          <%="|" %>
+          <%="|" %>
+          <%="|" %>
+          <%="|" %>
+          <%="|" %>
+          <%="|" %>
+          <%="|"+"2"+"|" %>
+        <%else %>
+          <%= "|"+(if item.serie.first=="F" then "1" else "6" end)+"|"+
+          (item.client.ruc+"|" if item.client)+
+          (item.client.razon+"|" if item.client)%>
+          <%= "|"+('%.2f' % (item.subtotal).to_s+"|" if item.subtotal)%>
+            <%= "|"+('%.2f' % (item.subtotal*0.18).to_s+"|" if item.subtotal)%>
+            <%="|" %>
+            <%="|" %>
+            <%="|" %>
+            <%="|" %>
+            <%="|" %>
+            <%="|" %>
+          <%if item.tc==0 %>
+            <%= "|"+('%.2f' % (item.subtotal*1.18).to_s+"|" if item.subtotal)%>
+            <%="|" %>
+            <%="|"+ item.pfecha.strftime("%d/%m/%Y")+"|"%>
+          <% else %>
+            <%= "|"+('%.2f' % (item.subtotal*1.18).to_s+"|" if item.subtotal)+"USD"+"|"+ ('%.3f' % item.tc).to_s +
+             "|"+item.pfecha.strftime("%d/%m/%Y")+"|"%>
+          <% end %>
+
+            <%="|" %>
+            <%="|" %>
+            <%="|" %>
+            <%="|" %>
+            <%="|"+"1"+"|"+"1"+"|" %>
+        <% end %>
+
+      <% end %>
+
+        </h5>
+     <% end %>
 
     </tbody>
   </table>
+
 </body>

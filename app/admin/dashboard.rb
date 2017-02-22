@@ -12,8 +12,35 @@ ActiveAdmin.register_page "Dashboard" do
 strong { link_to "IR AL SISTEMA", root_path }
 br
 br
-strong { link_to 'ver pdf reporte', variables_form_path(format: :pdf)}
+strong { "Periodo:"+Parameter.find_by_id(1).mes.strftime("%b/%Y")}
 br
+br
+case Parameter.find_by_id(1).origen
+  when 1
+     strong { "Registro de Compras-"}
+
+
+     case Parameter.find_by_id(1).empresa
+        when 1
+         strong { "Altamirano"}
+        when 2
+        strong { "Confecciones"}
+      end
+      strong { link_to 'generar pdf', variables_form_path(format: :pdf)}
+  when 2
+      strong { "Registro de Ventas-"}
+    case Parameter.find_by_id(1).empresa
+       when 1
+      strong { "Altamirano"}
+       when 2
+      strong { "Confecciones"}
+    end
+     strong { link_to 'generar pdf', variables_form_path(format: :pdf)}
+end
+
+
+br
+
 br
 strong { link_to 'ver pdf reporte2', variables_comment_path(format: :pdf)}
 
