@@ -66,16 +66,22 @@
   <thead>
     <tr>
       <th  style="width:100px;">Material</th>
+      <th  style="width:100px;">descripcion</th>
       <th  style="width:100px;">Cantidad</th>
+      <th  style="width:100px;">orden</th>
+      <th  style="width:100px;">Producto</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @product.formulas.each do |formula| %>
+    <% @product.formulas.order('orden ASC').each do |formula| %>
       <tr>
         <td><%= Product.find_by_id(formula.material).nombre if formula.material %></td>
+        <td><%= formula.descripcion %></td>
         <td><%= formula.cantidad %></td>
+        <td><%= formula.orden %></td>
+        <td><%= formula.product_id %></td>
         <td  style="width:100px;"><%= link_to 'Editar', edit_product_formula_path(@product,formula) %></td>
         <td  style="width:100px;"><%= link_to 'Eliminar', product_formula_path(@product,formula), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

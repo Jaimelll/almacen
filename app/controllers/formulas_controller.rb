@@ -81,6 +81,6 @@ class FormulasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def formula_params
-      params.require(:formula).permit(:product_id, :material, :cantidad, :user_id)
+      params.require(:formula).permit(:product_id, :material, :cantidad, :user_id, :descripcion, :indicacion, :orden)
     end
 end

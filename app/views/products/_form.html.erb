@@ -57,7 +57,8 @@
 
   <div class="field">
     <%= f.label :proceso %>
-   <%= f.select :proceso, [['prensa',1],['inyeccion',2],['otro',3]] %>
+
+   <%= f.collection_select :proceso, Formula.where(product_id:7).order(:orden), :orden, :descripcion  %>
   </div>
 
   <div class="field">
