@@ -13,12 +13,16 @@
 
   <div class="field">
     <%= f.label :empresa %>
-   <%= f.select :empresa, [['Mario',1],['Confecciones',2],['Industrias',3]]%>
+
+   <%= f.collection_select :empresa, Formula.where(product_id:10).
+          order(:orden), :orden, :descripcion  %>
   </div>
 
   <div class="field">
     <%= f.label :origen %>
-   <%= f.select :origen, [['compras',1],['ventas',2],['pedido',3],['orden de compra',4],['produccion',5],['inventario',6]] %>
+
+    <%= f.collection_select :origen, Formula.where(product_id:11).
+           order(:orden), :orden, :descripcion  %>
   </div>
 
   <div class="field">

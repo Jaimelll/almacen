@@ -28,12 +28,14 @@
 
   <div class="field">
     <%= f.label :origen %>
-  <%= f.select :origen, [['Mercaderia',1],['Activo fijo',2],['Otros activos',3],['Gastos',4],['Otros gastos',5]]  %>
+
+  <%= f.collection_select :origen, Formula.where(product_id:12).order(:orden), :orden, :descripcion  %>
   </div>
 
   <div class="field">
     <%= f.label :tipo %>
-  <%= f.select :tipo, [['cliente',1],['proveedor',2]] %>
+  
+  <%= f.collection_select :tipo, Formula.where(product_id:13).order(:orden), :orden, :descripcion  %>
   </div>
 
   <div class="field">

@@ -32,12 +32,16 @@
 
   <div class="field">
     <%= f.label :moneda %>
-    <%= f.select :moneda, [['Sol',1],['Dolar',2]] %>
+
+    <%= f.collection_select :moneda, Formula.where(product_id:8).
+                             order(:orden), :orden, :descripcion%>
   </div>
 
   <div class="field">
     <%= f.label :unidad %>
     <%= f.select :unidad, [['unidad',1],['kg',2],['gal',3]] %>
+    <%= f.collection_select :unidad, Formula.where(product_id:9).
+                             order(:orden), :orden, :descripcion%>
   </div>
 
   <div class="field">

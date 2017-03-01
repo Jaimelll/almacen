@@ -17,12 +17,17 @@
 
 <p>
   <strong>Moneda:</strong>
-  <%= @product.moneda %>
+  <%= Formula.where(product_id:8).where(orden:@product.moneda).
+              select('descripcion as dd').first.dd.capitalize   %>
+
 </p>
 
 <p>
   <strong>Unidad:</strong>
-  <%= @product.unidad %>
+
+  <%= Formula.where(product_id:9).where(orden:@product.unidad).
+              select('descripcion as dd').first.dd.capitalize   %>
+
 </p>
 
 
@@ -46,7 +51,9 @@
 
 <p>
   <strong>Proceso:</strong>
-  <%= @product.proceso %>
+  
+  <%= Formula.where(product_id:7).where(orden:@product.proceso).
+              select('descripcion as dd').first.dd.capitalize   %>
 </p>
 
 <p>

@@ -12,9 +12,13 @@
   <% end %>
   <div class="field">
     <%= f.label :Parametros %>
-    <%= f.select :empresa, [['Mario',1],['Confecciones',2],['Industrias',3]] %>
+
+    <%= f.collection_select :empresa, Formula.where(product_id:10).
+                     order(:orden), :orden, :descripcion  %>
     <%= f.date_select :mmes, discard_day:true %>
-    <%= f.select :origen, [['compras',1],['ventas',2],['pedido',3],['orden de compra',4],['produccion',5],['inventario',6]] %>
+
+    <%= f.collection_select :origen, Formula.where(product_id:11).
+                       order(:orden), :orden, :descripcion  %>
   </div>
 <br/>
 <br/>
@@ -33,14 +37,17 @@
 
    <div class="field">
     <%= f.label :Razon %>
-    <%= f.collection_select :client_id, Client.all.order(:razon), :id, :razon, html_options = {:style => "width:600px"}  %>
+    <%= f.collection_select :client_id, Client.all.
+             order(:razon), :id, :razon, html_options = {:style => "width:600px"}  %>
    </div>
 
 
    <div class="field">
     <%= f.label :tc %>
     <%= f.text_field :tc %>
-    <%= f.select :moneda, [['Sol',1],['Dolar',2]] %>
+
+    <%= f.collection_select :moneda, Formula.where(product_id:8).
+                   order(:orden), :orden, :descripcion  %>
    </div>
   <% end %>
 <br/>

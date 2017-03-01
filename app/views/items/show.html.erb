@@ -3,36 +3,17 @@
 <p>
   <strong class="para">Periodo:</strong>
        <%= @item.mmes.strftime("%b-%Y") %>
-  <strong class="para">Empresa:</strong>
-       <% if @item.empresa==1 %>
-       Mario
-       <% end %>
-       <% if @item.empresa==2 %>
-      Confecciones
-      <% end %>
-      <% if @item.empresa==3 %>
-      Industrias
-      <% end %>
-  <strong class="para">Origen:</strong>
 
-      <% if @item.origen==1 %>
-      Compras
-      <% end %>
-      <% if @item.origen==2 %>
-      Ventas
-      <% end %>
-      <% if @item.origen==3 %>
-      Pedido
-     <% end %>
-     <% if @item.origen==4 %>
-      Orden de compra
-     <% end %>
-     <% if @item.origen==5 %>
-      Produccion
-     <% end %>
-     <% if @item.origen==6 %>
-     Inventario
-    <% end %>
+  <strong class="para">Empresa:</strong>
+
+      <%= Formula.where(product_id:10).where(orden:@item.empresa).
+                  select('descripcion as dd').first.dd.capitalize   %>
+
+
+  <strong class="para">Origen:</strong>
+<%= Formula.where(product_id:11).where(orden:@item.origen).
+            select('descripcion as dd').first.dd.capitalize   %>
+
 
 
 
@@ -56,12 +37,9 @@
     <%= @item.tc %>
 
   <strong class="para">Moneda:</strong>
-    <% if @item.moneda==1 %>
-     Soles
-    <% end %>
-    <% if @item.moneda==2 %>
-     Dolares
-     <% end %>
+  <%= Formula.where(product_id:8).where(orden:@item.moneda).
+              select('descripcion as dd').first.dd.capitalize   %>
+
 
 
 <% end %>

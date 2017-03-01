@@ -17,12 +17,16 @@
 
 <p>
   <strong>Origen:</strong>
-  <%= @client.origen %>
+
+  <%= Formula.where(product_id:12).where(orden:@client.origen).
+              select('descripcion as dd').first.dd.capitalize   %>
 </p>
 
 <p>
   <strong>Tipo:</strong>
-  <%= @client.tipo %>
+  
+  <%= Formula.where(product_id:13).where(orden:@client.tipo).
+              select('descripcion as dd').first.dd.capitalize   %>
 </p>
 
 <p>

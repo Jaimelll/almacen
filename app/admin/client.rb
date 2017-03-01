@@ -47,8 +47,10 @@ permit_params :ruc, :razon, :direccion,
       f.input :ruc, :input_html => { :style =>  'width:30%'}
       f.input :razon, :input_html => {:rows => 2, :style =>  'width:30%'}
       f.input :direccion, :input_html => {:rows => 2, :style =>  'width:30%'}
-      f.input :tipo, :input_html => { :style =>  'width:30%'}, as: :select, collection: ([['cliente',1],['proveedor',2]] )
-      f.input :origen, :input_html => { :style =>  'width:30%'}, as: :select, collection: ([['Mercaderia',1],['Activo fijo',2],['Otros activos',3],['Gastos',4],['Otros gastos',5]]  )
+      f.input :tipo, :label => 'Tipo', :as => :select, :collection =>
+              Formula.where(product_id:13).map{|u| [u.descripcion, u.orden]}
+      f.input :origen, :label => 'Origen', :as => :select, :collection =>
+              Formula.where(product_id:12).map{|u| [u.descripcion, u.orden]}
       f.input :user_id, :input_html => { :value => current_user.id }, :as => :hidden
 
     end
