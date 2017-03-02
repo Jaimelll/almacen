@@ -1,6 +1,8 @@
 class VariablesController < ApplicationController
   def form
+    nombre="configurarEmpresa"
   case Parameter.find_by_id(1).origen
+
     when 1
 
 
