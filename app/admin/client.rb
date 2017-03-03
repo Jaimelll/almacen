@@ -38,10 +38,20 @@ permit_params :ruc, :razon, :direccion,
     column("ruc")
     column("razon")
     column("direccion")
-    column("tipo")
-    column("origen")
+    column("tipo") do |clients|
+      Formula.where(product_id:13).where(orden:clients.tipo).
+                  select('descripcion as dd').first.dd.capitalize
+    end
+    column("origen") do |clients|
+      Formula.where(product_id:12).where(orden:clients.origen).
+                  select('descripcion as dd').first.dd.capitalize
+    end
       actions
   end
+
+  
+
+
   form do |f|
     f.inputs "Centros" do
       f.input :ruc, :input_html => { :style =>  'width:30%'}

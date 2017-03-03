@@ -3,6 +3,7 @@ class Product < ApplicationRecord
   has_many :formulas
     belongs_to :user
 
+  accepts_nested_attributes_for :formulas
 
 
 

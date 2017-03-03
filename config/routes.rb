@@ -10,13 +10,20 @@ Rails.application.routes.draw do
 #  post 'variables/form'
   match 'variables/form', via: [:get]
   match 'variables/comment', via: [:get]
-  
+
 resources :items do
   resources :details
 end
 
   devise_for :users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+
+  namespace :admin do
+    resources :products do
+      resources :formulas
+    end
+  end
+
 
 
   root 'welcome#index'

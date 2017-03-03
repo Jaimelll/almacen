@@ -44,3 +44,7 @@ td,th{
 .para{
  margin-left: 20px;
 }
+.rep {
+  font: 40% sans-serif;
+  line-height: 100%;
+}
