@@ -12,6 +12,7 @@ ActiveAdmin.register Client do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
+menu priority: 2,label: "Centros"
 permit_params :ruc, :razon, :direccion,
               :obs, :tipo, :origen, :created_at,
               :updated_at,  :user_id
@@ -49,7 +50,7 @@ permit_params :ruc, :razon, :direccion,
       actions
   end
 
-  
+
 
 
   form do |f|
@@ -61,7 +62,7 @@ permit_params :ruc, :razon, :direccion,
               Formula.where(product_id:13).map{|u| [u.descripcion, u.orden]}
       f.input :origen, :label => 'Origen', :as => :select, :collection =>
               Formula.where(product_id:12).map{|u| [u.descripcion, u.orden]}
-      f.input :user_id, :input_html => { :value => current_user.id }, :as => :hidden
+      f.input :user_id, :input_html => { :default => current_user.id }, :as => :hidden
 
     end
     f.actions

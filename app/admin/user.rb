@@ -1,4 +1,8 @@
 ActiveAdmin.register User do
+
+
+
+  menu if: proc{ current_user.id==1 }, priority: 3,label: "Usuarios"
   permit_params :email, :password, :password_confirmation
 
   index do

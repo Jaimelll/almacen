@@ -16,6 +16,8 @@ resources :items do
 end
 
   devise_for :users, ActiveAdmin::Devise.config
+
+  
   ActiveAdmin.routes(self)
 
   namespace :admin do
