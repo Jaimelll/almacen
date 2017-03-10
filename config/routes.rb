@@ -17,12 +17,18 @@ end
 
   devise_for :users, ActiveAdmin::Devise.config
 
-  
+
   ActiveAdmin.routes(self)
 
   namespace :admin do
     resources :products do
       resources :formulas
+    end
+  end
+
+  namespace :admin do
+    resources :items do
+      resources :details
     end
   end
 

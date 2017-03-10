@@ -12,6 +12,9 @@ ActiveAdmin.register Client do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
+
+
+
 menu priority: 2,label: "Centros"
 permit_params :ruc, :razon, :direccion,
               :obs, :tipo, :origen, :created_at,
@@ -21,7 +24,11 @@ permit_params :ruc, :razon, :direccion,
   filter :razon
   filter :direccion
 
-  scope :all, :default => true
+
+  scope :Todos, :default => true do |clients|
+    clients.all.order('razon ASC')
+  end
+
   scope :proveedores do |clients|
     clients.where("tipo = 2")
   end

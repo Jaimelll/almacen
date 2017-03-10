@@ -20,9 +20,9 @@ permit_params :nombre, :descripcion, :precio,
      :conversion, :peso, :activo, :user_id,
      :created_at, :updated_at
 
-scope :all, :default => false
 
-scope :productos do |products|
+
+scope :productos, :default => true do |products|
   products.where("proceso <> 3")
 end
 
@@ -70,7 +70,7 @@ form do |f|
                    u.orden]}
         f.input :conversion
         f.input :client_id, :label => 'Centro', :as => :select, :collection =>
-                Client.all.order('razon ASC').map{|u| ["#{u.razon}---RUC#{u.ruc}", u.id]}, :input_html => { :style =>  'width:50%'}
+                Client.all.order('razon ASC').map{|u| ["#{u.razon.capitalize}---RUC#{u.ruc}", u.id]}, :input_html => { :style =>  'width:50%'}
         f.input :lote
         f.input :equivalente, :label => 'Equivalente', :as => :select, :collection =>
                 Product.all.order('nombre ASC').map{|u| [u.nombre, u.id]}
@@ -104,8 +104,12 @@ end
 
       panel "Formula de #{nn}" do
         table_for(product.formulas.order('orden ASC')) do |t|
-          t.column("descripcion", :sortable => :descripcion) {|formula|
-             link_to "#{formula.descripcion} ",  admin_product_formula_path(product,formula) }
+          t.column("formula",:sortable => :id) {|formula|
+             link_to "#{formula.id}--#{nn} ",  admin_product_formula_path(product,formula) }
+          t.column("Material", :material) do |formula|
+               Product.find_by_id(formula.material).nombre if formula.material
+             end
+          t.column("descripcion")
           t.column("cantidad")
           t.column("orden")
 

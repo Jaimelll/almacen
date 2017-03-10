@@ -28,7 +28,10 @@ permit_params :product_id, :material, :cantidad,
             f.inputs "PRODUCTO = #{nn}" do
                f.input :product_id, :label => 'Producto', :as => :select, :collection =>
                       Product.all.order('nombre ASC').map{|u| [u.nombre, u.id]}, :as => :hidden
+               f.input :material, :label => 'Material', :as => :select, :collection =>
+                             Product.all.order('nombre ASC').map{|u| [u.nombre, u.id]}
                f.input :descripcion, :input_html => { :style =>  'width:30%'}
+
                f.input :cantidad,:as =>:string
                f.input :orden, :input_html => { :style =>  'width:30%'}
                f.input :user_id, :input_html => { :value => current_user.id }, :as => :hidden
@@ -41,6 +44,8 @@ permit_params :product_id, :material, :cantidad,
            f.inputs "PRODUCTO = #{nn}" do
               f.input :product_id, :label => 'Producto' ,
                        :input_html => { :value => params[:product_id]}, :as => :hidden
+              f.input :material, :label => 'Material', :as => :select, :collection =>
+                                      Product.all.order('nombre ASC').map{|u| [u.nombre, u.id]}
               f.input :descripcion, :input_html => { :style =>  'width:30%'}
               f.input :cantidad,:as =>:string
               f.input :orden, :input_html => { :style =>  'width:30%'}
