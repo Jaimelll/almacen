@@ -64,8 +64,8 @@
                "M"+item.id.to_s.rjust(5,"0")+"|"+
                item.pfecha.strftime("%d/%m/%Y")+"|" %>
          <% end %>
-         <%= "|"+(if item.serie.first=="T" then "12" else (if item.serie.first=="F" then "01" else "01" end) end)+
-            "|"+(if item.serie.first=="T" then item.serie else (if item.serie.first=="F" then item.serie else item.serie.rjust(4,"0") end) end)+
+        <%= "|"+(if item.serie.first=="T" then "12" else (if item.serie.first=="B" then "03" else "01" end) end)+
+            "|"+(if item.serie.first=="T" then item.serie else (if item.serie.first=="B" then (item.serie.delete "B").rjust(4,"0") else item.serie.rjust(4,"0") end) end)+
             "|" +item.nfactu.rjust(8,"0")+"|"%>
         <%if item.client.id==1 %>
           <%="|" %>

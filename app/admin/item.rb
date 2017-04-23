@@ -144,6 +144,15 @@ end
     strong { link_to 'Agregar detalle', new_admin_item_detail_path(item) }
 
 
+    if Parameter.find_by_id(1).origen<5  then
+  br
+  br  
+    li  strong {'Subtotal='+'%.2f' % (item.subtotal) }
+    li  strong {'IGV='+'%.2f' % (item.subtotal*0.18) }
+    li  strong {'TOTAL='+'%.2f' % (item.subtotal*1.18) }
+
+    end
+
   end
 
 
