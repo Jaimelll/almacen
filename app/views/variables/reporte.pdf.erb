@@ -96,7 +96,7 @@
           <%="|" %>
           <%="|"+"2"+"|" %>
         <%else %>
-          <%= "|"+(if item.serie.first=="F" then "1" else "6" end)+"|"+
+          <%= "|"+(if item.serie.first=="B" then "1" else "6" end)+"|"+
           (item.client.ruc+"|" if item.client)+
           (item.client.razon+"|" if item.client)%>
           <%= "|"+('%.2f' % (item.subtotal).to_s+"|" if item.subtotal)%>
