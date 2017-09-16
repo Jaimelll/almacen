@@ -2,7 +2,8 @@ class Detail < ApplicationRecord
   belongs_to :item
   belongs_to :user
 
-
+  validates :cantidad, presence: true
+  validates :precio, presence: true
 
   after_create:crear_monto
 
@@ -15,7 +16,7 @@ class Detail < ApplicationRecord
      self.update(monto: self.cantidad*self.precio)
   end
 
-  
+
 
 
 

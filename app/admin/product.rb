@@ -12,13 +12,23 @@ ActiveAdmin.register Product do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-menu priority: 3, label: "Productos"
+menu priority: 6, label: "Productos"
+
+
+ActiveAdmin.register Formula do
+  belongs_to :product
+end
 
 permit_params :nombre, :descripcion, :precio,
      :moneda, :unidad, :client_id,
      :material, :lote, :proceso, :equivalente,
      :conversion, :peso, :activo, :user_id,
      :created_at, :updated_at
+
+
+
+
+  
 
 
 
@@ -30,25 +40,37 @@ scope :procesos do |products|
   products.where("proceso = 3")
 end
 
+scope :todos do |products|
+  products.all
+end
+
 filter :nombre
 filter :proceso
 
-index do
-  column("nombre", :sortable => :nombre) {|product|
-    link_to "#{product.nombre} ", admin_product_path(product) }
+
+
+index :title => 'Productos' do
+  column("nombre") do |products|
+     link_to "#{products.nombre} ", admin_product_formulas_path(products)
+  end
+
   column("descripcion")
   column("proceso") do |products|
-    Formula.where(product_id:7).where(orden:products.proceso).
+      if products.proceso then
+          Formula.where(product_id:7).where(orden:products.proceso).
                 select('descripcion as dd').first.dd.capitalize
+      end
   end
   column("precio")
 
     actions
 end
 
-form do |f|
 
-  f.inputs "Products" do
+
+form :title => 'Edicion Producto'  do |f|
+
+  f.inputs  do
         f.input :nombre
         f.input :descripcion
         f.input :precio
@@ -61,10 +83,6 @@ form do |f|
         f.input :material
 
 
-
-
-     if params[:id] then
-
         f.input :proceso, :as => :select, :collection =>
                 Formula.where(product_id:7).map{|u| [u.descripcion,
                    u.orden]}
@@ -74,13 +92,6 @@ form do |f|
         f.input :lote
         f.input :equivalente, :label => 'Equivalente', :as => :select, :collection =>
                 Product.all.order('nombre ASC').map{|u| [u.nombre, u.id]}
-    else
-        f.input :proceso, :input_html => { :value => 1 }, :as => :hidden
-        f.input :conversion, :input_html => { :value => 1}, :as => :hidden
-        f.input :client_id, :input_html => { :value => 881}, :as => :hidden
-        f.input :lote, :input_html => { :value => 1}, :as => :hidden
-        f.input :user_id, :input_html => { :value => current_user.id }, :as => :hidden
-    end
 
       f.input :activo
   end
@@ -93,35 +104,33 @@ end
 
 
 
-    show do
-      unless  Product.where(id:params[:id]).
-          select('equivalente as dd').first.dd.to_i >=1 then
-      Product.where(id:params[:id]).update(equivalente: params[:id])
-     end
-
-     nn=Product.where(id:params[:id]).
-            select('nombre as dd').first.dd.capitalize
-
-      panel "Formula de #{nn}" do
-        table_for(product.formulas.order('orden ASC')) do |t|
-          t.column("formula",:sortable => :id) {|formula|
-             link_to "#{formula.id}--#{nn} ",  admin_product_formula_path(product,formula) }
-          t.column("Material", :material) do |formula|
-               Product.find_by_id(formula.material).nombre if formula.material
-             end
-          t.column("descripcion")
-          t.column("cantidad")
-          t.column("orden")
+show :title => ' Producto'  do
 
 
+
+        attributes_table do
+
+
+
+          row :nombre
+          row :descripcion
+          row :precio
+          row :moneda
+          row :unidad
+          row :material
+          row :proceso
+          row :conversion
+          row :client_id
+          row :lote
+          row :equivalente
+          row :admin_user_id
         end
 
-      end
-
-      strong { link_to 'Agregar formula', new_admin_product_formula_path(product) }
+    end
 
 
-  end
+
+
 
 
 

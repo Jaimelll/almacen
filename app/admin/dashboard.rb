@@ -1,8 +1,26 @@
 ActiveAdmin.register_page "Dashboard" do
 
+
+
+
   menu priority: 1, label: proc{ I18n.t("active_admin.dashboard") }
 
+  action_item :only=> :index do
+      link_to   'Venta', venta_admin_parameter_path(1, :@num), method: :put
+  end
+
+  action_item :only=> :index do
+      link_to   'Compra', compra_admin_parameter_path(1, :@num), method: :put
+  end
+
   content title: proc{ I18n.t("active_admin.dashboard") } do
+
+
+
+
+
+
+
 
 strong { link_to "IR AL SISTEMA", root_path }
 br

@@ -15,7 +15,7 @@ ActiveAdmin.register Client do
 
 
 
-menu priority: 2,label: "Centros"
+menu priority: 4,label: "Centros"
 permit_params :ruc, :razon, :direccion,
               :obs, :tipo, :origen, :created_at,
               :updated_at,  :user_id

@@ -1,0 +1,98 @@
+ActiveAdmin.register Parameter do
+
+  permit_params :empresa, :origen,:mes
+
+  member_action :compra, method: :put do
+    @num=Parameter.where( id:1 ).
+         select('origen as dd').first.dd
+
+      Parameter.where( id:1 ).update_all( origen:1 )
+        redirect_to admin_dashboard_path
+    end
+
+
+  member_action :venta, method: :put do
+    @num=Parameter.where( id:1 ).
+         select('origen as dd').first.dd
+
+      Parameter.where( id:1 ).update_all( origen:2 )
+        redirect_to admin_dashboard_path
+    end
+
+
+
+menu priority: 6, label: "Parametros"
+filter :mes
+
+index :title => 'Parametros' do
+
+
+
+    column("empresa")do |para|
+               Formula.where(product_id:10,orden:para.empresa).
+                select('descripcion as dd').first.dd
+    end
+
+    column("origen")do |para|
+              Formula.where(product_id:11,orden:para.origen).
+                select('descripcion as dd').first.dd
+    end
+
+
+    column("mes")
+
+        actions
+    end
+
+    form :title => 'Edicion Parte'  do |f|
+
+        f.inputs  do
+
+
+
+           f.input :empresa , :as => :select, :collection =>
+               Formula.where(product_id:10).map{|u| [u.descripcion, u.orden]}
+           f.input :origen, :as => :select, :collection =>
+               Formula.where(product_id:11).map{|u| [u.descripcion, u.orden]}
+            f.input :mes,:as =>:string, :input_html => { :style =>  'width:30%'}
+
+
+            f.actions
+        end
+      end
+
+
+
+
+      show :title => ' Parte'  do
+
+
+
+              attributes_table do
+
+
+
+                row :empresa do |para|
+                           Formula.where(product_id:10,orden:para.empresa).
+                            select('descripcion as dd').first.dd
+                end
+                row :origen do |para|
+                          Formula.where(product_id:11,orden:para.origen).
+                            select('descripcion as dd').first.dd
+                end
+
+                row :mes
+
+
+          end
+
+      end
+
+
+
+
+
+
+
+
+end

@@ -12,52 +12,46 @@ ActiveAdmin.register Detail do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-action_item :view, only: :show do
-  link_to 'Ir a Partes', admin_items_path()
+action_item :view, only: :index do
+  link_to 'Ir a Parte', admin_item_path(params[:item_id])
 end
 
 
 
-menu false
+
 permit_params :descripcion, :cantidad,:precio, :monto,:item_id,
             :user_id, :product_id
 
-            form do |f|
-            if params[:id] then
-                n1=Detail.where(id:params[:id]).
-                         select('item_id as dd').first.dd.to_i
-                 nn=Item.where(id:n1).
-                          select('id as dd').first.dd.to_s
-               f.inputs "ParteNo= #{nn}" do
 
-                 f.input :item_id, :label => 'Parte'
+filter :descripcion
+
+index do
+
+  column("descripcion")
+  column("cantidad")
+  column("precio")
+  column("monto")
+
+    actions
+end
+
+
+            form do |f|
+
+
+               f.inputs  do
+
+
                  f.input :product_id, :label => 'Producto', :as => :select, :collection =>
                         Product.all.order('nombre ASC').map{|u| [u.nombre, u.id]}
                  f.input :descripcion, :input_html => { :rows => 2,:style =>  'width:30%'}
                  f.input :cantidad,:as =>:string, :input_html => { :style =>  'width:30%'}
                  f.input :precio,:as =>:string, :input_html => { :style =>  'width:30%'}
-
+                 f.input :monto,:as =>:string, :input_html => {:value =>0, :style =>  'width:30%'}, :as => :hidden
                  f.input :user_id, :input_html => { :value => current_user.id }, :as => :hidden
 
-                 end
-                f.actions
-            else
 
-                 nn=Item.where(id:params[:item_id]).
-                          select('id as dd').first.dd.to_s
-              f.inputs "ParteNo= #{nn}" do
 
-                f.input :item_id, :label => 'Parte' ,
-                         :input_html => { :value => params[:item_id]}
-                f.input :product_id, :label => 'Producto', :as => :select, :collection =>
-                          Product.all.order('nombre ASC').map{|u| [u.nombre, u.id]}
-                f.input :descripcion, :input_html => { :rows => 2,:style =>  'width:30%'}
-                f.input :cantidad,:as =>:string, :input_html => {:value =>1, :style =>  'width:30%'}
-                f.input :precio,:as =>:string, :input_html => { :style =>  'width:30%'}
-                f.input :monto,:as =>:string, :input_html => {:value =>0, :style =>  'width:30%'}, :as => :hidden
-                f.input :user_id, :input_html => { :value => current_user.id }, :as => :hidden
-
-               end
                f.actions
             end
           end
@@ -65,13 +59,17 @@ permit_params :descripcion, :cantidad,:precio, :monto,:item_id,
 
       show do
 
-          panel "Detalle de parte" do
+         Item.where(id:params[:item_id]).update(subtotal:Detail.where(item_id:params[:item_id]).sum(:monto))
+
+
           attributes_table do
             row :item_id do |detail|
               link_to "Parte-#{detail.item_id}", admin_item_path(detail.item_id)
             end
             row :product_id do |detail|
+                   Detail.where(id:params[:id]).update(monto:detail.cantidad*detail.precio)
                  if detail.product_id then
+
                    Product.where(id:detail.product_id).select('nombre as dd').first.dd.to_s
 
                  end
@@ -79,28 +77,40 @@ permit_params :descripcion, :cantidad,:precio, :monto,:item_id,
             row :descripcion
             row :cantidad
             row :precio
-            row :actualiMonto do |detail|
-              detail.edit_monto
-            end
-            row :actualiSubtotal do |detail|
-            Item.where(id:detail.item_id).update(subtotal:Detail.where(item_id:detail.item_id).sum(:monto))
-            end
             row :monto
             row :updated_at
             row :create_at
-
-
-
             end
-
-            end
-
-
-
-
-
 
       end
+
+      sidebar "Datos de Parte" do
+        Item.where(id:params[:item_id]).each do |item|
+
+            ul do
+
+                li   strong {'Fecha='+item.pfecha.to_s}
+                li   strong {'Serie='+item.serie}
+                li  strong {'Factura='+item.nfactu}
+               li  strong {'Centro='+  item.client.razon.capitalize if item.client}
+
+
+            end
+            ul do
+
+              li   strong {'Subtotal='+'%.2f' %(item.subtotal).to_s}
+              li   strong {'IGV='+'%.2f' %(item.subtotal*0.18).to_s}
+              li  strong {'TOTAL='+'%.2f' %(item.subtotal*1.18).to_s}
+
+
+            end
+
+          end #each
+       end# de sider
+
+
+
+
 
 
 
