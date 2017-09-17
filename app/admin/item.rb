@@ -83,15 +83,15 @@ form :title => 'Edicion Parte'  do |f|
     f.inputs  do
 
 
-       f.input :pfecha,:as =>:string
-       f.input :serie
-       f.input :nfactu
+       f.input :pfecha,:as =>:string, :input_html => { :rows => 2,:style =>  'width:30%'}
+       f.input :serie, :input_html => { :rows => 2,:style =>  'width:30%'}
+       f.input :nfactu, :input_html => { :rows => 2,:style =>  'width:30%'}
        f.input :client_id, :label => 'Centro', :as => :select, :collection =>
          Client.all.order('razon ASC').map{|u| ["#{u.razon.capitalize}---RUC#{u.ruc}",
            u.id]}, :input_html => { :style =>  'width:50%'}
        f.input :moneda, :label => 'Moneda', :as => :select, :collection =>
            Formula.where(product_id:8).map{|u| [u.descripcion, u.orden]}
-       f.input :tc,:as =>:string
+       f.input :tc,:as =>:string, :input_html => { :rows => 2,:style =>  'width:30%'}
        f.input :origen, :input_html => { :value => Parameter.find_by_id(1).origen }, :as => :hidden
        f.input :mmes,:as =>:string, :input_html => { :value => Parameter.find_by_id(1).mes }, :as => :hidden
        f.input :empresa, :input_html => { :value => Parameter.find_by_id(1).empresa }, :as => :hidden
@@ -119,7 +119,10 @@ show :title => ' Parte'  do
               item.client.razon.capitalize if item.client
             end
             row :subtotal
-            row :origen
+            row :origen do |item|
+              Formula.where(product_id:11,orden:item.origen).
+                   select('descripcion as dd').first.dd
+             end
             row :mmes
             row :moneda do |item|
               Formula.where(product_id:8,orden:item.moneda).
@@ -127,7 +130,10 @@ show :title => ' Parte'  do
              end
             row :tc
 
-            row :empresa
+            row :empresa do |item|
+              Formula.where(product_id:10,orden:item.empresa).
+                   select('descripcion as dd').first.dd
+             end
 
 
           end
@@ -167,17 +173,6 @@ sidebar "Parametros" do
     end
   end
 
-  sidebar "Resumen" do
-    ul do
 
-  if Parameter.find_by_id(1).origen<5  then
-br
-br
-
-
-  end
-
-end
-end
 
 end
