@@ -12,12 +12,21 @@ ActiveAdmin.register Detail do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-action_item :view, only: :index do
-  link_to 'Ir a Parte', admin_item_path(params[:item_id])
+action_item :view , only: [:show, :index] do
+  link_to 'ir a Parte', admin_item_path(params[:item_id])
+end
+action_item :view , only: [:show, :index] do
+  link_to 'Lista de Partes', admin_items_path
 end
 
 
+action_item :view, only: :show do
+  link_to 'Ver Detalles', admin_item_details_path(params[:item_id])
+end
 
+action_item :view , only: [:show, :index] do
+  link_to 'Crear nuevo Parte', new_admin_item_path
+end
 
 permit_params :descripcion, :cantidad,:precio, :monto,:item_id,
             :user_id, :product_id
@@ -63,9 +72,7 @@ end
 
 
           attributes_table do
-            row :item_id do |detail|
-              link_to "Parte-#{detail.item_id}", admin_item_path(detail.item_id)
-            end
+
             row :product_id do |detail|
                    Detail.where(id:params[:id]).update(monto:detail.cantidad*detail.precio)
                  if detail.product_id then

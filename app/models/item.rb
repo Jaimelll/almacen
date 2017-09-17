@@ -3,6 +3,9 @@ class Item < ApplicationRecord
   belongs_to :user
    has_many :details
 
+ validates_uniqueness_of :nfactu, :scope => [:serie, :client_id]
+
+
 def self.to_csv(options={})
   CSV.generate(options) do |csv|
   csv <<  column_names

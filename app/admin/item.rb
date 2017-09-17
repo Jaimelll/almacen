@@ -12,7 +12,9 @@ action_item :view, only: :show do
   link_to 'Ir a Detalles', admin_item_details_path(params[:id])
 end
 
-
+action_item :view, only: :show do
+  link_to 'Crear nuevo Detalle', new_admin_item_detail_path(params[:id])
+end
 
 
 
