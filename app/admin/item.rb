@@ -137,6 +137,10 @@ show :title => ' Parte'  do
                    select('descripcion as dd').first.dd
              end
 
+             row :user_id do |item|
+               item.user.email if item.user_id
+             end
+
 
           end
 

@@ -83,6 +83,10 @@ index :title => 'Parametros' do
 
                 row :mes
 
+                row 'modificado' do |clients|
+                  clients.updated_at.to_s
+                end
+
 
           end
 

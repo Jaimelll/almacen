@@ -17,8 +17,7 @@ ActiveAdmin.register Client do
 
 menu priority: 4,label: "Centros"
 permit_params :ruc, :razon, :direccion,
-              :obs, :tipo, :origen, :created_at,
-              :updated_at,  :user_id
+              :obs, :tipo, :origen, :user_id
 
   filter :ruc
   filter :razon
@@ -69,11 +68,42 @@ permit_params :ruc, :razon, :direccion,
               Formula.where(product_id:13).map{|u| [u.descripcion, u.orden]}
       f.input :origen, :label => 'Origen', :as => :select, :collection =>
               Formula.where(product_id:12).map{|u| [u.descripcion, u.orden]}
-      f.input :user_id, :input_html => { :default => current_user.id }, :as => :hidden
+      f.input :user_id, :input_html => { :value => current_user.id }, :as => :hidden
 
     end
     f.actions
   end
+
+
+
+  show :title => ' Centro'  do
+
+
+            attributes_table do
+
+              row :ruc
+              row :razon
+              row :direccion
+              row :tipo  do |clients|
+                Formula.where(product_id:13).where(orden:clients.tipo).
+                            select('descripcion as dd').first.dd.capitalize
+              end
+              row :origen  do |clients|
+                Formula.where(product_id:12).where(orden:clients.origen).
+                            select('descripcion as dd').first.dd.capitalize
+              end
+              row :obs
+              row :user_id do |clients|
+                clients.user.email if clients.user_id
+              end
+
+
+
+            end
+
+        end
+
+
 
 
 
