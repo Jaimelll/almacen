@@ -120,7 +120,12 @@ show :title => ' Parte'  do
             row :Centro do |item|
               item.client.razon.capitalize if item.client
             end
-            row :subtotal
+            row :subtotal do |item|
+               if Detail.where(item_id:item.id).sum(:monto)>0 then
+                  item.update(subtotal:Detail.where(item_id:item.id).sum(:monto))
+                  item.subtotal
+              end
+            end
             row :origen do |item|
               Formula.where(product_id:11,orden:item.origen).
                    select('descripcion as dd').first.dd
