@@ -162,6 +162,7 @@ show :title => ' Parte'  do
 
 sidebar "Parametros" do
   ul do
+    li "PARA DEJAR SIN RUC Y RAZON EN VENTAS INGRESAR -SIN RUC- en CENTRO"
       li Formula.where(product_id:11).where(orden:Parameter.find_by_id(1).origen).
                     select('descripcion as dd').first.dd.capitalize+"-"+
 
