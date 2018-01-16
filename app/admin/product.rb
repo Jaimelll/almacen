@@ -28,7 +28,7 @@ permit_params :nombre, :descripcion, :precio,
 
 
 
-  
+
 
 
 
@@ -92,6 +92,7 @@ form :title => 'Edicion Producto'  do |f|
         f.input :lote
         f.input :equivalente, :label => 'Equivalente', :as => :select, :collection =>
                 Product.all.order('nombre ASC').map{|u| [u.nombre, u.id]}
+        f.input :user_id, :input_html => { :value => current_user.id }, :as => :hidden
 
       f.input :activo
   end
@@ -123,7 +124,10 @@ show :title => ' Producto'  do
           row :client_id
           row :lote
           row :equivalente
-          row :admin_user_id
+          row :user_id do |products|
+            products.user.email if products.user_id
+          end
+
         end
 
     end

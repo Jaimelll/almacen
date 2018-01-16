@@ -36,7 +36,8 @@
            <%= "|"  %>
            <%= "|" +item.pfecha.strftime("%d/%m/%Y")+"|"  %>
            <%else %>
-           <%= "|" +('%.2f' % (item.subtotal*1.18).to_s+"|" if item.subtotal)+"USD"+"|"+ item.tc.to_s+
+
+           <%= "|" +('%.2f' % (item.subtotal*1.18).to_s+"|" if item.subtotal)+"USD"+"|"+ ('%.3f' % item.tc).to_s +
            "|"+item.pfecha.strftime("%d/%m/%Y")+"|"  %>
            <%end %>
            <%= "|"  %>
@@ -96,9 +97,16 @@
           <%="|" %>
           <%="|"+"2"+"|" %>
         <%else %>
-          <%= "|"+(if item.serie.first=="B" then "1" else "6" end)+"|"+
-          (item.client.ruc+"|" if item.client)+
-          (item.client.razon+"|" if item.client)%>
+          <%= "|"+(if item.serie.first=="B" then "1" else "6" end)+"|"%>
+                    <%if item.client.id==623 then %>
+                      <%="|" %>
+                      <%="|" %>
+                    <%else %>
+                      <%=  (item.client.ruc+"|" if item.client)+
+                       (item.client.razon+"|" if item.client)%>
+                    <%end %>
+
+
           <%= "|"+('%.2f' % (item.subtotal).to_s+"|" if item.subtotal)%>
             <%= "|"+('%.2f' % (item.subtotal*0.18).to_s+"|" if item.subtotal)%>
             <%="|" %>

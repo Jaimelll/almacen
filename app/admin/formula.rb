@@ -75,6 +75,9 @@ filter :descripcion
                     row :descripcion
                     row :cantidad
                     row :orden
+                    row :user_id do |formula|
+                      formula.user.email if formula.user_id
+                    end
 
 
                   end
