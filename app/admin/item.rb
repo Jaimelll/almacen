@@ -95,7 +95,7 @@ form :title => 'Edicion Parte'  do |f|
            Formula.where(product_id:8).map{|u| [u.descripcion, u.orden]}
        f.input :tc,:as =>:string, :input_html => { :rows => 2,:style =>  'width:30%'}
        f.input :origen, :input_html => { :value => Parameter.find_by_id(1).origen }, :as => :hidden
-       f.input :mmes,:as =>:string, :input_html => { :value => Parameter.find_by_id(1).mes }, :as => :hidden
+#       f.input :mmes,:as =>:string, :input_html => { :value => Parameter.find_by_id(1).mes }, :as => :hidden
        f.input :empresa, :input_html => { :value => Parameter.find_by_id(1).empresa }, :as => :hidden
        f.input :user_id, :input_html => { :value => current_user.id }, :as => :hidden
        f.input :subtotal, :input_html => { :value => 0}, :as => :hidden
