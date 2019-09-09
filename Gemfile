@@ -31,9 +31,11 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'devise'
 
-gem 'wicked_pdf'
 
-gem 'wkhtmltopdf-binary-edge'
+gem 'wicked_pdf', '~> 1.1'
+#gem 'wicked_pdf', github: 'mileszs/wicked_pdf'
+gem 'wkhtmltopdf-binary-edge', '~> 0.12.4.0'
+ #gem "wkhtmltopdf-heroku"
 
 gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
 
