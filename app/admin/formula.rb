@@ -26,7 +26,10 @@ filter :descripcion
 
               column("cantidad")
               column("orden")
-              column("indicacion")
+
+              column("RUC") do |formula|
+               formula.indicacion
+              end
 
                 actions
             end
@@ -45,6 +48,7 @@ filter :descripcion
                f.input :material, :label => 'Material', :as => :select, :collection =>
                              Product.all.order('nombre ASC').map{|u| [u.nombre, u.id]}
                f.input :descripcion, :input_html => { :style =>  'width:30%'}
+               f.input :indicacion, :label => 'RUC', :input_html => { :style =>  'width:30%'}
 
                f.input :cantidad,:as =>:string
                f.input :orden, :input_html => { :style =>  'width:30%'}
@@ -73,6 +77,9 @@ filter :descripcion
                       end
                     end
                     row :descripcion
+                    row "RUC" do |formula|
+                      formula.indicacion
+                     end
                     row :cantidad
                     row :orden
                     row :user_id do |formula|

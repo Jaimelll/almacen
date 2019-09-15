@@ -84,8 +84,9 @@ form :title => 'Edicion Parte'  do |f|
 
     f.inputs  do
 
-
-       f.input :pfecha,:as =>:string, :input_html => { :rows => 2,:style =>  'width:30%'}
+      f.input :pfecha, :label => 'Fecha' , as: :datepicker, :input_html =>
+      { :style =>  'width:30%'}
+      
        f.input :serie, :input_html => { :rows => 2,:style =>  'width:30%'}
        f.input :nfactu, :input_html => { :rows => 2,:style =>  'width:30%'}
        f.input :client_id, :label => 'Centro', :as => :select, :collection =>
@@ -113,7 +114,10 @@ show :title => ' Parte'  do
 
 
           attributes_table do
-
+            
+            row "NoParte" do |item|
+              link_to "#{item.id} ", admin_item_details_path(item) 
+            end 
             row :pfecha
             row :serie
             row :nfactu
