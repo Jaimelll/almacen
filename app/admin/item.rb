@@ -16,7 +16,7 @@ end
 
 
 
-
+#### necesario para borrar hijos con el padre agregar _atributes
 permit_params :pfecha, :serie,:nfactu, :client_id,:subtotal,
               :origen, :mmes, :moneda, :tc, :user_id,
               :created_at, :updated_at, :empresa,
@@ -24,13 +24,7 @@ permit_params :pfecha, :serie,:nfactu, :client_id,:subtotal,
                 :user_id, :product_id, :_destroy]    
                 
 
-# or
-#
-# permit_params do
-#   permitted = [:permitted, :attributes]
-#   permitted << :other if params[:action] == 'create' && current_user.admin?
-#   permitted
-# end
+
 menu priority: 2, label: "Partes"
 
 
