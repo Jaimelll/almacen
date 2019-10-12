@@ -8,12 +8,10 @@ belongs_to :item
 end
 
 
-action_item :view, only: :show do
-  link_to 'Ir a Detalles', admin_item_details_path(params[:id])
-end
+
 
 action_item :view, only: :show do
-  link_to 'Crear nuevo Detalle', new_admin_item_detail_path(params[:id])
+  link_to 'Crear nuevo parte', new_admin_item_path()
 end
 
 
@@ -21,8 +19,11 @@ end
 
 permit_params :pfecha, :serie,:nfactu, :client_id,:subtotal,
               :origen, :mmes, :moneda, :tc, :user_id,
-              :created_at, :updated_at, :empresa
-#
+              :created_at, :updated_at, :empresa,
+              details_attributes: [:id, :descripcion, :cantidad, :precio, :monto, :item_id,
+                :user_id, :product_id, :_destroy]    
+                
+
 # or
 #
 # permit_params do
@@ -54,8 +55,7 @@ filter :client_id, :label => 'Centro', :as => :select, :collection =>
 
 index :title => 'Partes' do
 
-  column("NoParte", :sortable => :id) {|item|
-      link_to "#{item.id} ", admin_item_details_path(item) }
+  column("NoParte", :sortable => :id) {|item|  item.id }
   column("Fecha", :pfecha)
   column("serie")
   column("factura", :nfactu)
@@ -101,22 +101,34 @@ form :title => 'Edicion Parte'  do |f|
        f.input :user_id, :input_html => { :value => current_user.id }, :as => :hidden
        f.input :subtotal, :input_html => { :value => 0}, :as => :hidden
 
-
-        f.actions
     end
+    f.inputs do
+      f.has_many :details, heading: 'Detalles',
+                              allow_destroy: true,
+                              new_record: true do |a|
+       
+        a.input :product_id, :label => 'Producto', :as => :select, :collection =>
+                 Product.all.order('nombre ASC').map{|u| [u.nombre, u.id]}
+        a.input :descripcion, :input_html => { :rows => 2,:style =>  'width:30%'}
+        a.input :cantidad,:as =>:string, :input_html => { :style =>  'width:30%'}
+        a.input :precio,:as =>:string, :input_html => { :style =>  'width:30%'}
+        a.input :monto,:as =>:string, :input_html => {:value =>0, :style =>  'width:30%'}, :as => :hidden
+        a.input :user_id, :input_html => { :value => current_user.id }, :as => :hidden
+
+      end
+    end
+        f.actions
+  
   end
-
-
-
 
 
 show :title => ' Parte'  do
 
 
           attributes_table do
-            
+           
             row "NoParte" do |item|
-              link_to "#{item.id} ", admin_item_details_path(item) 
+               item.id
             end 
             row :pfecha
             row :serie
@@ -152,6 +164,15 @@ show :title => ' Parte'  do
 
 
           end
+          panel "Tabla de Detalles" do
+            table_for item.details do
+              column :descripcion
+              column :cantidad
+              column :precio
+              column :monto
+
+            end
+          end
 
       end
 
@@ -169,25 +190,7 @@ show :title => ' Parte'  do
 
 
 
-sidebar "Parametros" do
-  ul do
-    li "PARA DEJAR SIN RUC Y RAZON EN VENTAS INGRESAR -SIN RUC- en CENTRO"
-      li Formula.where(product_id:11).where(orden:Parameter.find_by_id(1).origen).
-                    select('descripcion as dd').first.dd.capitalize+"-"+
 
-      Formula.where(product_id:10).where(orden:Parameter.find_by_id(1).empresa).
-                    select('descripcion as dd').first.dd.capitalize+"-"+
-      Parameter.find_by_id(1).mes.strftime("%B")+"/"+Parameter.find_by_id(1).mes.strftime("%Y")
-      li "Registros="+
-     Item.where(origen:Parameter.find_by_id(1).origen,mmes:Parameter.find_by_id(1).mes,empresa:Parameter.find_by_id(1).empresa).count('Id').to_s
-      li "Subtotal="+
-    '%.2f' %( Item.where(origen:Parameter.find_by_id(1).origen,mmes:Parameter.find_by_id(1).mes,empresa:Parameter.find_by_id(1).empresa).sum('subtotal')).to_s+
-    "--IGV="+
-    '%.2f' %( Item.where(origen:Parameter.find_by_id(1).origen,mmes:Parameter.find_by_id(1).mes,empresa:Parameter.find_by_id(1).empresa).sum('subtotal*0.18')).to_s
-    li "Total="+
-    '%.2f' %( Item.where(origen:Parameter.find_by_id(1).origen,mmes:Parameter.find_by_id(1).mes,empresa:Parameter.find_by_id(1).empresa).sum('subtotal*1.18')).to_s
-    end
-  end
 
 
 
