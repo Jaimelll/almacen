@@ -14,6 +14,12 @@ action_item :view, only: :show do
   link_to 'Crear nuevo parte', new_admin_item_path()
 end
 
+action_item :only=> :index do
+  link_to 'Dar Codigo', darcod_admin_product_formula_path(1, 7122), method: :put
+end
+
+
+
 
 
 #### necesario para borrar hijos con el padre agregar _atributes
@@ -195,7 +201,7 @@ show :title => ' Parte'  do
          
          end
         li  strong { "Periodo :"+Parameter.find_by_id(1).mes.strftime("%b/%Y")}
-    
+ 
        end# de sider
 
 

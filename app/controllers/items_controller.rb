@@ -6,6 +6,13 @@ class ItemsController < ApplicationController
     end
   # GET /items
   # GET /items.json
+  
+
+
+
+
+
+
   def index
     @items = Item.where(origen:Parameter.find_by_id(1).origen,mmes:Parameter.find_by_id(1).mes,empresa:Parameter.find_by_id(1).empresa).order('pfecha ASC','serie','nfactu')
     @regis = Item.where(origen:Parameter.find_by_id(1).origen,mmes:Parameter.find_by_id(1).mes,empresa:Parameter.find_by_id(1).empresa).count('Id')
@@ -23,18 +30,7 @@ class ItemsController < ApplicationController
 
   # GET /items/1
   # GET /items/1.json
-  def show
-   @item.update_subtotal
-   @detail=Detail.new
-
-   #@details=@item.details
-   respond_to do |format|
-       format.html
-       format.json
-       format.pdf{render template: 'items/show.pdf.erb', pdf:'Factura'}
-     end
-
-   end
+  
 
   # GET /items/new
   def new

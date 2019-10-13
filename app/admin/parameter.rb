@@ -1,6 +1,7 @@
 ActiveAdmin.register Parameter do
 
-  permit_params :empresa, :origen,:mes
+  permit_params :empresa, :origen,:mes,
+                :sele, :sele1, :sele2, :sele3
 
   member_action :compra, method: :put do
     @num=Parameter.where( id:1 ).
@@ -40,7 +41,7 @@ index :title => 'Parametros' do
 
 
     column("mes")
-
+    column("Codigo Inicial", :sele)
         actions
     end
 
@@ -54,9 +55,9 @@ index :title => 'Parametros' do
                Formula.where(product_id:10).map{|u| [u.descripcion, u.orden]}
            f.input :origen, :as => :select, :collection =>
                Formula.where(product_id:11).map{|u| [u.descripcion, u.orden]}
-            f.input :mes,:as =>:string, :input_html => { :style =>  'width:30%'}
-
-
+            
+            f.input :mes, as: :datepicker, :input_html => { :style =>  'width:30%'}
+            f.input :sele, :label => 'Codigo inicial', :input_html => { :rows => 2,:style =>  'width:30%'}
             f.actions
         end
       end
@@ -82,6 +83,9 @@ index :title => 'Parametros' do
                 end
 
                 row :mes
+                row :CodigoInical do |para|
+                   para.sele
+                end
 
                 row 'modificado' do |clients|
                   clients.updated_at.to_s

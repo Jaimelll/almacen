@@ -79,8 +79,7 @@
         <td><%= detail.monto %></td>
      <% end %>
 
-        <td  style="width:50px;"><%= link_to 'Editar',edit_item_detail_path(@item,detail) %></td>
-        <td  style="width:50px;"> <%= link_to 'Eliminar', item_detail_path(@item,detail), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    
       </tr>
     <% end %>
   </tbody>
@@ -88,7 +87,7 @@
 
   <br/>
   <br/>
-  <h3><%= link_to '<Nuevo Detalle>', new_item_detail_path(@item) %> </h3>
+
 </div>
 
   <%= link_to 'Retroceder', items_path %>
