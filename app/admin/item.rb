@@ -19,7 +19,7 @@ end
 #### necesario para borrar hijos con el padre agregar _atributes
 permit_params :pfecha, :serie,:nfactu, :client_id,:subtotal,
               :origen, :mmes, :moneda, :tc, :user_id,
-              :created_at, :updated_at, :empresa,
+              :created_at, :updated_at, :empresa, :sele, :sele1, :sele2, :sele3,
               details_attributes: [:id, :descripcion, :cantidad, :precio, :monto, :item_id,
                 :user_id, :product_id, :_destroy]    
                 
@@ -49,7 +49,7 @@ filter :client_id, :label => 'Centro', :as => :select, :collection =>
 
 index :title => 'Partes' do
 
-  column("NoParte", :sortable => :id) {|item|  item.id }
+  column("Codigo", :sortable => :sele) {|selen|  selen.sele }
   column("Fecha", :pfecha)
   column("serie")
   column("factura", :nfactu)
@@ -89,6 +89,7 @@ form :title => 'Edicion Parte'  do |f|
        f.input :moneda, :label => 'Moneda', :as => :select, :collection =>
            Formula.where(product_id:8).map{|u| [u.descripcion, u.orden]}
        f.input :tc,:as =>:string, :input_html => { :rows => 2,:style =>  'width:30%'}
+       f.input :sele, :label => 'Codigo', :input_html => { :rows => 2,:style =>  'width:30%'}
        f.input :origen, :input_html => { :value => Parameter.find_by_id(1).origen }, :as => :hidden
        f.input :mmes,:as =>:string, :input_html => { :value => Parameter.find_by_id(1).mes }, :as => :hidden
        f.input :empresa, :input_html => { :value => Parameter.find_by_id(1).empresa }, :as => :hidden
@@ -156,6 +157,9 @@ show :title => ' Parte'  do
                item.user.email if item.user_id
              end
 
+             row :codigo do |item|
+              item.sele
+            end
 
           end
           panel "Tabla de Detalles" do
@@ -167,11 +171,32 @@ show :title => ' Parte'  do
 
             end
           end
+          
+ 
+
+
+
 
       end
 
 
-
+      sidebar "Datos" do
+        case Parameter.find_by_id(1).origen
+        when 1
+          li strong { "Registro de Compras : "+
+           Formula.where(product_id:10).where(orden:Parameter.find_by_id(1).empresa).
+                       select('descripcion as dd').first.dd.capitalize}
+                      
+          
+        when 2
+          li strong { "Registro de Ventas : "+
+           Formula.where(product_id:10).where(orden:Parameter.find_by_id(1).empresa).
+                         select('descripcion as dd').first.dd.capitalize}
+         
+         end
+        li  strong { "Periodo :"+Parameter.find_by_id(1).mes.strftime("%b/%Y")}
+    
+       end# de sider
 
 
 
