@@ -15,8 +15,8 @@
         <h6 class="rep">
         <%if Parameter.find_by_id(1).origen==1 %>
            <%= Parameter.find_by_id(1).mes.strftime("%Y").to_s+Parameter.find_by_id(1).mes.strftime("%m").to_s+"00"+"|"  +
-               item.id.to_s.rjust(5,"0")+"|" +
-               "M"+item.id.to_s.rjust(5,"0")+"|"+item.pfecha.strftime("%d/%m/%Y")+"|" %>
+               item.sele.to_s.rjust(5,"0")+"|" +
+               "M"+item.sele.to_s.rjust(5,"0")+"|"+item.pfecha.strftime("%d/%m/%Y")+"|" %>
 
            <%= "|"+(if item.serie.first=="T" then "12" else (if item.serie.first=="F" then "01" else "01" end) end)+
               "|"+(if item.serie.first=="T" then item.serie else (if item.serie.first=="F" then item.serie else item.serie.rjust(4,"0") end) end)+"|" %>
@@ -56,13 +56,13 @@
        <%if Parameter.find_by_id(1).origen==2 %>
          <%if item.client.id==1 %>
            <%= Parameter.find_by_id(1).mes.strftime("%Y").to_s+Parameter.find_by_id(1).mes.strftime("%m").to_s+"00"+"|"  +
-               item.id.to_s.rjust(5,"0")+"|" +
-               "M"+item.id.to_s.rjust(5,"0")+"|"%>
+               item.sele.to_s.rjust(5,"0")+"|" +
+               "M"+item.sele.to_s.rjust(5,"0")+"|"%>
            <%="|" %>
          <%else %>
            <%= Parameter.find_by_id(1).mes.strftime("%Y").to_s+Parameter.find_by_id(1).mes.strftime("%m").to_s+"00"+"|"  +
-               item.id.to_s.rjust(5,"0")+"|" +
-               "M"+item.id.to_s.rjust(5,"0")+"|"+
+               item.sele.to_s.rjust(5,"0")+"|" +
+               "M"+item.sele.to_s.rjust(5,"0")+"|"+
                item.pfecha.strftime("%d/%m/%Y")+"|" %>
          <% end %>
         <%= "|"+(if item.serie.first=="T" then "12" else (if item.serie.first=="B" then "03" else "01" end) end)+
