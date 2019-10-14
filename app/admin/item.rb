@@ -15,7 +15,7 @@ action_item :view, only: :show do
 end
 
 action_item :only=> :index do
-  link_to 'Dar Codigo', darcod_admin_product_formula_path(1, 7122), method: :put
+  link_to 'Dar Codigo', darcod_admin_parameter_path(7122), method: :put
 end
 
 

@@ -16,8 +16,8 @@ Rails.application.routes.draw do
 
 
 
-root 'welcome#index'
-#root 'admin/dashboard#index'
+#root 'welcome#index'
+root 'admin/dashboard#index'
 match 'variables/form', via: [:get]
 match 'variables/comment', via: [:get]
 
