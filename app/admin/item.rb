@@ -14,8 +14,13 @@ action_item :view, only: :show do
   link_to 'Crear nuevo parte', new_admin_item_path()
 end
 
+<<<<<<< HEAD
 action_item :view, only: :index do
   link_to 'Dar Codigo', darcod_admin_product_formula_path(1, 7122), method: :put
+=======
+action_item :only=> :index do
+  link_to 'Dar Codigo', darcod_admin_parameter_path(1), method: :put
+>>>>>>> 2559eb2c434a10a21b814981c81307f4b46f3180
 end
 
 

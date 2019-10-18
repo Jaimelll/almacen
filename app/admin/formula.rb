@@ -11,27 +11,7 @@ permit_params :product_id, :material, :cantidad,
   
 
 
-         member_action :darcod, method: :put do
-
-         
-          conta=Parameter.find_by_id(1).sele
-           vite= Item.where(origen:Parameter.find_by_id(1).origen,
-                 mmes:Parameter.find_by_id(1).mes,
-                 empresa:Parameter.find_by_id(1).empresa ).
-                 order('pfecha ASC','serie','nfactu')
-                 
-         
-
-             if vite.count>0 then    
-               vite.each do |item|
-                  vite.where(id:item.id).update_all(sele:conta)
-                  conta=conta+1
-               end
-               
-               @num=vite.select('id as dd').first.dd
-             end 
-             redirect_to admin_item_path  
-         end
+      
 
 
 
