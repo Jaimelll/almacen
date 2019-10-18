@@ -107,7 +107,14 @@ index :title => 'Parametros' do
 
                 row :mes
                 row :CodigoInical do |para|
-                   para.sele
+                  vite=para.sele
+                  unless para.sele
+                    vite= Item.where(origen:Parameter.find_by_id(1).origen,
+                          mmes:Parameter.find_by_id(1).mes,
+                        empresa:Parameter.find_by_id(1).empresa ).maximum(:sele)+1
+                      Parameter.where(id:1).update(sele:vite)   
+                  end  
+                  vite
                 end
 
                 row 'modificado' do |clients|
