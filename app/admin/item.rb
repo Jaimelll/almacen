@@ -14,7 +14,7 @@ action_item :view, only: :show do
   link_to 'Crear nuevo parte', new_admin_item_path()
 end
 
-action_item :only=> :index do
+action_item :view, only: :index do
   link_to 'Dar Codigo', darcod_admin_product_formula_path(1, 7122), method: :put
 end
 
@@ -138,6 +138,12 @@ show :title => ' Parte'  do
               item.client.razon.capitalize if item.client
             end
             row :subtotal do |item|
+                if  Detail.where(item_id:item.id).count>0 then
+                  Detail.where(item_id:item.id).each do |detal|
+                    Detail.where(id:detal.id).update(monto:detal.cantidad*detal.precio)
+                  end  
+                end  
+
                if Detail.where(item_id:item.id).sum(:monto)>0 then
                   item.update(subtotal:Detail.where(item_id:item.id).sum(:monto))
                   item.subtotal
@@ -170,6 +176,7 @@ show :title => ' Parte'  do
           end
           panel "Tabla de Detalles" do
             table_for item.details do
+ 
               column :descripcion
               column :cantidad
               column :precio
@@ -203,7 +210,25 @@ show :title => ' Parte'  do
         li  strong { "Periodo :"+Parameter.find_by_id(1).mes.strftime("%b/%Y")}
  
        end# de sider
+       
+       sidebar "Datos de Parte" , only: :show do
+        sub=0
+        Item.where(id:params[:id]).each do |item|
+          
+          sub=sub+item.subtotal
 
+        end #each
+            ul do
+
+              li   strong {'Subtotal='+'%.2f' %(sub).to_s}
+              li   strong {'IGV='+'%.2f' %(sub*0.18).to_s}
+              li  strong {'TOTAL='+'%.2f' %(sub*1.18).to_s}
+
+
+            end
+
+         
+       end# de sider
 
 
 
