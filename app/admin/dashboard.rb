@@ -22,8 +22,7 @@ ActiveAdmin.register_page "Dashboard" do
 
 
 
-strong { link_to "IR AL SISTEMA", root_path }
-br
+
 br
 strong { "Periodo:"+Parameter.find_by_id(1).mes.strftime("%b/%Y")}
 br

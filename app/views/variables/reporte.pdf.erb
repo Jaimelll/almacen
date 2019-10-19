@@ -7,10 +7,13 @@
 </head>
 <body>
 
-  <table>
-
+  <table> 
 
     <tbody>
+      <%  dar = ParametersController.new   %> 
+      <%  dar.darcod2 %> 
+      <%  dar.darcod1 %> 
+    
       <% @items.each do |item| %>
         <h6 class="rep">
         <%if Parameter.find_by_id(1).origen==1 %>

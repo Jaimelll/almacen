@@ -23,25 +23,11 @@ ActiveAdmin.register Parameter do
 
     member_action :darcod, method: :put do
 
-         
-      conta=Parameter.find_by_id(1).sele
-       vite= Item.where(origen:Parameter.find_by_id(1).origen,
-             mmes:Parameter.find_by_id(1).mes,
-             empresa:Parameter.find_by_id(1).empresa ).
-             order('pfecha ASC','serie','nfactu')
-             
-     
-
-         if vite.count>0 then    
-           vite.each do |item|
-              vite.where(id:item.id).update_all(sele:conta)
-              conta=conta+1
-           end
-           
-           @num=vite.select('id as dd').first.dd
-         end 
-         redirect_to admin_items_path  
-     end
+      dar = ParametersController.new   
+      dar.darcod1
+      redirect_to admin_items_path  
+      
+    end
 
 
 
@@ -107,14 +93,7 @@ index :title => 'Parametros' do
 
                 row :mes
                 row :CodigoInical do |para|
-                  vite=para.sele
-                  unless para.sele
-                    vite= Item.where(origen:Parameter.find_by_id(1).origen,
-                          mmes:Parameter.find_by_id(1).mes,
-                        empresa:Parameter.find_by_id(1).empresa ).maximum(:sele)+1
-                      Parameter.where(id:1).update(sele:vite)   
-                  end  
-                  vite
+                     para.sele
                 end
 
                 row 'modificado' do |clients|
