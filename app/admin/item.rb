@@ -93,7 +93,8 @@ form :title => 'Edicion Parte'  do |f|
        f.input :serie, :input_html => { :rows => 2,:style =>  'width:30%'}
        f.input :nfactu, :input_html => { :rows => 2,:style =>  'width:30%'}
        f.input :sele1, :label => 'Documento', :as => :select, :collection =>
-                Formula.where(product_id:15).map{|u| [u.descripcion, u.orden]}
+                Formula.where(product_id:16
+                ).map{|u| [u.descripcion, u.orden]}
                 
        f.input :client_id, :label => 'Centro', :as => :select, :collection =>
                Client.all.order('ruc ASC').map{|u| ["#{u.ruc}-RUC-#{u.razon.capitalize}",
@@ -140,6 +141,12 @@ show :title => ' Parte'  do
             row :pfecha
             row :serie
             row :nfactu
+            row "Documento" do |item|
+              if Formula.where(product_id:16,orden:item.sele1).count>0 then
+              Formula.where(product_id:16,orden:item.sele1).
+                   select('descripcion as dd').first.dd
+              end
+             end
             row :Centro do |item|
               item.client.razon.capitalize if item.client
             end
