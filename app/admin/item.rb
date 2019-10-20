@@ -83,9 +83,12 @@ end
 form :title => 'Edicion Parte'  do |f|
 
     f.inputs  do
-
-      f.input :pfecha, :label => 'Fecha' , as: :datepicker, :input_html =>
-      { :style =>  'width:30%'}
+      
+      f.input :pfecha, :label => 'Fecha' , as: :datepicker,
+       datepicker_options: { dateFormat: "dd/mm/yy",
+          min_date: Parameter.find_by_id(1).mes.beginning_of_month.strftime("%d/%m/%Y"),
+          max_date: (Parameter.find_by_id(1)).mes.end_of_month.strftime("%d/%m/%Y") },
+        :input_html => { :style =>  'width:30%'}   
       
        f.input :serie, :input_html => { :rows => 2,:style =>  'width:30%'}
        f.input :nfactu, :input_html => { :rows => 2,:style =>  'width:30%'}
