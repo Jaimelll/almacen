@@ -92,6 +92,9 @@ form :title => 'Edicion Parte'  do |f|
       
        f.input :serie, :input_html => { :rows => 2,:style =>  'width:30%'}
        f.input :nfactu, :input_html => { :rows => 2,:style =>  'width:30%'}
+       f.input :sele1, :label => 'Documento', :as => :select, :collection =>
+                Formula.where(product_id:15).map{|u| [u.descripcion, u.orden]}
+                
        f.input :client_id, :label => 'Centro', :as => :select, :collection =>
                Client.all.order('ruc ASC').map{|u| ["#{u.ruc}-RUC-#{u.razon.capitalize}",
                u.id]}, :input_html => { :style =>  'width:50%'}
