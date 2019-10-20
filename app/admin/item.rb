@@ -93,10 +93,10 @@ form :title => 'Edicion Parte'  do |f|
        f.input :serie, :input_html => { :rows => 2,:style =>  'width:30%'}
        f.input :nfactu, :input_html => { :rows => 2,:style =>  'width:30%'}
        f.input :client_id, :label => 'Centro', :as => :select, :collection =>
-         Client.all.order('razon ASC').map{|u| ["#{u.razon.capitalize}---RUC#{u.ruc}",
-           u.id]}, :input_html => { :style =>  'width:50%'}
+               Client.all.order('ruc ASC').map{|u| ["#{u.ruc}-RUC-#{u.razon.capitalize}",
+               u.id]}, :input_html => { :style =>  'width:50%'}
        f.input :moneda, :label => 'Moneda', :as => :select, :collection =>
-           Formula.where(product_id:8).map{|u| [u.descripcion, u.orden]}
+               Formula.where(product_id:8).map{|u| [u.descripcion, u.orden]}
        f.input :tc,:as =>:string, :input_html => { :rows => 2,:style =>  'width:30%'}
        f.input :sele, :label => 'Codigo', :input_html => { :rows => 2,:style =>  'width:30%'}
        f.input :origen, :input_html => { :value => Parameter.find_by_id(1).origen }, :as => :hidden
