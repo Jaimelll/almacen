@@ -27,6 +27,16 @@ class ParametersController < ApplicationController
         end 
      end
 
+     def modnomb    
+      case Parameter.find_by_id(1).origen
+         when 1
+          vnomb="Registro de Compras"
+   
+         when 2
+          vnomb="Registro de Ventas"
+      end
+      return vnomb
+    end
 
 
 

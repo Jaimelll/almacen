@@ -19,6 +19,13 @@ action_item :only=> :index do
 end
 
 
+action_item :only=> :index do
+  link_to   'Venta', venta_admin_parameter_path(1, :@num), method: :put
+end
+
+action_item :only=> :index do
+  link_to   'Compra', compra_admin_parameter_path(1, :@num), method: :put
+end
 
 
 
@@ -29,9 +36,10 @@ permit_params :pfecha, :serie,:nfactu, :client_id,:subtotal,
               details_attributes: [:id, :descripcion, :cantidad, :precio, :monto, :item_id,
                 :user_id, :product_id, :_destroy]    
                 
+# dar = ParametersController.new   
+# vtit=dar.modnomb
 
-
-menu priority: 2, label: "Partes"
+menu priority: 2, label: "Parte"
 
 
 scope :MesActivo, :default => true do |items|
@@ -53,7 +61,7 @@ filter :client_id, :label => 'Centro', :as => :select, :collection =>
 
 
 
-index :title => 'Partes' do
+index :title => "Parte" do
 
   column("Codigo", :sortable => :sele) {|selen|  selen.sele }
   column("Fecha", :pfecha)
@@ -207,6 +215,9 @@ show :title => ' Parte'  do
 
 
       sidebar "Datos" do
+        vitev = Item.where(origen:Parameter.find_by_id(1).origen,mmes:Parameter.
+                find_by_id(1).mes,empresa:Parameter.find_by_id(1).empresa).sum('subtotal')
+
         case Parameter.find_by_id(1).origen
         when 1
           li strong { "Registro de Compras : "+
@@ -221,6 +232,13 @@ show :title => ' Parte'  do
          
          end
         li  strong { "Periodo :"+Parameter.find_by_id(1).mes.strftime("%b/%Y")}
+
+        vitev = Item.where(origen:Parameter.find_by_id(1).origen,mmes:Parameter.
+                find_by_id(1).mes,empresa:Parameter.find_by_id(1).empresa).sum('subtotal')       
+
+        li   strong {'Subtotal='+'%.2f' %(vitev).to_s}
+        li   strong {'IGV='+'%.2f' %(vitev*0.18).to_s}
+        li  strong {'TOTAL='+'%.2f' %(vitev*1.18).to_s}
  
        end# de sider
        
