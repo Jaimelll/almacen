@@ -236,6 +236,9 @@ show :title => ' Parte'  do
         li  strong { "Subtotal :"+ '%.2f' %(suss*0.18)}
         li  strong { "IGV :"+ '%.2f' %(suss*0.18)} 
         li  strong { "TOTAL :"+ '%.2f' %(suss*1.18)} 
+
+        link_to "PAC excel",reports_vhoja1_path(format:  "xlsx")
+        
        end# de sider
        
        sidebar "Datos de Parte" , only: :show do
@@ -255,6 +258,7 @@ show :title => ' Parte'  do
             end
 
          
+              # de sider     ,param1=> vpara,:param2=> 1) 
        end# de sider
 
 

@@ -42,6 +42,15 @@ gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+
+
+gem 'rubyzip', '= 1.0.0'
+gem 'axlsx', '= 2.0.1'
+gem 'axlsx_rails'
+
+
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
