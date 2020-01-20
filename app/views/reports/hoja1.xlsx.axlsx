@@ -7,11 +7,11 @@ titu = style.add_style( border: Axlsx::STYLE_THIN_BORDER,
                                 b: true, sz: 8, bg_color: "C1C1C1")
 
 solestitu = style.add_style(border: Axlsx::STYLE_THIN_BORDER,
-                           alignment: { horizontal: :center ,vertical: :center, wrap_text: :true},num_fmt: 3,
+                           alignment: { horizontal: :center ,vertical: :center, wrap_text: :true},num_fmt: 2,
                                 b: true,sz: 8, bg_color: "C1C1C1")
 
 soles = style.add_style(border: Axlsx::STYLE_THIN_BORDER,
-                           alignment: { horizontal: :center ,vertical: :center},num_fmt: 3, sz: 8)
+                           alignment: { horizontal: :center ,vertical: :center},num_fmt: 2, sz: 8)
 
 soles1 = style.add_style(border: Axlsx::STYLE_THIN_BORDER,
                            alignment: { horizontal: :center ,vertical: :center},num_fmt: 3,
@@ -42,26 +42,6 @@ fecham = style.add_style(format_code: "mmmm", border: Axlsx::STYLE_THIN_BORDER,
 centra = style.add_style( border: Axlsx::STYLE_THIN_BORDER,
                                alignment: { horizontal: :center,vertical: :center }, sz: 8)
 
-centra1 = style.add_style( border: Axlsx::STYLE_THIN_BORDER,
-                               alignment: { horizontal: :center,vertical: :center }, sz: 8,
-                                bg_color: "C1C1C1")
-
-centra2 = style.add_style( border: Axlsx::STYLE_THIN_BORDER,
-                               alignment: { horizontal: :center,vertical: :center }, sz: 8,
-                                 bg_color: "ffff99")
-centra3 = style.add_style( border: Axlsx::STYLE_THIN_BORDER,
-                               alignment: { horizontal: :center,vertical: :center }, sz: 8,
-                                 bg_color: "4dff4d")
-   # 4dff4d verde  3
-   # C1C1C1 plomo 1
-   # ffff99 amarillo 2
-   # ff3333 rojo  4
-   
-
-centra4 = style.add_style( border: Axlsx::STYLE_THIN_BORDER,
-                               alignment: { horizontal: :center,vertical: :center }, sz: 8,
-                                bg_color: "ff3333")         
-
 
 
 izq = style.add_style( border: Axlsx::STYLE_THIN_BORDER,
@@ -72,24 +52,16 @@ izq = style.add_style( border: Axlsx::STYLE_THIN_BORDER,
 desc = style.add_style( border: Axlsx::STYLE_THIN_BORDER,
                               alignment: { horizontal: :left ,vertical: :center, wrap_text: :true}, sz: 8)
 
-desc2 = style.add_style( border: Axlsx::STYLE_THIN_BORDER,
-                              alignment: { horizontal: :left ,vertical: :center, wrap_text: :true},
-                              sz: 8, bg_color: "ffff99")
-desc3 = style.add_style( border: Axlsx::STYLE_THIN_BORDER,
-                              alignment: { horizontal: :left ,vertical: :center, wrap_text: :true},
-                              sz: 8,  bg_color: "4dff4d")
-desc4 = style.add_style( border: Axlsx::STYLE_THIN_BORDER,
-                              alignment: { horizontal: :left ,vertical: :center, wrap_text: :true},
-                              sz: 8,  bg_color: "ff3333")                                                            
+                                                       
 
 
 ddmm = style.add_style(format_code: "dd-mm", border: Axlsx::STYLE_THIN_BORDER,
                             alignment: { horizontal: :center,vertical: :center }, sz: 8)
 
 
-normal = style.add_style( alignment: { horizontal: :center,vertical: :center }, sz: 8)
+normal = style.add_style( alignment: { horizontal: :center,vertical: :center }, sz: 10)
 
-blue_cell =  style.add_style  :bg_color => "ffff66", :color => "FF", alignment: { horizontal: :center,vertical: :center, sz: 8 }
+
 
 def merge_last_row(sheet,options ={})
   last_row = sheet.rows.last.index + 1
@@ -104,22 +76,122 @@ end
 
 ############################
 
+report = ItemsController.new
 
-wb.add_worksheet(name: "RESUMEN-") do |sheet|
+############################
+wb.add_worksheet(name: "VENTAS") do |sheet|
 
   sheet.add_row []
 
      
-    sheet.add_row ["SITUACIÓN DE LOS EXPEDIENTES Y PROCESOS DE CONTRATACIÓN A CARGO DE LA ACFFAA - ",
-    nil,nil,nil,nil,nil,nil,nil,nil,nil], 
-      style: [titu,titu,titu,titu,titu,titu,titu,titu], height: 40
-    merge_last_row sheet, columns:["A","H"]
+    sheet.add_row [nil,nil,"REGISTRO DE VENTAS ",nil], 
+      style: [nil,nil,normal,normal], height: 40
+    merge_last_row sheet, columns:["C","D"]
+    sheet.add_row []
 
-  sheet.add_row ["ESTADO SITUACIONAL", "CCFFAA", "EP", "MGP", "FAP", "CANTIDAD PAC",
-   "PROCESOS", "ESTIMADO"],
-        style: [titu, titu, titu, titu, titu, titu, titu,titu], height: 40
-        sheet.column_widths 30, 10,10,10,10,12,12,12,12
+vraz=Formula.where(product_id:10).where(orden:Parameter.find_by_id(1).empresa).
+                   select('descripcion as dd').first.dd.capitalize
 
-end
+   sheet.add_row ["RAZON SOCIAL:", vraz,nil],
+        style: [normal, normal], height: 40
+         merge_last_row sheet, columns:["B","C"]
+   sheet.add_row ["PERIODO:", Parameter.find_by_id(1).mes.strftime("%b/%Y"),nil],
+        style: [normal, normal], height: 40
+         merge_last_row sheet, columns:["B","C"]      
+   sheet.add_row []      
 
+  sheet.add_row ["CODIGO", "FECHA", "SERIE", "FACTURA", "CLIENTE", "RUC","DETALLE","MONTO","IGV" ],
+        style: [titu, titu, titu, titu, titu, titu, titu,titu,titu], height: 40
+
+
+vparte= Item.where(origen:2, mmes:Parameter.find_by_id(1).mes,empresa:Parameter.find_by_id(1).empresa).
+        order('sele') 
+conta=7
+ vparte.each do |item|
+ vrazon,vruc=report.centr_nomb(item.client_id)
+         
+
+    vdetalle=Detail.where(item_id:item.id)
+    if vdetalle.count>0 then
+      vdetalle.each do |detalle|
+           
+      sheet.add_row [item.sele, item.pfecha,item.serie, item.nfactu,vrazon, vruc,detalle.descripcion,
+                   detalle.cantidad*detalle.precio, detalle.cantidad*detalle.precio*0.18  ],
+              style: [centra, fechad, centra, centra, desc, centra, desc,soles,soles], height: 35
+      conta=conta+1    
+      end
+    end
+
+ end   
+ tot="ACUMULADO ="
+ tot1="TOTAL ="
+sheet.add_row [nil,nil,nil,nil,nil,nil,tot,"=SUM(H4:H#{conta})","=SUM(I8:I#{conta})" ],
+    style: [nil, nil, nil, nil, nil, nil,titu,solestitu,solestitu], height: 25
+
+sheet.add_row [nil,nil,nil,nil,nil,nil,tot1,"=SUM(H4:H#{conta})+SUM(I8:I#{conta})" ],
+    style: [nil, nil, nil, nil, nil, nil,titu,solestitu], height: 25
+   
+ sheet.column_widths 15, 15,8,15,40,15,30,15
+
+ end
+
+############################
+wb.add_worksheet(name: "COMPRAS") do |sheet|
+
+  sheet.add_row []
+
+     
+    sheet.add_row [nil,nil,"REGISTRO DE COMPRAS ",nil], 
+      style: [nil,nil,normal,normal], height: 40
+    merge_last_row sheet, columns:["C","D"]
+    sheet.add_row []
+
+vraz=Formula.where(product_id:10).where(orden:Parameter.find_by_id(1).empresa).
+                   select('descripcion as dd').first.dd.capitalize
+
+   sheet.add_row ["RAZON SOCIAL:", vraz,nil],
+        style: [normal, normal], height: 40
+         merge_last_row sheet, columns:["B","C"]
+   sheet.add_row ["PERIODO:", Parameter.find_by_id(1).mes.strftime("%b/%Y"),nil],
+        style: [normal, normal], height: 40
+         merge_last_row sheet, columns:["B","C"]      
+   sheet.add_row []      
+
+  sheet.add_row ["CODIGO", "FECHA", "SERIE", "FACTURA", "PROVEEDOR", "RUC","DETALLE","MONTO","IGV" ],
+        style: [titu, titu, titu, titu, titu, titu, titu,titu,titu], height: 40
+
+
+vparte= Item.where(origen:1, mmes:Parameter.find_by_id(1).mes,empresa:Parameter.find_by_id(1).empresa).
+        order('sele') 
+conta=7
+ vparte.each do |item|
+ vrazon,vruc=report.centr_nomb(item.client_id)
+         
+
+    vdetalle=Detail.where(item_id:item.id)
+    if vdetalle.count>0 then
+      vdetalle.each do |detalle|
+           
+      sheet.add_row [item.sele, item.pfecha,item.serie, item.nfactu,vrazon, vruc,detalle.descripcion,
+                   detalle.cantidad*detalle.precio, detalle.cantidad*detalle.precio*0.18  ],
+              style: [centra, fechad, centra, centra, desc, centra, desc,soles,soles], height: 35
+      conta=conta+1    
+      end
+    end
+
+ end   
+ tot="ACUMULADO ="
+ tot1="TOTAL ="
+sheet.add_row [nil,nil,nil,nil,nil,nil,tot,"=SUM(H4:H#{conta})","=SUM(I8:I#{conta})" ],
+    style: [nil, nil, nil, nil, nil, nil,titu,solestitu,solestitu], height: 25
+
+ 
+sheet.add_row [nil,nil,nil,nil,nil,nil,tot1,"=SUM(H4:H#{conta})+SUM(I8:I#{conta})" ],
+    style: [nil, nil, nil, nil, nil, nil,titu,solestitu], height: 25
+
+ sheet.column_widths 15, 15,8,15,40,15,30,15
+
+ end
+
+ 
 end  ##cierre de hoja  estilos

@@ -237,7 +237,7 @@ show :title => ' Parte'  do
         li  strong { "IGV :"+ '%.2f' %(suss*0.18)} 
         li  strong { "TOTAL :"+ '%.2f' %(suss*1.18)} 
 
-        link_to "PAC excel",reports_vhoja1_path(format:  "xlsx")
+        link_to "Registros Excel",reports_vhoja1_path(format:  "xlsx")
         
        end# de sider
        
