@@ -8,7 +8,7 @@ ActiveAdmin.register Parameter do
          select('origen as dd').first.dd
 
       Parameter.where( id:1 ).update_all( origen:1 )
-        redirect_to admin_dashboard_path
+        redirect_to admin_items_path
     end
 
 
@@ -17,7 +17,7 @@ ActiveAdmin.register Parameter do
          select('origen as dd').first.dd
 
       Parameter.where( id:1 ).update_all( origen:2 )
-        redirect_to admin_dashboard_path
+        redirect_to admin_items_path
     end
 
 
