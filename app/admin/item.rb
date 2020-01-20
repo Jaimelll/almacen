@@ -206,7 +206,7 @@ show :title => ' Parte'  do
       end
 
 
-      sidebar "Datos" do
+      sidebar "Datos Registro" do
         case Parameter.find_by_id(1).origen
         when 1
           li strong { "Registro de Compras : "+
@@ -221,7 +221,13 @@ show :title => ' Parte'  do
          
          end
         li  strong { "Periodo :"+Parameter.find_by_id(1).mes.strftime("%b/%Y")}
- 
+        suss=Item.where(origen:Parameter.find_by_id(1).origen,
+              mmes:Parameter.find_by_id(1).mes,
+              empresa:Parameter.find_by_id(1).empresa).sum(:subtotal)
+              
+        li  strong { "Subtotal :"+ '%.2f' %(suss*0.18)}
+        li  strong { "IGV :"+ '%.2f' %(suss*0.18)} 
+        li  strong { "TOTAL :"+ '%.2f' %(suss*1.18)} 
        end# de sider
        
        sidebar "Datos de Parte" , only: :show do

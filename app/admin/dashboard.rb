@@ -46,7 +46,65 @@ br
 br
 strong { link_to 'ver pdf reporte2', variables_comment_path(format: :pdf)}
 
-    # Here is an example of a simple dashboard with columns and panels.
+
+
+
+br
+br
+suss2=Item.where(origen:2,
+  mmes:Parameter.find_by_id(1).mes,
+  empresa:Parameter.find_by_id(1).empresa).sum(:subtotal)
+suss1=Item.where(origen:1,
+    mmes:Parameter.find_by_id(1).mes,
+    empresa:Parameter.find_by_id(1).empresa).sum(:subtotal)
+
+columns do
+
+  column do
+
+
+    panel "REGISTRO DE VENTAS" do
+     
+
+          
+          br
+          strong { "Subtotal :"+ '%.2f' %(suss2)}
+          br
+          strong { "IGV :"+ '%.2f' %(suss2*0.18)} 
+          br
+          strong { "TOTAL :"+ '%.2f' %(suss2*1.18)} 
+          br
+
+    end
+  end
+
+  column do
+ 
+    panel "REGISTRO DE COMPRAS" do
+     
+       
+        br
+        strong { "Subtotal :"+ '%.2f' %(suss1)}
+        br
+        strong { "IGV :"+ '%.2f' %(suss1*0.18)} 
+        br
+        strong { "TOTAL :"+ '%.2f' %(suss1*1.18)} 
+    br
+    end
+  end
+
+ 
+end
+suss3=suss2*0.18-suss1*0.18
+if suss3>0 then
+  dif="SALDO POR PAGAR="
+else
+  dif="CREDITO FISCAL="
+end  
+
+strong { "DIFERENCIA DE IGV VENTAS - IGV COMPRAS= "+dif+'%.2f' %(suss2*0.18-suss1*0.18)}
+
+    # SALDO POR PAGAR Here is an example of a simple dashboard with columns and panels.
     #
     # columns do
     #   column do
