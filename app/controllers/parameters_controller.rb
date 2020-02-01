@@ -18,13 +18,16 @@ class ParametersController < ApplicationController
             end
     end
     def darcod2    
-
-       unless Parameter.find_by_id(1).sele 
-           vite= Item.where(origen:Parameter.find_by_id(1).origen,
-                     empresa:Parameter.find_by_id(1).empresa).where.not( mmes:Parameter.find_by_id(1).mes).
-                     maximum(:sele)+1 
+        viten=Item.where(origen:Parameter.find_by_id(1).origen,
+        empresa:Parameter.find_by_id(1).empresa).where( "mmes<?",Parameter.find_by_id(1).mes)
+      
+       if viten.count>0 then
+           vite= viten.maximum(:sele)+1 
+       else 
+            vite=1
+       end
            Parameter.where(id:1).update(sele:vite)   
-        end 
+        
      end
 
      def modnomb    

@@ -29,6 +29,13 @@ ActiveAdmin.register Parameter do
       
     end
 
+  #   member_action :darcodini, method: :put do
+  #     redirect_to admin_parameters_path
+  #   end
+
+  #    action_item :only=> :index do
+  #     link_to 'Dar codigo inicial', darcodini_admin_parameter_path(1), method: :put
+  #    end
 
 
 menu priority: 6, label: "Parametros"
@@ -37,9 +44,8 @@ filter :mes
 index :title => 'Parametros' do
 
 
-
     column("empresa")do |para|
-               Formula.where(product_id:10,orden:para.empresa).
+     Formula.where(product_id:10,orden:para.empresa).
                 select('descripcion as dd').first.dd
     end
 
@@ -54,7 +60,7 @@ index :title => 'Parametros' do
         actions
     end
 
-    form :title => 'Edicion Parte'  do |f|
+    form :title => 'Edicion Parametro'  do |f|
 
         f.inputs  do
 
@@ -66,7 +72,7 @@ index :title => 'Parametros' do
                Formula.where(product_id:11).map{|u| [u.descripcion, u.orden]}
             
             f.input :mes, as: :datepicker, :input_html => { :style =>  'width:30%'}
-            f.input :sele, :label => 'Codigo inicial', :input_html => { :rows => 2,:style =>  'width:30%'}
+      #      f.input :sele, :label => 'Codigo inicial', :input_html => { :rows => 2,:style =>  'width:30%'}
             f.actions
         end
       end
@@ -74,15 +80,17 @@ index :title => 'Parametros' do
 
 
 
-      show :title => ' Parte'  do
-
+      show :title => ' Parametro'  do
+        dar = ParametersController.new   
+        dar.darcod2
 
 
               attributes_table do
 
-
+      
 
                 row :empresa do |para|
+
                            Formula.where(product_id:10,orden:para.empresa).
                             select('descripcion as dd').first.dd
                 end
@@ -92,9 +100,9 @@ index :title => 'Parametros' do
                 end
 
                 row :mes
-                row :CodigoInical do |para|
-                     para.sele
-                end
+#                 row :CodigoInical do |para|
+#                      para.sele
+ #                end
 
                 row 'modificado' do |clients|
                   clients.updated_at.to_s
