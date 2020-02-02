@@ -62,7 +62,7 @@ filter :client_id, :label => 'Centro', :as => :select, :collection =>
 
 
 index :title => "Parte" do
-
+ 
   column("Codigo", :sortable => :sele) {|selen|  selen.sele }
   column("Fecha", :pfecha)
   column("serie")
@@ -139,9 +139,7 @@ form :title => 'Edicion Parte'  do |f|
 
 
 show :title => ' Parte'  do
-
-
-          attributes_table do
+           attributes_table do
            
             row "NoParte" do |item|
                item.id
@@ -243,6 +241,7 @@ show :title => ' Parte'  do
        
        sidebar "Datos de Parte" , only: :show do
         sub=0
+ 
         Item.where(id:params[:id]).each do |item|
           
           sub=sub+item.subtotal
