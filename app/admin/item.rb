@@ -140,7 +140,8 @@ form :title => 'Edicion Parte'  do |f|
 
 show :title => ' Parte'  do
            attributes_table do
-           
+           reporte = ItemsController.new   
+           reporte.nota_credito(params[:id])
             row "NoParte" do |item|
                item.id
             end 
