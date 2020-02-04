@@ -79,6 +79,10 @@ end
 report = ItemsController.new
 
 ############################
+
+case @vopc.to_i
+when 1
+
 wb.add_worksheet(name: "VENTAS") do |sheet|
 
   sheet.add_row []
@@ -136,6 +140,8 @@ sheet.add_row [nil,nil,nil,nil,nil,nil,tot1,"=SUM(H4:H#{conta})+SUM(I8:I#{conta}
  end
 
 ############################
+
+
 wb.add_worksheet(name: "COMPRAS") do |sheet|
 
   sheet.add_row []
@@ -193,5 +199,43 @@ sheet.add_row [nil,nil,nil,nil,nil,nil,tot1,"=SUM(H4:H#{conta})+SUM(I8:I#{conta}
 
  end
 
- 
+when 2
+
+wb.add_worksheet(name: "doc x  empresa") do |sheet|
+
+  sheet.add_row []
+
+   sheet.add_row ["CODIGO", "EMPRESA", "COMPRAS", "VENTAS", "INICIO", "FIN", "TOTAL" ],
+        style: [titu,titu, titu, titu, titu, titu, titu], height: 40
+
+        Formula.where(product_id:10).order('orden').each do |emp|
+
+          
+       sheet.add_row [emp.orden,emp.descripcion ,
+                      Item.where(empresa:emp.orden,origen:1).count,
+                      Item.where(empresa:emp.orden,origen:2).count,
+                      Item.where(empresa:emp.orden).minimum('pfecha'),
+                      Item.where(empresa:emp.orden).maximum('pfecha'),
+                      Item.where(empresa:emp.orden).count ],
+            style: [centra,centra, centra, centra, fechad, fechad, centra], height: 25
+
+
+
+        end
+
+  sheet.column_widths 5,50, 15,15,15,15,15
+  end  ##sheet  
+
+    when 3
+
+
+        wb.add_worksheet(name:"Elimina registros de parte") do |sheet|
+          sheet.add_row ["empieza"]
+
+            Item.where(empresa:2).destroy_all
+        sheet.add_row ["termino"]
+        end
+
+
+ end  ##case
 end  ##cierre de hoja  estilos

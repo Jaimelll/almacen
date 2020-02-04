@@ -3,7 +3,7 @@ class ReportsController < ApplicationController
   
  
      def vhoja1
-     #  @vopc=params[:param1]
+       @vopc=params[:param1]
       # sin parametros
         respond_to do |format|
           format.html

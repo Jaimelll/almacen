@@ -109,7 +109,11 @@ filter :descripcion
 
                       ul do
                         li   link_to "#{nn}", admin_products_path
-
+                        li
+                        li  link_to "Docs x empresa",reports_vhoja1_path(format:  "xlsx", :param1=> 2)
+                        li
+                        li  "CUIDADO CON ELIMINAR "
+                        li  link_to "Elimina Confecciones",reports_vhoja1_path(format:  "xlsx", :param1=> 3)
                       end
 
 
