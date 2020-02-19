@@ -61,12 +61,12 @@ filter :client_id, :label => 'Centro', :as => :select, :collection =>
 
 
 
-index :title => "Parte" do
+index :title => "Comprobante" do
  
   column("Codigo", :sortable => :sele) {|selen|  selen.sele }
   column("Fecha", :pfecha)
   column("serie")
-  column("factura", :nfactu)
+  column("Numero", :nfactu)
   column("RUC", :client_id) do |item|
    item.client.ruc if item.client
   end
@@ -88,7 +88,7 @@ index :title => "Parte" do
 
 end
 
-form :title => 'Edicion Parte'  do |f|
+form :title => 'Edicion Comprobante'  do |f|
 
     f.inputs  do
       
@@ -138,7 +138,7 @@ form :title => 'Edicion Parte'  do |f|
   end
 
 
-show :title => ' Parte'  do
+show :title => ' Comprobante'  do
            attributes_table do
            reporte = ItemsController.new   
            reporte.nota_credito(params[:id])
@@ -169,29 +169,13 @@ show :title => ' Parte'  do
                   item.subtotal
               end
             end
-            row :origen do |item|
-              Formula.where(product_id:11,orden:item.origen).
-                   select('descripcion as dd').first.dd
-             end
-            row :mmes
+           
             row :moneda do |item|
               Formula.where(product_id:8,orden:item.moneda).
                    select('descripcion as dd').first.dd
              end
             row :tc
 
-            row :empresa do |item|
-              Formula.where(product_id:10,orden:item.empresa).
-                   select('descripcion as dd').first.dd
-             end
-
-             row :user_id do |item|
-               item.user.email if item.user_id
-             end
-
-             row :codigo do |item|
-              item.sele
-            end
 
           end
           panel "Tabla de Detalles" do
