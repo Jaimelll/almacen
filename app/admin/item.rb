@@ -39,7 +39,7 @@ permit_params :pfecha, :serie,:nfactu, :client_id,:subtotal,
 # dar = ParametersController.new   
 # vtit=dar.modnomb
 
-menu priority: 2, label: "Parte"
+menu priority: 2, label: "Comprobante"
 
 
 scope :MesActivo, :default => true do |items|
@@ -119,6 +119,7 @@ form :title => 'Edicion Comprobante'  do |f|
 
     end
     f.inputs do
+      
       f.has_many :details, heading: 'Detalles',
                               allow_destroy: true,
                               new_record: true do |a|
