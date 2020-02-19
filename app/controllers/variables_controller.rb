@@ -21,6 +21,9 @@ class VariablesController < ApplicationController
           when 6
             nombre="LE20603468148"+ Parameter.find_by_id(1).mes.strftime("%Y") +
                Parameter.find_by_id(1).mes.strftime("%m")+"00080100001111"
+          when 7
+            nombre="LE10092676124"+ Parameter.find_by_id(1).mes.strftime("%Y") +
+               Parameter.find_by_id(1).mes.strftime("%m")+"00080100001111"      
        end
     when 2
       case Parameter.find_by_id(1).empresa
@@ -39,7 +42,9 @@ class VariablesController < ApplicationController
         when 6
             nombre="LE20603468148"+ Parameter.find_by_id(1).mes.strftime("%Y") +
             Parameter.find_by_id(1).mes.strftime("%m")+"00140100001111"
-
+        when 7
+            nombre="LE10092676124"+ Parameter.find_by_id(1).mes.strftime("%Y") +
+            Parameter.find_by_id(1).mes.strftime("%m")+"00140100001111"
       end
 
   end
