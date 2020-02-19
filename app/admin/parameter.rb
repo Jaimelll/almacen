@@ -1,5 +1,7 @@
 ActiveAdmin.register Parameter do
 
+  actions :all, except: [:destroy, :new]
+
   permit_params :empresa, :origen,:mes,
                 :sele, :sele1, :sele2, :sele3
 
@@ -37,6 +39,7 @@ ActiveAdmin.register Parameter do
   #     link_to 'Dar codigo inicial', darcodini_admin_parameter_path(1), method: :put
   #    end
 
+ # config.clear_action_items!
 
 menu priority: 6, label: "Parametros"
 filter :mes
@@ -57,7 +60,7 @@ index :title => 'Parametros' do
 
     column("mes")
     column("Codigo Inicial", :sele)
-        actions
+       actions
     end
 
     form :title => 'Edicion Parametro'  do |f|
