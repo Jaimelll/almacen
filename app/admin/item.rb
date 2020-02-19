@@ -216,7 +216,7 @@ show :title => ' Comprobante'  do
               mmes:Parameter.find_by_id(1).mes,
               empresa:Parameter.find_by_id(1).empresa).sum(:subtotal)
               
-        li  strong { "Subtotal :"+ '%.2f' %(suss*0.18)}
+        li   strong {'Subtotal='+'%.2f' %(sub).to_s}
         li  strong { "IGV :"+ '%.2f' %(suss*0.18)} 
         li  strong { "TOTAL :"+ '%.2f' %(suss*1.18)} 
 
