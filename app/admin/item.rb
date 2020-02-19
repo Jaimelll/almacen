@@ -99,7 +99,7 @@ form :title => 'Edicion Comprobante'  do |f|
         :input_html => { :style =>  'width:30%'}   
       
        f.input :serie, :input_html => { :rows => 2,:style =>  'width:30%'}
-       f.input :nfactu, :input_html => { :rows => 2,:style =>  'width:30%'}
+       f.input :nfactu, :label => 'Comprobante', :input_html => { :rows => 2,:style =>  'width:30%'}
        f.input :sele1, :label => 'Documento', :as => :select, :collection =>
                 Formula.where(product_id:16
                 ).map{|u| [u.descripcion, u.orden]}
@@ -127,8 +127,8 @@ form :title => 'Edicion Comprobante'  do |f|
                  Product.all.order('nombre ASC').map{|u| [u.nombre, u.id]}
         a.input :descripcion, :input_html => { :rows => 2,:style =>  'width:30%'}
         a.input :cantidad,:as =>:string, :input_html => { :style =>  'width:30%'}
-        a.input :precio,:as =>:string, :input_html => { :style =>  'width:30%'}
-        a.input :monto,:as =>:string, :input_html => {:value =>0, :style =>  'width:30%'}, :as => :hidden
+        a.input :monto,:as =>:string, :input_html => { :style =>  'width:30%'}
+        a.input :precio,:as =>:string, :input_html => {:value =>0, :style =>  'width:30%'}, :as => :hidden
         a.input :user_id, :input_html => { :value => current_user.id }, :as => :hidden
 
       end
@@ -147,7 +147,9 @@ show :title => ' Comprobante'  do
             end 
             row :pfecha
             row :serie
-            row :nfactu
+            row "Numero" do |item|
+              item.nfactu
+             end
             row "Documento" do |item|
               if Formula.where(product_id:16,orden:item.sele1).count>0 then
               Formula.where(product_id:16,orden:item.sele1).
@@ -159,8 +161,8 @@ show :title => ' Comprobante'  do
             end
             row :subtotal do |item|
                 if  Detail.where(item_id:item.id).count>0 then
-                  Detail.where(item_id:item.id).each do |detal|
-                    Detail.where(id:detal.id).update(monto:detal.cantidad*detal.precio)
+                  Detail.where(item_id:item.id).where('monto>0 and cantidad>0').each do |detal|
+                    Detail.where(id:detal.id).update(precio:detal.monto/(detal.cantidad*1.18))
                   end  
                 end  
 
@@ -216,7 +218,7 @@ show :title => ' Comprobante'  do
               mmes:Parameter.find_by_id(1).mes,
               empresa:Parameter.find_by_id(1).empresa).sum(:subtotal)
               
-        li   strong {'Subtotal='+'%.2f' %(sub).to_s}
+        li  strong { "IGV :"+ '%.2f' %(suss)} 
         li  strong { "IGV :"+ '%.2f' %(suss*0.18)} 
         li  strong { "TOTAL :"+ '%.2f' %(suss*1.18)} 
 
