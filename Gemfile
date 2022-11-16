@@ -15,11 +15,26 @@ gem 'draper'
 gem 'pundit'
 gem 'sass-rails'
 gem 'pg', '~> 1.1'
+
+gem 'wicked_pdf', '~> 1.1'
+#gem 'wicked_pdf', github: 'mileszs/wicked_pdf'
+
+gem 'caxlsx'
+gem 'caxlsx_rails'
+
+gem "active_admin_import" , github: "activeadmin-plugins/active_admin_import"
+gem 'cloudinary'
+gem "figaro"
+# implementacion milagrosa para Could not detect rake tasks de heroku
+gem 'rack-timeout', '0.3.2'
+
+gem 'sendgrid-actionmailer'
+# estos son los de alamcen4
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
 # Use sqlite3 as the database for Active Record
-#gem "sqlite3", "~> 1.4"
+# gem "sqlite3", "~> 1.4"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
