@@ -4,6 +4,17 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   config.hosts << "almacen-production.up.railway.app"
   # Code is not reloaded between requests.
+##### configuracion de sendgrid
+   
+config.action_mailer.delivery_method = :sendgrid_actionmailer
+config.action_mailer.sendgrid_actionmailer_settings = {
+ api_key: ENV['SENDGRID_API_KEY'],
+ raise_delivery_errors: true
+}
+
+ ################
+
+
   config.cache_classes = true
 
   # Eager load code on boot. This eager loads most of Rails and

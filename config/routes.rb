@@ -5,4 +5,18 @@ Rails.application.routes.draw do
   root 'admin/dashboard#index'
   # Defines the root path route ("/")
   # root "articles#index"
+  
+  resources :tickets
+  resources :formulas
+  resources :details
+  resources :products
+  resources :parameters
+  resources :items
+  resources :clients
+
+  match 'variables/form', via: [:get]
+  match 'variables/form2', via: [:get]
+  match 'variables/comment', via: [:get]
+  match 'reports/vhoja1', via: [:get]
+  match 'reports/vhoja2', via: [:get]
 end
