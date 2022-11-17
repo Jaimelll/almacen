@@ -22,8 +22,8 @@ class VariablesController < ApplicationController
    respond_to do |format|
        format.html
        format.json
-       format.pdf{render template: 'variables/reporte.pdf.erb', pdf:"#{nombre}"}
-
+     #  format.pdf{render template: 'variables/reporte.pdf.erb', pdf:"#{nombre}"}
+       format.pdf{render pdf: "variables/reporte", filename:  "#{nombre}"+".pdf"}
 
      end
   end
@@ -51,8 +51,8 @@ class VariablesController < ApplicationController
    respond_to do |format|
        format.html
        format.json
-       format.pdf{render template: 'variables/reporte3.pdf.erb', pdf:"#{nombre}"}
-
+       # format.pdf{render template: 'variables/reporte3.pdf.erb', pdf:"#{nombre}"}
+       format.pdf{render pdf: "variables/reporte3", filename: "#{nombre}"+".pdf"}
 
      end
   end
@@ -68,9 +68,10 @@ class VariablesController < ApplicationController
    @acum = Item.where(origen:Parameter.find_by_id(1).origen,mmes:Parameter.find_by_id(1).mes,empresa:Parameter.find_by_id(1).empresa).sum('subtotal')
    respond_to do |format|
        format.html
-       format.json
-       format.pdf{render template: 'variables/reporte2.pdf.erb', pdf:'Factura2'}
+       
+       # format.pdf{render template: 'variables/reporte2.pdf.erb', pdf:'Factura2'}
+       format.pdf{render pdf: "variables/reporte2", filename: "Factura2.pdf"}
      end
   end
-
+ 
 end

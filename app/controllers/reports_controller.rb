@@ -8,7 +8,8 @@ class ReportsController < ApplicationController
         respond_to do |format|
           format.html
       
-          format.xlsx{render template: 'reports/hoja1.xlsx.axlsx', xlsx:'partes'}
+           #format.xlsx{render template: 'reports/hoja1.xlsx.axlsx', xlsx:'partes'}
+           format.xlsx{render xlsx: "reports/hoja1", filename: "partes.xlsx"}
         end
       end
 
@@ -20,7 +21,8 @@ class ReportsController < ApplicationController
           respond_to do |format|
             format.html
         
-            format.xlsx{render template: 'reports/hoja2.xlsx.axlsx', xlsx:'items'}
+          #  format.xlsx{render template: 'reports/hoja2.xlsx.axlsx', xlsx:'items'}
+            format.xlsx{render xlsx: "reports/hoja2", filename: "nuevo.xlsx"}
           end
         end
        
