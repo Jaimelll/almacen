@@ -160,15 +160,28 @@ wb.add_worksheet(name: "empresa") do |sheet|
  sheet.add_row ["PERIODO :", Parameter.find_by_id(1).mes],  
             style: [centra, fechad], height: 25
 
+ if @items.where(origen:1).count>0 then
  sheet.add_row ["COMPRAS :", "LE" +vruc[0]+ Parameter.find_by_id(1).mes.strftime("%Y") +
           Parameter.find_by_id(1).mes.strftime("%m")+"00080100001111"],  
             style: [centra, centra], height: 25
+else
+sheet.add_row ["COMPRAS :", "LE" +vruc[0]+ Parameter.find_by_id(1).mes.strftime("%Y") +
+          Parameter.find_by_id(1).mes.strftime("%m")+"00080100001000"],  
+            style: [centra, centra], height: 25
+end
 
+
+if @items.where(origen:2).count>0 then
  sheet.add_row ["VENTAS :", "LE" +vruc[0]+ Parameter.find_by_id(1).mes.strftime("%Y") +
            Parameter.find_by_id(1).mes.strftime("%m")+"00140100001111"],  
             style: [centra, centra], height: 25
 
+else
+  sheet.add_row ["VENTAS :", "LE" +vruc[0]+ Parameter.find_by_id(1).mes.strftime("%Y") +
+           Parameter.find_by_id(1).mes.strftime("%m")+"00140100001000"],  
+            style: [centra, centra], height: 25
 
+end
 
 sheet.column_widths 15,30
 end # do sheet 
