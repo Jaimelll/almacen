@@ -166,7 +166,7 @@ wb.add_worksheet(name: "empresa") do |sheet|
             style: [centra, centra], height: 25
 else
 sheet.add_row ["COMPRAS :", "LE" +vruc[0]+ Parameter.find_by_id(1).mes.strftime("%Y") +
-          Parameter.find_by_id(1).mes.strftime("%m")+"00080100001000"],  
+          Parameter.find_by_id(1).mes.strftime("%m")+"00080100001011"],  
             style: [centra, centra], height: 25
 end
 
@@ -178,7 +178,7 @@ if @items.where(origen:2).count>0 then
 
 else
   sheet.add_row ["VENTAS :", "LE" +vruc[0]+ Parameter.find_by_id(1).mes.strftime("%Y") +
-           Parameter.find_by_id(1).mes.strftime("%m")+"00140100001000"],  
+           Parameter.find_by_id(1).mes.strftime("%m")+"00140100001011"],  
             style: [centra, centra], height: 25
 
 end
