@@ -1,6 +1,7 @@
 
 default: &default
   adapter: postgresql
+  
   pool: 20
   timeout: 5000
   encoding: unicode
@@ -10,7 +11,7 @@ development:
   port: 5432
   username: rails2
   password: rails2
-  host: localhost
+  host: 127.0.0.1
   database: almacend
 
 test:
@@ -18,7 +19,7 @@ test:
   port: 5432
   username: rails2
   password: rails2
-  host: localhost
+  host: 127.0.0.1
   database: almacent
 
 production:
