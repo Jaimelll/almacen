@@ -1,6 +1,6 @@
 default: &default
   adapter: postgresql
-  port: 6543
+  port: 5432
   pool: 20
   timeout: 5000
   encoding: unicode
@@ -21,7 +21,10 @@ test:
 
 production:
   <<: *default
-  host: containers-us-west-149.railway.app
-  username: postgres
+  url: <%= ENV["DATABASE_URL"] %>
+  username: <%= ENV["PGUSER"] %>
   password: <%= ENV["PGPASSWORD"] %>
-  database: railway
+  database: <%= ENV["PGDATABASE"] %>
+  host: <%= ENV["PGHOST"] %>
+  port: <%= ENV["PGPORT"] %>
+  pool: <%= ENV["RAILS_MAX_THREADS"] || 5 %>
