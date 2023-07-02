@@ -1,14 +1,12 @@
-
 default: &default
   adapter: postgresql
-  port: 5432
+  port: 6543
   pool: 20
   timeout: 5000
   encoding: unicode
 
 development:
   <<: *default
-  
   username: rails2
   password: rails2
   host: 127.0.0.1
@@ -16,17 +14,14 @@ development:
 
 test:
   <<: *default
-  
   username: rails2
   password: rails2
   host: 127.0.0.1
   database: almacent
 
 production:
-  
   <<: *default
-  url: <%= ENV["DATABASE_URL"] %>
-  username: railwayapp
-  password: <%= ENV["RAILWAYAPP_DATABASE_PASSWORD"] %>
-  database: railwayapp_production
-  pool: <%= ENV["RAILS_MAX_THREADS"] || 5 %>
+  host: containers-us-west-149.railway.app
+  username: postgres
+  password: <%= ENV["PGPASSWORD"] %>
+  database: railway
