@@ -33,11 +33,12 @@ class ProductsController < ApplicationController
       when 4 # nota de credito
         vtipc="07"
       when 5 # ticket
-        vtipc="12"
+        vtipc="05"
       else
         vtipc="sd"
       
       end
+      
 
 
        #vtipc=if Item.find_by_id(vid).serie.first=="T" then "12" else (if Item.find_by_id(vid).serie.first=="F" then "01" else "01" end) end

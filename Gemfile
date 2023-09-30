@@ -100,3 +100,5 @@ group :production do
   gem "wkhtmltopdf-heroku"
 
 end
+
+gem "fly-rails", "~> 0.3.5"
